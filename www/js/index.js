@@ -27,7 +27,7 @@ const APP = {
             artist: 'Bob McFerrin',
             track: 'Dont Worry Be Happy',
             length: 0,
-            image: './img/',
+            image: './img/jasonLeung-unsplash.jpg',
             path: './media/bob-mcferrin/dont-worry-be-happy.mp3',
         },
         {
@@ -35,7 +35,7 @@ const APP = {
             artist: 'Goo Goo Dolls',
             track: 'Come to Me',
             length: 0,
-            image: '',
+            image: './img/gooGooDolls.jpg',
             path: './media/goo-goo-dolls/come-to-me.mp3',
         },
         {
@@ -43,7 +43,7 @@ const APP = {
             artist: 'Imagine Dragons',
             track: 'Walking the Wire',
             length: 0,
-            image: '',
+            image: './img/imagineDragons.jpg',
             path: './media/imagine-dragons/walking-the-wire.mp3',
         },
         {
@@ -51,7 +51,7 @@ const APP = {
             artist: 'John Denver',
             track: 'Take me Home, Country Roads',
             length: 0,
-            image: '',
+            image: './img/johnDenver.jpg',
             path: './media/john-denver/take-me-home.mp3',
         },
         {
@@ -59,7 +59,7 @@ const APP = {
             artist: 'X Ambassadors',
             track: 'Gorgeous',
             length: 0,
-            image: '',
+            image: './img/xAmbassadors.jpg',
             path: './media/x-ambassadors/gorgeous.mp3',
         },
     ],
@@ -77,17 +77,20 @@ const APP = {
         let df = document.createDocumentFragment()
         APP.tracks.forEach((song => {
             let li = document.createElement('li')
+            let img = document.createElement('img')
             let title = document.createElement('h1')
             let artist = document.createElement('h3') 
-            // let img = document.createElement('img')
 
+            img.alt = 'track photo'
+            img.src = song.image
             title.textContent = song.track;
             artist.textContent = song.artist
 
             li.setAttribute('data-key', song.id)
             
-            li.append(title);
-            li.append(artist);
+            li.append(img)
+            li.append(title)
+            li.append(artist)
 
             df.append(li);
 

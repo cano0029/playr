@@ -27,7 +27,6 @@ html {
     font-size: 16px;
     line-height: 1.7;
     font-family: Lato, Arial, Helvetica, sans-serif;
-    background-color: rgba(236, 236, 236, 0.651);
 }
 body {
     min-height: 100vh;
@@ -54,14 +53,22 @@ body {
 .page header h1 {
     font-weight: 900;
     font-size: 1.5rem;
-    color: rgb(255, 255, 255);
     text-align: center;
     grid-area: title;
 }
 .page.active li {
     /* display: flex; */
-    padding-top: 1rem;
+    padding-top: 2rem;
     justify-content: center;
     text-align: center;
     
+}
+
+li {
+    border: 2px black;
+}
+
+img {
+    max-width: 200px;
+    max-height: 200px;
 }
