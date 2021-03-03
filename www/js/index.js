@@ -25,46 +25,50 @@ const APP = {
         {
             id: 412,
             artist: 'Green Day',
-            album: 'Dookie',
             track: 'Basket case',
             length: 0,
+            image: '',
             path: 'media/green-day/basket-case.mp3',
         },
         {
             id: 222,
             artist: 'Green Day',
-            album: 'American Idiot',
             track: 'Jesus of suburbia',
             length: 0,
+            image: '',
             path: 'media/green-day/jesus.mp3',
         },
         {
             id: 141,
             artist: 'Green Day',
-            album: 'Dos',
             track: 'Baby eyes',
             length: 0,
+            image: '',
             path: 'media/green-day/baby-eyes.mp3',
         },
         {
             id: 312,
             artist: 'P!nk',
-            album: 'The Truth About Love',
             track: 'Try',
             length: 0,
+            image: '',
             path: 'media/pink/try.mp3',
         },
         {
             id: 566,
             artist: 'P!nk',
-            album: 'Missundaztood',
             track: 'Just like a pill',
             length: 0,
+            image: '',
             path: 'media/pink/like-a-pill.mp3',
         },
     ],
     init: () => {
+        APP.addListeners()
         APP.showPlaylist()
+    },
+    addListeners: () => {
+        document.getElementById('btnClose').addEventListener('click', APP.displayHome)
     },
     showPlaylist: () => {
         console.log("suhhh dude");
@@ -73,30 +77,33 @@ const APP = {
         let df = document.createDocumentFragment()
         APP.tracks.forEach((song => {
             let li = document.createElement('li')
-            let artist = document.createElement('h2')
-            let album = document.createElement('p')
             let title = document.createElement('h1')
+            let artist = document.createElement('h3') 
             // let img = document.createElement('img')
 
-            artist.textContent = song.artist
-            album.textContent = song.album
             title.textContent = song.track;
-            
+            artist.textContent = song.artist
 
-            li.setAttribute('data-key', song.id);
+            li.setAttribute('data-key', song.id)
             
-            li.append(artist);
-            li.append(album)
             li.append(title);
+            li.append(artist);
+
             df.append(li);
 
-            li.addEventListener("click", APP.displaySong);
+            li.addEventListener("click", APP.displaySong)
         })
         )
         list.append(df)
     },
+    displayHome: () => {
+        document.querySelector('.page.active').classList.remove('active');
+        document.getElementById('home').classList.add('active');
+    },
     displaySong: () => {
         console.log('hi')
+        document.querySelector('.page.active').classList.remove('active');
+        document.getElementById('track').classList.add('active');
     }
 };
 
