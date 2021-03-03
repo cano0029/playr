@@ -47,7 +47,7 @@ const APP = {
             track: 'Dont Worry Be Happy',
             length: 0,
             image: './img/jasonLeung-unsplash.jpg',
-            src: 'media/bob-mcferrin/dont-worry-be-happy.mp3',
+            src: './media/dont-worry-be-happy.mp3',
             volume: 0.5
         },
         {
@@ -56,7 +56,7 @@ const APP = {
             track: 'Come to Me',
             length: 0,
             image: './img/gooGooDolls.jpg',
-            src: 'media/goo-goo-dolls/come-to-me.mp3',
+            src: './media/come-to-me.mp3',
             volume: 0.5
         },
         {
@@ -65,7 +65,7 @@ const APP = {
             track: 'Walking the Wire',
             length: 0,
             image: './img/imagineDragons.jpg',
-            src: 'media/imagine-dragons/walking-the-wire.mp3',
+            src: './media/walking-the-wire.mp3',
             volume: 0.5
         },
         {
@@ -74,7 +74,7 @@ const APP = {
             track: 'Take me Home, Country Roads',
             length: 0,
             image: './img/johnDenver.jpg',
-            src: 'media/john-denver/take-me-home.mp3',
+            src: './media/take-me-home.mp3',
             volume: 0.5
         },
         {
@@ -83,7 +83,7 @@ const APP = {
             track: 'Gorgeous',
             length: 0,
             image: './img/xAmbassadors.jpg',
-            src: 'media/x-ambassadors/gorgeous.mp3',
+            src: './media/gorgeous.mp3',
             volume: 0.5
         },
     ],
@@ -95,6 +95,10 @@ const APP = {
     addListeners: () => {
         document.getElementById('btnClose').addEventListener('click', APP.displayHome)
         document.getElementById('play').addEventListener('click', APP.play)
+        document.getElementById('pause').addEventListener('click', APP.pause)
+        document.getElementById('ff').addEventListener('click', APP.fastForward)
+        document.getElementById('rw').addEventListener('click', APP.rewind)
+        document.getElementById('mute').addEventListener('click', APP.toggleMute)
     },
     showPlaylist: () => {
         console.log("suhhh dude");
@@ -152,19 +156,25 @@ const APP = {
                 document.getElementById('track-image').src = song.image; 
                 document.getElementById('track-title').textContent = song.track;
                 document.getElementById('track-artist').textContent = song.artist;
+                document.getElementById('playr-item').setAttribute('data-key', song.id);
                 }
-            });
+            })
         }
     },
 
-    mountMedia: () => {
+    mountMedia: (ev) => {
+        let clickedThing = ev.target;
+        let track = clickedThing.closest('[data-key]');
+        console.log(track);
+        
         APP.media = new Media (
-            APP.tracks.src, 
+            APP.track[0].src, //how to target a specific one!
             APP.handleMediaSuccess, 
             APP.handleMediaError, 
             APP.handleMediaStatusChange 
         )
     },
+
     handleMediaSuccess: () => {
         console.log('WOOHOO! Successfully completed the media task')
     },
@@ -177,7 +187,45 @@ const APP = {
         //optional parameter
     }, 
 
-    play: () => {APP.media.play()},
+    play: () => { APP.media.play() },
+
+    pause: () => { APP.media.pause() },
+    
+    fastForward: () => {
+        APP.media.getCurrentPosition((currentPosition) => {
+            const maxPosition = APP.media.getDuration(); // duration is built-in - values in seconds
+            const newPosition = Math.min(maxPosition, currentPosition + 10); // adding 10 seconds
+
+            APP.media.seekTo((newPosition) * 1000) //milliseconds -- advance it by 10 seconds
+            console.log('Music is now fast forwarding:', {newPosition, maxPosition})
+        });
+    },
+
+    rewind: () => {
+        APP.media.getCurrentPosition((currentPosition) => { 
+            const minPosition = 0; 
+            const newPosition = Math.max(minPosition, currentPosition - 10); // subtracting 10 seconds
+            APP.media.seekTo((newPosition) * 1000) //milliseconds -- rewind it by 10 seconds
+            console.log('Music is now fast forwarding:', {newPosition, minPosition})
+        });
+    },
+
+    toggleMute: () => {
+        const buttonEl = document.getElementById('mute'); //event.target;
+        if(APP.tracks.isMuted) {
+            APP.media.setVolume(app.track.volume); //if muted, set back to last volume we were tracking
+            APP.tracks.isMuted = false;
+            buttonEl.textContent = 'Mute'; // if the volume is unmuted, tell the user a button they can click to mute
+            console.log(`Volume now set at ${app.track.volume}`);
+        }else {
+            APP.media.setVolume(0) //if not muted, we want to mute it so set the volume to 0
+            APP.tracks.isMuted = true;
+            buttonEl.textContent = 'Unmute'; // if the volume is muted, tell the user a button they can click to unmute
+            console.log(`Volume now set at 0`);
+        }
+    }
+
+
 };
 
 const ready = "cordova" in window ? "deviceready" : "DOMContentLoaded";
