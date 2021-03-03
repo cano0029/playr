@@ -52,23 +52,26 @@ body {
 
 .page header h1 {
     font-weight: 900;
-    font-size: 1.5rem;
+    font-size: 2rem;
     text-align: center;
     grid-area: title;
+    padding: 2rem;
+    background-color: rgb(255, 190, 69);
+    margin-bottom: 2rem;
 }
 .page.active li {
-    /* display: flex; */
-    padding-top: 2rem;
-    justify-content: center;
+    display: flex;
+    padding: 1rem;
+    justify-content: left;
     text-align: center;
-    
+    margin-left: 2rem;
 }
 
-li {
-    border: 2px black;
+li div {
+    margin-left: 2rem;
+    text-align: left;
 }
-
 img {
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 100px;
+    max-height: 100px;
 }

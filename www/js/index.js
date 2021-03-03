@@ -77,9 +77,10 @@ const APP = {
         let df = document.createDocumentFragment()
         APP.tracks.forEach((song => {
             let li = document.createElement('li')
+            let div = document.createElement('div')
             let img = document.createElement('img')
-            let title = document.createElement('h1')
-            let artist = document.createElement('h3') 
+            let title = document.createElement('h4')
+            let artist = document.createElement('h6') 
 
             img.alt = 'track photo'
             img.src = song.image
@@ -89,8 +90,9 @@ const APP = {
             li.setAttribute('data-key', song.id)
             
             li.append(img)
-            li.append(title)
-            li.append(artist)
+            div.append(title)
+            div.append(artist)
+            li.append(div)
 
             df.append(li);
 
@@ -103,10 +105,43 @@ const APP = {
         document.querySelector('.page.active').classList.remove('active');
         document.getElementById('home').classList.add('active');
     },
-    displaySong: () => {
+    displaySong: (ev) => {
         console.log('hi')
         document.querySelector('.page.active').classList.remove('active');
         document.getElementById('track').classList.add('active');
+
+        APP.songCard(ev)
+        // let clickedThing = ev.target;
+        // let track = clickedThing.closest('[data-key]');
+        // console.log(track);
+        
+        // if(track) {
+        //     const id = parseInt(track.getAttribute('data-key'));
+        //     APP.tracks.find(song => {
+        //         if (song.id === id) {
+        //         document.getElementById('track-image').src = song.image; 
+        //         document.getElementById('track-title').textContent = song.track;
+        //         document.getElementById('track-artist').textContent = song.artist;
+        //         }
+        //     });
+        // }
+    },
+
+    songCard: (ev) => {
+        let clickedThing = ev.target;
+        let track = clickedThing.closest('[data-key]');
+        console.log(track);
+        
+        if(track) {
+            const id = parseInt(track.getAttribute('data-key'));
+            APP.tracks.find(song => {
+                if (song.id === id) {
+                document.getElementById('track-image').src = song.image; 
+                document.getElementById('track-title').textContent = song.track;
+                document.getElementById('track-artist').textContent = song.artist;
+                }
+            });
+        }
     }
 };
 
