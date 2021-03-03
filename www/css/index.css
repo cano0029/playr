@@ -75,3 +75,26 @@ img {
     max-width: 100px;
     max-height: 100px;
 }
+
+#playr-item {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#track-image {
+    padding: 1rem;
+    min-width: 95vw;
+    min-height: 50vh;
+}
+
+#trackControls {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#trackControls btn {
+    padding: 0.5rem;
+}
