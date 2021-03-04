@@ -133,8 +133,9 @@ const APP = {
         document.querySelector('.page.active').classList.remove('active')
         document.getElementById('home').classList.add('active')
     },
+
     displaySongPage: (ev) => {
-        console.log('hi')
+        console.log('hi Im a song page')
         document.querySelector('.page.active').classList.remove('active')
         document.getElementById('track').classList.add('active')
 
@@ -144,7 +145,7 @@ const APP = {
     songCard: (ev) => {
         let clickedThing = ev.target;
         let track = clickedThing.closest('[data-key]');
-        console.log(track);
+        console.log('IM song track:' + track)
         
         if(track) {
             const id = parseInt(track.getAttribute('data-key'));
@@ -161,14 +162,17 @@ const APP = {
     },
 
     mountMedia: (track) => {
-        console.log(track)
         let id = parseInt(track.getAttribute('data-key'))
-        console.log(id)
+        console.log('My song id is:' + id)
         let index = APP.tracks.findIndex(song => {
             return song.id === id 
             }
         )
-        console.log(index)
+        console.log('My index position is:' + index)
+        
+        APP.trackLength() 
+        // TO DO: show track length when song page opens - but only shows when play button is clicked
+        
         APP.media = new Media (
             APP.tracks[index].src, //how to target a specific one!
             APP.handleMediaSuccess, 
@@ -178,7 +182,8 @@ const APP = {
     },
 
     handleMediaSuccess: () => {
-        console.log('WOOHOO! Successfully completed the media task')
+        console.log('WOOHOO! Successfully completed the media task') //when song is finished
+        //APP.playNextSong()
     },
 
     handleMediaError: (error) => {
@@ -187,11 +192,13 @@ const APP = {
 
     handleMediaStatusChange: () => {
         //optional parameter
+        console.log(CODES.status[code], CODES.status[message])
     }, 
 
     play: () => { 
         APP.media.play()
         APP.progressBar() 
+        // TO DO: when song is playing, change play button to pause button - vice versa
     },
 
     pause: () => { APP.media.pause() },
@@ -211,54 +218,72 @@ const APP = {
             const minPosition = 0; 
             const newPosition = Math.max(minPosition, currentPosition - 10); // subtracting 10 seconds
             APP.media.seekTo((newPosition) * 1000) //milliseconds -- rewind it by 10 seconds
-            console.log('Music is now fast forwarding:', {newPosition, minPosition})
+            console.log('Music is now rewinding:', {newPosition, minPosition})
         });
     },
 
     toggleMute: () => {
-        const buttonEl = document.getElementById('mute'); //event.target;
+        const buttonEl = document.getElementById('mute') //event.target;
         if(APP.tracks.isMuted) {
-            APP.media.setVolume(APP.tracks.volume); //if muted, set back to last volume we were tracking
+            APP.media.setVolume(APP.tracks.volume) //if muted, set back to last volume we were tracking
             APP.tracks.isMuted = false;
             buttonEl.textContent = '🔇'; // if the volume is unmuted, tell the user a button they can click to mute
-            console.log(`Volume now set at ${APP.tracks.volume}`);
+            console.log(`Volume now set at ${APP.tracks.volume}`)
         }else {
             APP.media.setVolume(0) //if not muted, we want to mute it so set the volume to 0
-            APP.tracks.isMuted = true;
-            buttonEl.textContent = '🔈'; // if the volume is muted, tell the user a button they can click to unmute
-            console.log(`Volume now set at 0`);
+            APP.tracks.isMuted = true
+            buttonEl.textContent = '🔈' // if the volume is muted, tell the user a button they can click to unmute
+            console.log(`Volume now set at 0`)
         }
     },
 
-    playNextSong: () => {
-
-    },
-
     progressBar: () => {
-        // let maxPosition = APP.media.getCurrentPosition()
         let mediaTimer = setInterval(function () {
             // get media position
-            APP.media.getCurrentPosition(
+            APP.media.getCurrentPosition( 
                 // success callback
                 function (position) {
                     if (position > -1) {
-                        //TO DO: put progress bar max to maxPosition of song 
-                        //TO DO: insert p and write innerHTML masPosition
+                        const minutes = Math.floor(position / 60000)
+                        const seconds = Math.floor(position - minutes * 60)
                         document.getElementById('progressBar').value = position
-                        document.getElementById('duration').innerHTML= position
-                        console.log((position) + " sec");
-                        //TO DO: change sec to minute:sec
+                        document.getElementById('duration').innerHTML= minutes + ':' + (seconds < 10 ? '0' : '') + seconds
                     }
+                    //TO DO: reset progress bar and time when changing to a new song
                 },
                 // error callback
-                function (e) {
-                    console.log("Error getting pos=" + e);
+                function (error) {
+                    console.log('Error getting position:' + error)
                 }
             );
         }, 1000);
-    }
+    },
 
+    trackLength: () => {
+        const counter = 0;
+        const timerDur = setInterval(function() {
+            if (counter > 2000) {
+                counter = counter + 100
+                clearInterval(timerDur)
+            }
+            const duration = APP.media.getDuration()
+            const minutes = Math.floor(duration / 60)
+            const seconds = Math.floor(duration - minutes * 60)
 
+            if (duration > 0) {
+                clearInterval(timerDur);
+                document.getElementById('trackLength').innerHTML = minutes + ':' + (seconds < 10 ? '0' : '') + seconds
+                document.getElementById('progressBar').max = duration
+                console.log('Track length:' + minutes + ':' + (seconds < 10 ? '0' : '') + seconds)
+            }
+        }, 1000);
+    },
+
+    playNextSong: () => {
+        //TO DO - when song is done, play next song in the playlist 
+        //also show that song's track cover, artist, title etc
+        
+    },
 };
 
 const ready = "cordova" in window ? "deviceready" : "DOMContentLoaded";
