@@ -104,3 +104,11 @@ img {
     justify-content: center;
     align-items: center;
 }
+
+#bar progress, p {
+    margin: 0.5rem;
+}
+
+progress {
+    min-width: 50vw;
+}

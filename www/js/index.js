@@ -159,6 +159,8 @@ const APP = {
             })
         }
         APP.mountMedia(track)
+        APP.play()
+        APP.trackLength()
     },
 
     mountMedia: (track) => {
@@ -170,11 +172,8 @@ const APP = {
         )
         console.log('My index position is:' + index)
         
-        APP.trackLength() 
-        // TO DO: show track length when song page opens - but only shows when play button is clicked
-        
         APP.media = new Media (
-            APP.tracks[index].src, //how to target a specific one!
+            APP.tracks[index].src, 
             APP.handleMediaSuccess, 
             APP.handleMediaError, 
             APP.handleMediaStatusChange 
@@ -244,7 +243,7 @@ const APP = {
                 // success callback
                 function (position) {
                     if (position > -1) {
-                        const minutes = Math.floor(position / 60000)
+                        const minutes = Math.floor(position / 60)
                         const seconds = Math.floor(position - minutes * 60)
                         document.getElementById('progressBar').value = position
                         document.getElementById('duration').innerHTML= minutes + ':' + (seconds < 10 ? '0' : '') + seconds
@@ -260,12 +259,14 @@ const APP = {
     },
 
     trackLength: () => {
+
         const counter = 0;
         const timerDur = setInterval(function() {
             if (counter > 2000) {
                 counter = counter + 100
                 clearInterval(timerDur)
             }
+
             const duration = APP.media.getDuration()
             const minutes = Math.floor(duration / 60)
             const seconds = Math.floor(duration - minutes * 60)
@@ -274,9 +275,11 @@ const APP = {
                 clearInterval(timerDur);
                 document.getElementById('trackLength').innerHTML = minutes + ':' + (seconds < 10 ? '0' : '') + seconds
                 document.getElementById('progressBar').max = duration
-                console.log('Track length:' + minutes + ':' + (seconds < 10 ? '0' : '') + seconds)
+                
             }
         }, 1000);
+
+        //TO DO: save total length of the song in APP.tracks array
     },
 
     playNextSong: () => {
