@@ -242,9 +242,12 @@ const APP = {
                 // success callback
                 function (position) {
                     if (position > -1) {
-                        //put progress bar max to maxPosition of song 
+                        //TO DO: put progress bar max to maxPosition of song 
+                        //TO DO: insert p and write innerHTML masPosition
                         document.getElementById('progressBar').value = position
+                        document.getElementById('duration').innerHTML= position
                         console.log((position) + " sec");
+                        //TO DO: change sec to minute:sec
                     }
                 },
                 // error callback
