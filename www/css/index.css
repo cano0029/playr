@@ -98,3 +98,9 @@ img {
 #trackControls btn {
     padding: 0.5rem;
 }
+
+#bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

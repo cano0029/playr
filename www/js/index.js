@@ -26,9 +26,7 @@ const CODES = {
         2: 'MEDIA_ERR_NETWORK',
         3: 'MEDIA_ERR_DECODE',
         4: 'MEDIA_ERR_NONE_SUPPORTED'
-
     },
-
     status: {
         0: 'MEDIA_NONE',
         1: 'MEDIA_STARTING',
@@ -90,7 +88,6 @@ const APP = {
     init: () => {
         APP.addListeners()
         APP.showPlaylist()
-        APP.mountMedia()
     },
     addListeners: () => {
         document.getElementById('btnClose').addEventListener('click', APP.displayHome)
@@ -160,15 +157,20 @@ const APP = {
                 }
             })
         }
+        APP.mountMedia(track)
     },
 
-    mountMedia: (ev) => {
-        let clickedThing = ev.target;
-        let track = clickedThing.closest('[data-key]');
-        console.log(track);
-        
+    mountMedia: (track) => {
+        console.log(track)
+        let id = parseInt(track.getAttribute('data-key'))
+        console.log(id)
+        let index = APP.tracks.findIndex(song => {
+            return song.id === id 
+            }
+        )
+        console.log(index)
         APP.media = new Media (
-            APP.track[0].src, //how to target a specific one!
+            APP.tracks[index].src, //how to target a specific one!
             APP.handleMediaSuccess, 
             APP.handleMediaError, 
             APP.handleMediaStatusChange 
@@ -187,7 +189,10 @@ const APP = {
         //optional parameter
     }, 
 
-    play: () => { APP.media.play() },
+    play: () => { 
+        APP.media.play()
+        APP.progressBar() 
+    },
 
     pause: () => { APP.media.pause() },
     
@@ -213,16 +218,41 @@ const APP = {
     toggleMute: () => {
         const buttonEl = document.getElementById('mute'); //event.target;
         if(APP.tracks.isMuted) {
-            APP.media.setVolume(app.track.volume); //if muted, set back to last volume we were tracking
+            APP.media.setVolume(APP.tracks.volume); //if muted, set back to last volume we were tracking
             APP.tracks.isMuted = false;
-            buttonEl.textContent = 'Mute'; // if the volume is unmuted, tell the user a button they can click to mute
-            console.log(`Volume now set at ${app.track.volume}`);
+            buttonEl.textContent = '🔇'; // if the volume is unmuted, tell the user a button they can click to mute
+            console.log(`Volume now set at ${APP.tracks.volume}`);
         }else {
             APP.media.setVolume(0) //if not muted, we want to mute it so set the volume to 0
             APP.tracks.isMuted = true;
-            buttonEl.textContent = 'Unmute'; // if the volume is muted, tell the user a button they can click to unmute
+            buttonEl.textContent = '🔈'; // if the volume is muted, tell the user a button they can click to unmute
             console.log(`Volume now set at 0`);
         }
+    },
+
+    playNextSong: () => {
+
+    },
+
+    progressBar: () => {
+        // let maxPosition = APP.media.getCurrentPosition()
+        let mediaTimer = setInterval(function () {
+            // get media position
+            APP.media.getCurrentPosition(
+                // success callback
+                function (position) {
+                    if (position > -1) {
+                        //put progress bar max to maxPosition of song 
+                        document.getElementById('progressBar').value = position
+                        console.log((position) + " sec");
+                    }
+                },
+                // error callback
+                function (e) {
+                    console.log("Error getting pos=" + e);
+                }
+            );
+        }, 1000);
     }
 
 
