@@ -44,7 +44,7 @@ const APP = {
             artist: 'Bob McFerrin',
             track: 'Dont Worry Be Happy',
             length: 0,
-            image: './img/jasonLeung-unsplash.jpg',
+            image: './img/bobbyMcferrin.jpg',
             src: './media/dont-worry-be-happy.mp3',
             volume: 0.5
         },
@@ -198,9 +198,15 @@ const APP = {
         APP.media.play()
         APP.progressBar() 
         // TO DO: when song is playing, change play button to pause button - vice versa
+        // document.querySelector('.play.active').classList.remove('active')
+        // document.getElementById('.pause').classList.add('active')
     },
 
-    pause: () => { APP.media.pause() },
+    pause: () => { 
+        APP.media.pause()
+        // document.querySelector('.pause.active').classList.remove('active')
+        // document.getElementById('.play').classList.add('active') 
+    },
     
     fastForward: () => {
         APP.media.getCurrentPosition((currentPosition) => {
@@ -287,6 +293,9 @@ const APP = {
         //also show that song's track cover, artist, title etc
         
     },
+
+    // TO DO: click on another song and will stop the current one from playing
+    // TO DO: exit current song page and go back to it, will resume where it is currently playing not overlap and play again
 };
 
 const ready = "cordova" in window ? "deviceready" : "DOMContentLoaded";

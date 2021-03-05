@@ -29,12 +29,13 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
         <!-- <meta name="color-scheme" content="light dark"> -->
         <link rel="stylesheet" href="css/index.css">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
         <title>cano0029-Playr</title>
     </head>
     <body>
@@ -43,7 +44,8 @@
             <header>
                 <h1>josPlayr</h1>
             </header>
-            <main>
+            <main id = "playlist-container">
+                <h3>Playlist</h3>
                 <ul id="playlist">
                     <!-- songs will go here -->
                 </ul>
@@ -53,8 +55,9 @@
         <!-- TRACK PAGE -->
         <section class="page" id="track">
             <main>
-                <div>
+                <div id = "track-header">
                     <btn id="btnClose">X</btn>
+                    <h3 id="playing-title">Now Playing</h6>
                 </div>
                 <div id = "playr-item">
                     <img id = "track-image">
@@ -67,11 +70,14 @@
                     <p id ="trackLength">0:00</p>
                 </div>
                 <div id= "trackControls">
-                    <btn id= "rw">⏪</btn>
-                    <btn id= "pause">⏸️</btn>
-                    <btn id= "play">▶️</btn>
-                    <btn id= "ff">⏩</btn>
-                    <btn id="mute">🔇</btn>
+                    <btn id = replay><i class="material-icons">replay</i></btn>
+                    <div id ="mainControls">
+                        <btn id= "rw"><i class="material-icons rw">fast_rewind</i></btn>
+                        <btn id= "pause"><i class="material-icons pause">pause_circle_filled</i></btn>
+                        <btn id= "play"><i class="material-icons play active">play_circle_filled</i></btn>
+                        <btn id= "ff"><i class="material-icons ff">fast_forward</i></btn>
+                    </div>
+                    <btn id="mute"><i class="material-icons">volume_off</i></btn>
                 </div>
             </main>
         </section>
