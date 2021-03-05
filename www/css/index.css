@@ -77,6 +77,7 @@ body {
     border-radius: 20px;
     transform: translateY(-1rem);
     background-color: rgb(238, 240, 249);
+    padding-bottom: 2rem;
 }
 
 #playlist-container h3 {
@@ -131,23 +132,24 @@ img {
 
 #track header {
     display: grid;
-    padding-top: 2rem;
-    padding-bottom: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 2.5rem;
     padding-left: 0.2rem;
     padding-right: 0.2rem;
     grid-template-columns: 1fr 3fr 1fr;
     grid-template-areas: "btn-left playing-title btn-right";
     justify-items: center;
-    height: 120px;
+    height: 110px;
     background-color: rgb(238, 240, 249);
 }
 
 #track-container {
-    padding-top: 2rem;
+    padding-top: 1rem;
     border-radius: 40px;
     transform: translateY(-2rem);
     background-color: rgb(255, 255, 255);
     box-shadow: -1px -8px 6px rgb(229, 230, 236);
+    border: none;
 }
 
 

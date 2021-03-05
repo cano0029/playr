@@ -38,6 +38,7 @@ const CODES = {
 
 const APP = {
     media: null, 
+
     tracks: [
         {
             id: 412,
@@ -85,10 +86,12 @@ const APP = {
             volume: 0.5
         },
     ],
+
     init: () => {
         APP.addListeners()
         APP.showPlaylist()
     },
+
     addListeners: () => {
         document.getElementById('btnClose').addEventListener('click', APP.displayHome)
         document.getElementById('play').addEventListener('click', APP.play)
@@ -97,6 +100,7 @@ const APP = {
         document.getElementById('rw').addEventListener('click', APP.rewind)
         document.getElementById('mute').addEventListener('click', APP.toggleMute)
     },
+
     showPlaylist: () => {
         console.log("suhhh dude");
         let list = document.getElementById('playlist')
@@ -161,6 +165,7 @@ const APP = {
         APP.mountMedia(track)
         APP.play()
         APP.trackLength()
+        APP.saveLength(track)
     },
 
     mountMedia: (track) => {
@@ -182,30 +187,36 @@ const APP = {
 
     handleMediaSuccess: () => {
         console.log('WOOHOO! Successfully completed the media task') //when song is finished
-        //APP.playNextSong()
+        APP.playNextSong()
     },
 
     handleMediaError: (error) => {
-        console.log(CODES.error[code], CODES.error[message])
+        console.log(CODES.error[error])
     },
 
-    handleMediaStatusChange: () => {
-        //optional parameter
-        console.log(CODES.status[code], CODES.status[message])
+    handleMediaStatusChange: (ev) => {
+        console.log(CODES.status[ev])
     }, 
 
     play: () => { 
         APP.media.play()
         APP.progressBar() 
-        // TO DO: when song is playing, change play button to pause button - vice versa
+        
         document.getElementById('play').classList.remove('show')
         document.getElementById('play').classList.add('hide')
         document.getElementById('pause').classList.remove('hide')
         document.getElementById('pause').classList.add('show')
     },
 
+    playNextSong: () => {
+        //TO DO - when song is done, play next song in the playlist 
+        //also show that song's track cover, artist, title etc
+        
+    },
+
     pause: () => { 
         APP.media.pause()
+
         document.getElementById('pause').classList.remove('show')
         document.getElementById('pause').classList.add('hide')
         document.getElementById('play').classList.remove('hide')
@@ -284,22 +295,44 @@ const APP = {
             if (duration > 0) {
                 clearInterval(timerDur);
                 document.getElementById('trackLength').innerHTML = minutes + ':' + (seconds < 10 ? '0' : '') + seconds
-                document.getElementById('progressBar').max = duration
-                
+                document.getElementById('progressBar').max = duration 
             }
-        }, 1000);
 
-        //TO DO: save total length of the song in APP.tracks array
+
+        }, 1000);
     },
 
-    playNextSong: () => {
-        //TO DO - when song is done, play next song in the playlist 
-        //also show that song's track cover, artist, title etc
-        
+    saveLength: (track) => {
+        const counter = 0;
+        let id = parseInt(track.getAttribute('data-key'))
+        let index = APP.tracks.findIndex(song => {
+            return song.id === id 
+            }
+        )
+        console.log('FIND MY INDEX PLLLLEASE:' + index)
+
+        const timerDur = setInterval(function() {
+            if (counter > 2000) {
+                counter = counter + 100
+                clearInterval(timerDur)
+            }
+
+            const duration = APP.media.getDuration()
+
+            if (duration > 0) {
+                APP.tracks[index].length = duration;
+                clearInterval(timerDur)
+            }
+            console.log('WHAT IS MY LENGTH??' + duration) 
+            console.log(APP.tracks)
+        }, 1000)
     },
 
     // TO DO: click on another song and will stop the current one from playing
     // TO DO: exit current song page and go back to it, will resume where it is currently playing not overlap and play again
+    // TO DO: rewind to the beginning of the song
+    // TO DO: put into separate functions: find index # of track in array, song id = data-key
+    // TO DO: clean code, delete all console logs, comments
 };
 
 const ready = "cordova" in window ? "deviceready" : "DOMContentLoaded";
