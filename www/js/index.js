@@ -198,14 +198,18 @@ const APP = {
         APP.media.play()
         APP.progressBar() 
         // TO DO: when song is playing, change play button to pause button - vice versa
-        // document.querySelector('.play.active').classList.remove('active')
-        // document.getElementById('.pause').classList.add('active')
+        document.getElementById('play').classList.remove('show')
+        document.getElementById('play').classList.add('hide')
+        document.getElementById('pause').classList.remove('hide')
+        document.getElementById('pause').classList.add('show')
     },
 
     pause: () => { 
         APP.media.pause()
-        // document.querySelector('.pause.active').classList.remove('active')
-        // document.getElementById('.play').classList.add('active') 
+        document.getElementById('pause').classList.remove('show')
+        document.getElementById('pause').classList.add('hide')
+        document.getElementById('play').classList.remove('hide')
+        document.getElementById('play').classList.add('show')
     },
     
     fastForward: () => {

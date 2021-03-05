@@ -55,30 +55,34 @@
         <!-- TRACK PAGE -->
         <section class="page" id="track">
             <main>
-                <div id = "track-header">
-                    <btn id="btnClose">X</btn>
-                    <h3 id="playing-title">Now Playing</h6>
-                </div>
-                <div id = "playr-item">
-                    <img id = "track-image">
-                    <h1 id = "track-title"></h1>
-                    <p id = "track-artist"></p>
-                </div>
-                <div id = "bar">
-                    <p id ="duration">0:00</p>
-                    <progress id="progressBar" max="100" value="">Listening at:</progress>
-                    <p id ="trackLength">0:00</p>
-                </div>
-                <div id= "trackControls">
-                    <btn id = replay><i class="material-icons">replay</i></btn>
-                    <div id ="mainControls">
-                        <btn id= "rw"><i class="material-icons rw">fast_rewind</i></btn>
-                        <btn id= "pause"><i class="material-icons pause">pause_circle_filled</i></btn>
-                        <btn id= "play"><i class="material-icons play active">play_circle_filled</i></btn>
-                        <btn id= "ff"><i class="material-icons ff">fast_forward</i></btn>
+                <header id = "track-header">
+                    <btn id="btnClose"><img src= "./img/outline_arrow_back_ios_black_24pt_1x.png" alt="back arrow"></btn>
+                    <h4 id="playing-title">Now Playing</h4>
+                    <btn id="like"><i class="material-icons">favorite_outline</i></btn>
+                </header>
+                <div id = "track-container">
+                    <div id = "playr-item">
+                        <img id = "track-image">
+                        <h1 id = "track-title"></h1>
+                        <p id = "track-artist"></p>
                     </div>
-                    <btn id="mute"><i class="material-icons">volume_off</i></btn>
+                    <div id = "bar">
+                        <p id ="duration">0:00</p>
+                        <progress id="progressBar" max="100" value="">Listening at:</progress>
+                        <p id ="trackLength">0:00</p>
+                    </div>
+                    <div id= "trackControls">
+                        <btn id = replay><i class="material-icons">replay</i></btn>
+                        <div id ="mainControls">
+                            <btn id= "rw"><i class="material-icons rw">fast_rewind</i></btn>
+                            <btn id= "pause" class="hide"><i class="material-icons pause">pause_circle_filled</i></btn>
+                            <btn id= "play" class="show"><i class="material-icons play">play_circle_filled</i></btn>
+                            <btn id= "ff"><i class="material-icons ff">fast_forward</i></btn>
+                        </div>
+                        <btn id="mute"><i class="material-icons">volume_off</i></btn>
+                    </div>
                 </div>
+                
             </main>
         </section>
         
