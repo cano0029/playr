@@ -200,22 +200,61 @@ const APP = {
 
     handleMediaStatusChange: (ev) => {
         console.log(CODES.status[ev])
+        APP.resumeSong(ev)
+
     }, 
+
+    stop: () => {
+        APP.media.stop()
+    },
 
     play: () => { 
         // TO DO: only play song that matches to user click - if change, stop previous one - do not overlap
+        
         APP.media.play()
         APP.progressBar()
-        
+
         document.getElementById('play').classList.remove('show')
         document.getElementById('play').classList.add('hide')
         document.getElementById('pause').classList.remove('hide')
-        document.getElementById('pause').classList.add('show')
+        document.getElementById('pause').classList.add('show') 
+        
+        
     },
 
-    resumeSong: () => {
+    resumeSong: (ev) => {
         // TO DO: if it matches, continue playing it and do not restart from beginning - will overlap
         // get currentPosition last left off and resume?
+        const track = document.getElementById('playr-item')
+        const id = parseInt(track.getAttribute('data-key'))
+        let index = APP.tracks.findIndex(song => {
+            return song.id === id 
+            })
+
+        console.log('I AM TRYING TO PAUSE/RESUME')
+        const statusCode = CODES.status[ev]
+        console.log('WHAT AM I??' + statusCode)
+            if (statusCode === 'MEDIA_RUNNING') {
+                const checkInterval = setInterval(function () {
+                    APP.media.getCurrentPosition(function(position) {
+                        const newPosition = Math.floor(position)
+                            if (APP.tracks[index].id === id && newPosition === 0) {
+                                APP.play()
+                                // console.log('yoooo' + position)
+                                clearInterval(checkInterval)
+                                console.log(newPosition)
+                                console.log('AWOOOOO' + id)
+                            } else {
+                                // it still plays and overlaps!!
+                                APP.pause()
+                                console.log(id)
+                                console.log('I AM TRYING TO PAUSE YOU')
+                                clearInterval(checkInterval)
+                            }
+                            clearInterval(checkInterval)
+                        })
+                }, 1000) 
+            }
     },
 
     release: () => {
@@ -283,12 +322,7 @@ const APP = {
     },
 
     rewind: () => {
-        APP.media.getCurrentPosition((currentPosition) => { 
-            const minPosition = 0; 
-            const newPosition = Math.max(minPosition, currentPosition - 10); // subtracting 10 seconds
-            APP.media.seekTo((newPosition) * 1000) //milliseconds -- rewind it by 10 seconds
-            console.log('Music is now rewinding:', {newPosition, minPosition})
-        });
+        v
     },
 
     replay: () => {
