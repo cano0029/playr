@@ -82,17 +82,21 @@ body {
     padding-top: 0.8rem;
     border-radius: 40px;
     background-color: rgba(238, 240, 249, 0.579);
-    /* background-color: rgba(0, 0, 0, 0.716); */
+    /* background-color: rgba(0, 0, 0, 0.415); */
     padding-bottom: 4rem;
 }
 
 #playlist-container h3 {
-    padding-left: 3rem;
-    padding-bottom: 1rem;
-    /* text-decoration: underline; */
-    /* text-decoration-color: rgb(0, 0, 0); */
-    text-underline-offset: 0.2rem;
-    text-decoration-thickness: 0.3rem;
+    font-size: 1rem;
+    padding-left: 1.5rem;
+    /* padding-bottom: 1rem; */
+    border-radius: 20px;
+    color: rgb(60, 60, 60);
+    background-color:rgba(247, 232, 232, 0.387);
+    /* box-shadow: 2px 2px 6px rgba(103, 103, 103, 0.312); */
+    width: 20%;
+    margin-left: 1.3rem;
+    margin-bottom: 0.4rem;
 }
 ul{
     padding-top: 0.5rem;
@@ -106,9 +110,8 @@ ul{
     margin-left: 1.2rem;
     margin-right: 1.2rem;
     margin-bottom: 1rem;
-    /* height: 5rem; */
     background-color: rgb(245, 247, 255);
-    /* background-color: rgba(0, 0, 0, 0.387); */
+    /* background-color: rgba(32, 32, 32, 0.867); */
     border-radius: 45px;
     box-shadow: -2px 6px 12px rgba(0, 0, 0, 0.312);
     align-items: center;
@@ -166,7 +169,7 @@ img {
     border-radius: 40px;
     transform: translateY(-4rem);
     background-color: rgb(255, 255, 255);
-    box-shadow: -1px -8px 6px rgba(229, 230, 236, 0.25);
+    box-shadow: -1px -8px 6px rgba(188, 188, 188, 0.25);
     border: none;
 }
 
@@ -258,30 +261,31 @@ progress[value]::-webkit-progress-bar {
 
 progress[value]::-webkit-progress-value {
     /* styles the bar */
-    background-image:
+    /* background-image:
         -webkit-linear-gradient(-45deg, 
             transparent 33%, rgba(0, 0, 0, .1) 33%, 
-            rgba(4, 86, 63, 0.1) 66%, transparent 66%),
+            rgba(86, 4, 50, 0.1) 66%, transparent 66%),
         -webkit-linear-gradient(top, 
-            rgba(9, 255, 198, 0.25), 
-            rgba(7, 77, 89, 0.25)),
-        -webkit-linear-gradient(left, rgb(13, 173, 191), rgb(49, 237, 225));
+            rgba(255, 9, 87, 0.25), 
+            rgba(89, 7, 11, 0.25)),
+        -webkit-linear-gradient(bottom, rgb(255, 1, 73), rgb(187, 1, 255)); */
+    background: rgb(255, 1, 73);
     border-radius: 20px; 
     background-size: 60px 20px, 100% 100%, 100% 100%;
 
     /* animates it */
-    -webkit-animation: animate-stripes 5s linear infinite;
-        animation: animate-stripes 5s linear infinite;
+    /* -webkit-animation: animate-stripes 5s linear infinite;
+        animation: animate-stripes 5s linear infinite; */
 
 }
 
-@-webkit-keyframes animate-stripes {
+/* @-webkit-keyframes animate-stripes {
     100% { background-position: -50px 0px; }
 }
 
 @keyframes animate-stripes {
     100% { background-position: -50px 0px; }
-}
+} */
 
 
 
