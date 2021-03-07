@@ -144,7 +144,15 @@ const APP = {
         console.log('hi Im a song page')
         document.querySelector('.page.active').classList.remove('active')
         document.getElementById('track').classList.add('active')
-        APP.songCard(ev)
+        
+        if (APP.media != null) {
+            APP.media.stop()
+            // APP.media.release()
+            console.log('CAN YOU WORK PLLZ',  APP.media)
+        }
+
+    APP.songCard(ev)
+    
     },
 
     songCard: (ev) => {
@@ -163,6 +171,7 @@ const APP = {
                 }
             })
         }
+
         APP.mountMedia(track)
         APP.play()
         APP.trackLength()
@@ -188,7 +197,19 @@ const APP = {
 
     handleMediaSuccess: () => {
         console.log('WOOHOO! Successfully completed the media task') //when song is finished
-        APP.release() //release old media
+
+        // TO DO: check if maxPosition of the song is reached, APP.media.release
+        let id = document.getElementById('playr-item').getAttribute('data-key')
+        if (APP.tracks.id === id) {
+        APP.media.getCurrentPosition((currentPosition) => {
+            const maxPosition = APP.media.getDuration(); // duration is built-in - values in seconds
+            if (maxPosition === currentPosition) {
+                APP.release()
+                console.log('ERRMMARGERD', maxPosition)
+                console.log('ERRMMARGERD', currentPosition)
+            }
+        })
+        }
 
     },
 
@@ -293,7 +314,8 @@ const APP = {
         const muteBtn = document.getElementById('mute') //event.target;
         const unmuteBtn = document.getElementById('unmute')
         if(APP.tracks.isMuted) {
-            APP.media.setVolume(APP.tracks.volume) //if muted, set back to last volume we were tracking
+            // APP.media.setVolume(APP.tracks.volume) //if muted, set back to last volume we were tracking
+            APP.media.setVolume(1)
             APP.tracks.isMuted = false;
 
             // TO DO: move to separate function
@@ -398,8 +420,7 @@ const APP = {
 
     playAnotherSong: () => {
         // TO DO: click on another song and will stop the current one from playing - no overlapping
-        // find the index
-        let next
+        // if there is a song in the background playing???
     }, 
 
     // TO DO: put into separate functions: find index # of track in array, song id = data-key - keep em short, Math.floor, get songInformation
