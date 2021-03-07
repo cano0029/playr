@@ -144,7 +144,6 @@ const APP = {
         console.log('hi Im a song page')
         document.querySelector('.page.active').classList.remove('active')
         document.getElementById('track').classList.add('active')
-
         APP.songCard(ev)
     },
 
@@ -178,7 +177,6 @@ const APP = {
             }
         )
         console.log('My index position is:' + index)
-        
         APP.media = new Media (
             APP.tracks[index].src, 
             APP.handleMediaSuccess, 
@@ -214,11 +212,6 @@ const APP = {
         document.getElementById('pause').classList.add('show')
     },
 
-    resumeSong: () => {
-        // TO DO: if it matches, continue playing it and do not restart from beginning - will overlap
-        // get currentPosition last left off and resume?
-    },
-
     release: () => {
         APP.media.release()
         APP.playNextSong()
@@ -226,7 +219,6 @@ const APP = {
 
     playNextSong: () => {
         // TO DO: clean up, move some in different functions
-        // when song is done, play next song in the playlist + song card
         // logic: keep track of position in array
         // listen for status fo event at the end of the song
         // release old media object before creating a new one
@@ -328,12 +320,12 @@ const APP = {
     },
 
     progressBar: () => {
-        let mediaTimer = setInterval(function () {
+        setInterval(function () {
             // get media position
             APP.media.getCurrentPosition( 
                 // success callback
                 function (position) {
-                    if (position > -1) {
+                    if (position > -1) { // if it is actually playing
                         const minutes = Math.floor(position / 60)
                         const seconds = Math.floor(position - minutes * 60)
                         document.getElementById('progressBar').value = position
@@ -400,14 +392,16 @@ const APP = {
 
     resumePlaying: () => {
         // TO DO: exit current song page and go back to it, will resume where it is currently playing not overlap and play again
+        // Eric's suggestion: when you hit pause, save currentPosition in Local storage
+        // and then when you click on song card again, retrieve position from Local storage and start playing from that position
     },
 
     playAnotherSong: () => {
         // TO DO: click on another song and will stop the current one from playing - no overlapping
-    }
+    }, 
 
-    // TO DO: put into separate functions: find index # of track in array, song id = data-key - keep em short
-    // TO DO: clean code, delete all console logs, comments
+    // TO DO: put into separate functions: find index # of track in array, song id = data-key - keep em short, Math.floor, get songInformation
+    // TO DO: clean code, delete all console logs, comments, change function/variable names, delete let => const
 };
 
 const ready = "cordova" in window ? "deviceready" : "DOMContentLoaded";

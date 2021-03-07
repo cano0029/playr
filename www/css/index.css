@@ -28,7 +28,8 @@ html {
     line-height: 1.7;
     font-family: Lato, Arial, Helvetica, sans-serif;
     background-color: rgb(238, 240, 249);
-    background: url(https://images.unsplash.com/photo-1581610186406-5f6e9f9edbc1?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80) top no-repeat;
+    background: url(https://images.unsplash.com/photo-1581610186406-5f6e9f9edbc1?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80) center no-repeat;
+    /* padding-right: 0; */
 }
 body {
     min-height: 100vh;
@@ -137,12 +138,18 @@ img {
     padding-left: 0.2rem;
     padding-right: 0.2rem;
     grid-template-columns: 1fr 3fr 1fr;
-    grid-template-areas: "btn-left playing-title btn-right";
+    /* grid-template-areas: "btn-left title btn-right"; */
     justify-items: center;
     height: 110px;
     background-color: rgb(238, 240, 249);
 }
 
+/* like button size */
+#like i.material-icons {
+    max-width: 24px;
+    max-height: 24px;
+    color:rgb(13, 173, 191);
+}
 #track-container {
     padding-top: 1rem;
     border-radius: 40px;
@@ -163,7 +170,7 @@ img {
 #track-image {
     padding: 1rem;
     min-width: 90vw;
-    min-height: 50vh;
+    min-height: 45vh;
     border-radius: 4rem;
     /* box-shadow: 2px 2px 5px rgb(174, 174, 174); */
     margin-bottom: 0.5rem;
@@ -212,13 +219,42 @@ i.play, i.pause {
     align-items: center;
 }
 
-
 #bar progress, p {
     margin: 0.5rem;
 }
 
 progress {
     min-width: 60vw;
-    color: rgb(13, 173, 191);
+    max-height: 1vh;
 }
+
+progress[value] {
+    /* Reset the default appearance */
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+progress[value]::-webkit-progress-bar {
+    /* styles the container */
+    background-color: #eee;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress[value]::-webkit-progress-value {
+    /* styles the bar */
+    background-image:
+        -webkit-linear-gradient(-45deg, 
+            transparent 33%, rgba(0, 0, 0, .1) 33%, 
+            rgba(4, 86, 63, 0.1) 66%, transparent 66%),
+        -webkit-linear-gradient(top, 
+            rgba(9, 255, 198, 0.25), 
+            rgba(7, 77, 89, 0.25)),
+        -webkit-linear-gradient(left, rgb(13, 173, 191), rgb(49, 237, 225));
+    border-radius: 20px; 
+    background-size: 60px 20px, 100% 100%, 100% 100%;
+
+}
+
+
 
