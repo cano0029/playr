@@ -147,7 +147,6 @@ const APP = {
         
         if (APP.media != null) {
             APP.media.stop()
-            // APP.media.release()
             console.log('CAN YOU WORK PLLZ',  APP.media)
         }
 
@@ -196,13 +195,13 @@ const APP = {
     },
 
     handleMediaSuccess: () => {
-        console.log('WOOHOO! Successfully completed the media task') //when song is finished
+        console.log('WOOHOO! Successfully completed the media task')
 
-        // TO DO: check if maxPosition of the song is reached, APP.media.release
+        // check if song is finished, call APP.media.release (which calls next song)
         let id = document.getElementById('playr-item').getAttribute('data-key')
         if (APP.tracks.id === id) {
         APP.media.getCurrentPosition((currentPosition) => {
-            const maxPosition = APP.media.getDuration(); // duration is built-in - values in seconds
+            const maxPosition = APP.media.getDuration(); 
             if (maxPosition === currentPosition) {
                 APP.release()
                 console.log('ERRMMARGERD', maxPosition)
@@ -314,7 +313,6 @@ const APP = {
         const muteBtn = document.getElementById('mute') //event.target;
         const unmuteBtn = document.getElementById('unmute')
         if(APP.tracks.isMuted) {
-            // APP.media.setVolume(APP.tracks.volume) //if muted, set back to last volume we were tracking
             APP.media.setVolume(1)
             APP.tracks.isMuted = false;
 
@@ -417,11 +415,6 @@ const APP = {
         // Eric's suggestion: when you hit pause, save currentPosition in Local storage
         // and then when you click on song card again, retrieve position from Local storage and start playing from that position
     },
-
-    playAnotherSong: () => {
-        // TO DO: click on another song and will stop the current one from playing - no overlapping
-        // if there is a song in the background playing???
-    }, 
 
     // TO DO: put into separate functions: find index # of track in array, song id = data-key - keep em short, Math.floor, get songInformation
     // TO DO: clean code, delete all console logs, comments, change function/variable names, delete let => const
