@@ -41,7 +41,7 @@ const APP = {
 
     tracks: [
         {
-            id: 412,
+            id: 0,
             artist: 'Bob McFerrin',
             track: 'Dont Worry Be Happy',
             length: 0,
@@ -50,7 +50,7 @@ const APP = {
             volume: 0.5
         },
         {
-            id: 222,
+            id: 1,
             artist: 'Goo Goo Dolls',
             track: 'Come to Me',
             length: 0,
@@ -59,7 +59,7 @@ const APP = {
             volume: 0.5
         },
         {
-            id: 141,
+            id: 2,
             artist: 'Imagine Dragons',
             track: 'Walking the Wire',
             length: 0,
@@ -68,7 +68,7 @@ const APP = {
             volume: 0.5
         },
         {
-            id: 312,
+            id: 3,
             artist: 'John Denver',
             track: 'Take me Home, Country Roads',
             length: 0,
@@ -77,7 +77,7 @@ const APP = {
             volume: 0.5
         },
         {
-            id: 566,
+            id: 4,
             artist: 'X Ambassadors',
             track: 'Gorgeous',
             length: 0,
@@ -398,6 +398,8 @@ const APP = {
 
     playAnotherSong: () => {
         // TO DO: click on another song and will stop the current one from playing - no overlapping
+        // find the index
+        let next
     }, 
 
     // TO DO: put into separate functions: find index # of track in array, song id = data-key - keep em short, Math.floor, get songInformation

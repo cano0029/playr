@@ -28,11 +28,13 @@ html {
     line-height: 1.7;
     font-family: Lato, Arial, Helvetica, sans-serif;
     background-color: rgb(238, 240, 249);
-    background: url(https://images.unsplash.com/photo-1581610186406-5f6e9f9edbc1?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80) center no-repeat;
+    /* background: url(https://images.unsplash.com/photo-1581610186406-5f6e9f9edbc1?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80) center no-repeat; */
     /* padding-right: 0; */
+    background: url(https://images.unsplash.com/photo-1604076913837-52ab5629fba9?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=934&q=80) top no-repeat;
+    background-size: 100vh; 
 }
 body {
-    min-height: 100vh;
+    /* min-height: 100vh; */
     margin: 0;
 }
 
@@ -54,15 +56,16 @@ body {
 }
 
 #home {
-    background-color: rgb(238, 240, 249);
+    /* background-color: rgb(238, 240, 249); */
 }
 
 #home header {
-    background: url(https://images.unsplash.com/photo-1581610186406-5f6e9f9edbc1?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80) center no-repeat;
-    /* background: url(https://images.unsplash.com/photo-1504198266287-1659872e6590?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80) center no-repeat; */
-    background-size: 100vw;
-    /* margin-bottom: 2rem; */
-    min-height: 150px;
+    /* background: url(https://images.unsplash.com/photo-1581610186406-5f6e9f9edbc1?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80) center no-repeat; */
+    /* background: url('./playrBackground.jpg') top no-repeat; */
+    background: url(https://images.unsplash.com/photo-1604076913837-52ab5629fba9?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=934&q=80) top no-repeat;
+    background-size: 100vh;
+    margin-bottom: 2rem;
+    min-height: 130px;
 }
 .page header h1 {
     display: flex;
@@ -70,44 +73,46 @@ body {
     font-size: 2rem;
     padding-left: 3rem;
     grid-area: title;
-    color: white;
+    /* color:white; */
+    letter-spacing: 0.15rem;
     transform: translateY(5rem);
 }
 #playlist-container {
-    padding-top: 1rem;
-    border-radius: 20px;
-    transform: translateY(-1rem);
-    background-color: rgb(238, 240, 249);
-    padding-bottom: 2rem;
+    padding-top: 0.8rem;
+    border-radius: 40px;
+    background-color: rgba(238, 240, 249, 0.579);
+    /* background-color: rgba(0, 0, 0, 0.716); */
+    padding-bottom: 4rem;
 }
 
 #playlist-container h3 {
     padding-left: 3rem;
     padding-bottom: 1rem;
-    text-decoration: underline;
-    text-decoration-color: rgb(13, 173, 191);
+    /* text-decoration: underline; */
+    /* text-decoration-color: rgb(0, 0, 0); */
     text-underline-offset: 0.2rem;
-    text-decoration-thickness: 0.2rem;
+    text-decoration-thickness: 0.3rem;
+    color: white;
 }
-/* ul{
-    padding-top: 2.5rem;
-    border-radius: 20px;
-    transform: translateY(-1rem);
-    background-color: white;
-} */
+ul{
+    padding-top: 0.5rem;
+}
 .page.active li {
     display: flex;
     padding: 1rem;
     justify-content: left;
     text-align: center;
     padding-left: 2rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    margin-bottom: 0.5rem;
-    height: 6.5rem;
-    background-color: rgb(255, 255, 255);
-    border-radius: 12px;
-    box-shadow: 2px 5px 8px rgb(219, 219, 219);
+    margin-left: 1.2rem;
+    margin-right: 1.2rem;
+    margin-bottom: 1rem;
+    height: 5rem;
+    background-color: rgb(245, 247, 255);
+    /* background-color: rgba(0, 0, 0, 0.387); */
+    border-radius: 45px;
+    box-shadow: -2px 6px 12px rgba(0, 0, 0, 0.312);
+    /* color: white; */
+    /* border: 0.5px solid rgb(11, 11, 11); */
 }
 
 li div {
@@ -140,22 +145,27 @@ img {
     grid-template-columns: 1fr 3fr 1fr;
     /* grid-template-areas: "btn-left title btn-right"; */
     justify-items: center;
-    height: 110px;
-    background-color: rgb(238, 240, 249);
+    height: 120px;
+    background-color: rgb(0, 0, 0);
+    color: white;
 }
 
 /* like button size */
 #like i.material-icons {
     max-width: 24px;
     max-height: 24px;
-    color:rgb(13, 173, 191);
+    color:rgb(255, 1, 73);
+}
+
+#btnClose {
+    color: white;
 }
 #track-container {
-    padding-top: 1rem;
+    padding-top: 2.5rem;
     border-radius: 40px;
     transform: translateY(-3rem);
     background-color: rgb(255, 255, 255);
-    box-shadow: -1px -8px 6px rgb(229, 230, 236);
+    box-shadow: -1px -8px 6px rgba(229, 230, 236, 0.25);
     border: none;
 }
 
@@ -170,9 +180,9 @@ img {
 #track-image {
     padding: 1rem;
     min-width: 90vw;
-    min-height: 45vh;
-    border-radius: 4rem;
-    /* box-shadow: 2px 2px 5px rgb(174, 174, 174); */
+    min-height: 50vh;
+    border-radius: 50%;
+    box-shadow: 2px 2px 20px rgba(255, 4, 96, 0.161);
     margin-bottom: 0.5rem;
     margin-left: 2rem;
     margin-right: 2rem;
@@ -201,7 +211,7 @@ i.rw, i.ff {
 
 i.play, i.pause {
     font-size: 4rem;
-    color: rgb(13, 173, 191);
+    color: rgb(255, 1, 73);
 }
 
 
@@ -254,6 +264,18 @@ progress[value]::-webkit-progress-value {
     border-radius: 20px; 
     background-size: 60px 20px, 100% 100%, 100% 100%;
 
+    /* animates it */
+    -webkit-animation: animate-stripes 5s linear infinite;
+        animation: animate-stripes 5s linear infinite;
+
+}
+
+@-webkit-keyframes animate-stripes {
+    100% { background-position: -50px 0px; }
+}
+
+@keyframes animate-stripes {
+    100% { background-position: -50px 0px; }
 }
 
 
