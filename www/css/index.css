@@ -254,7 +254,7 @@ i.rw, i.ff {
 }
 
 i.play, i.pause {
-    font-size: 6rem;
+    font-size: 5rem;
     color: rgb(255, 1, 73);
 }
 

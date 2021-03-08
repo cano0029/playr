@@ -147,26 +147,34 @@ const APP = {
         console.log('hi Im a song page')
         document.querySelector('.page.active').classList.remove('active')
         document.getElementById('track').classList.add('active')
+
+        let clickedThing = ev.target;
+        let track = clickedThing.closest('[data-key]');
+        let index = parseInt(track.getAttribute('data-key'))
+        console.log('ME TARZAN', index)
         
-        const dataKey = document.getElementById('playr-item').getAttribute('data-key')
-        const id = parseInt(dataKey)
+        let songId = APP.tracks[index].id
+        console.log('AHOY THERE', songId )
 
-        if (APP.media != null && APP.tracks.id != id) {
+        // if it is not the same song, stop music else keep playing
+        // i am doing the opposite here, but it works??
+        if (APP.media != null && songId === index) {
+            console.log('CAN YOU WORK PLLZ',  songId, index)
             APP.media.stop()
-            console.log('CAN YOU WORK PLLZ',  APP.media)
         } 
-
-    APP.songCard(ev)  
+        
+        APP.songCard(ev)  
     
     },
 
     songCard: (ev) => {
         let clickedThing = ev.target;
         let track = clickedThing.closest('[data-key]');
-        console.log('IM song track:' + track)
+
         
         if(track) {
             const id = parseInt(track.getAttribute('data-key'));
+            console.log('I am track #', id)
             APP.tracks.find(song => {
                 if (song.id === id) {
                 document.getElementById('track-image').src = song.image; 
@@ -223,7 +231,7 @@ const APP = {
         }
     },
 
-    mountMedia: (track) => {
+    mountMedia: () => {
         let dataKey = document.getElementById('playr-item').getAttribute('data-key')
         let id = parseInt(dataKey)
         console.log('My song id is:' + id)
@@ -256,8 +264,8 @@ const APP = {
 
     play: () => { 
         // TO DO: check if the same clicked song is currently playing, if it is resume playing at that position, else play
-        
-            APP.media.play()
+
+        APP.media.play()
         
         // TO DO: move to separate function - togglePlay
         document.getElementById('play').classList.remove('show')
@@ -318,6 +326,7 @@ const APP = {
         document.getElementById('pause').classList.add('hide')
         document.getElementById('play').classList.remove('hide')
         document.getElementById('play').classList.add('show')
+
     },
     
     fastForward: () => {
@@ -447,8 +456,8 @@ const APP = {
         }, 1000)
     },
 
-    resumePlaying: () => {
-        // TO DO: exit current song page and go back to it on homepage, will resume where it is currently playing not overlap and play again
+    resumeSong: () => {
+
     },
 
     finishSongCheck: (position) => {
@@ -456,7 +465,7 @@ const APP = {
         const currentPosition = Math.floor(position)
         console.log(currentPosition, maxPosition)
         if (currentPosition === maxPosition || currentPosition ==- (maxPosition - 1)) { //doesn't reach maxPosition sometimes
-            APP.release()
+            return APP.release()
         } 
     }
 
