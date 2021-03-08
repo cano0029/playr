@@ -101,6 +101,7 @@ const APP = {
         document.getElementById('rw').addEventListener('click', APP.rewind)
         document.getElementById('mute').addEventListener('click', APP.toggleMute)
         document.getElementById('unmute').addEventListener('click', APP.toggleMute)
+        document.getElementById('nextSong-container').addEventListener('click', APP.displaySongPage)
     },
 
     showPlaylist: () => {
@@ -150,8 +151,7 @@ const APP = {
             console.log('CAN YOU WORK PLLZ',  APP.media)
         }
 
-    APP.songCard(ev)
-    
+    APP.songCard(ev)    
     },
 
     songCard: (ev) => {
@@ -173,8 +173,33 @@ const APP = {
 
         APP.mountMedia(track)
         APP.play()
+        APP.progressBar()
         APP.trackLength()
         APP.saveLength(track)
+        APP.previewNextSong()
+    },
+
+    previewNextSong: () => {
+        let dataKey = document.getElementById('playr-item').getAttribute('data-key')
+        let index = parseInt(dataKey)
+        let nextSong = index + 1
+        if (index < APP.tracks.length - 1) {
+            document.getElementById('nextSong').textContent =`Up Next: ${APP.tracks[nextSong].track} by ${APP.tracks[nextSong].artist}`
+            document.getElementById('nextSong-container').setAttribute('data-key', APP.tracks[nextSong].id);
+
+            document.getElementById('nextBtn').classList.remove('hide')
+            document.getElementById('nextBtn').classList.add('show')
+            document.getElementById('sadFace').classList.remove('show') 
+            document.getElementById('sadFace').classList.add('hide') 
+        }
+        else if (index = APP.tracks.length - 1) {
+            document.getElementById('nextSong').textContent ='You have reached the end of the playlist'
+            
+            document.getElementById('sadFace').classList.remove('hide') 
+            document.getElementById('sadFace').classList.add('show') 
+            document.getElementById('nextBtn').classList.remove('show')
+            document.getElementById('nextBtn').classList.add('hide')
+        }
     },
 
     mountMedia: (track) => {
@@ -196,20 +221,7 @@ const APP = {
 
     handleMediaSuccess: () => {
         console.log('WOOHOO! Successfully completed the media task')
-
-        // check if song is finished, call APP.media.release (which calls next song)
-        let id = document.getElementById('playr-item').getAttribute('data-key')
-        if (APP.tracks.id === id) {
-        APP.media.getCurrentPosition((currentPosition) => {
-            const maxPosition = APP.media.getDuration(); 
-            if (maxPosition === currentPosition) {
-                APP.release()
-                console.log('ERRMMARGERD', maxPosition)
-                console.log('ERRMMARGERD', currentPosition)
-            }
-        })
-        }
-
+        // APP.release()
     },
 
     handleMediaError: (error) => {
@@ -221,9 +233,9 @@ const APP = {
     }, 
 
     play: () => { 
-        // TO DO: only play song that matches to user click - if change, stop previous one - do not overlap
+        // TO DO: check if song is currently playing, if it is resume playing at that position, else play
+        
         APP.media.play()
-        APP.progressBar()
         
         // TO DO: move to separate function - togglePlay
         document.getElementById('play').classList.remove('show')
@@ -234,6 +246,7 @@ const APP = {
 
     release: () => {
         APP.media.release()
+        console.log('I MADE IT HERE')
         APP.playNextSong()
     },
 
@@ -350,13 +363,15 @@ const APP = {
                         const seconds = Math.floor(position - minutes * 60)
                         document.getElementById('progressBar').value = position
                         document.getElementById('duration').innerHTML= minutes + ':' + (seconds < 10 ? '0' : '') + seconds
-                    }
+                        
+                        APP.finishSongCheck(position)
+                    } 
                 },
                 // error callback
                 function (error) {
                     console.log('Error getting position:' + error)
                 }
-            );
+            )
         }, 1000);
     },
 
@@ -378,9 +393,8 @@ const APP = {
                 document.getElementById('trackLength').innerHTML = minutes + ':' + (seconds < 10 ? '0' : '') + seconds
                 document.getElementById('progressBar').max = duration 
             }
-
-
         }, 1000);
+
     },
 
     saveLength: (track) => {
@@ -411,13 +425,20 @@ const APP = {
     },
 
     resumePlaying: () => {
-        // TO DO: exit current song page and go back to it, will resume where it is currently playing not overlap and play again
-        // Eric's suggestion: when you hit pause, save currentPosition in Local storage
-        // and then when you click on song card again, retrieve position from Local storage and start playing from that position
+        // TO DO: exit current song page and go back to it on homepage, will resume where it is currently playing not overlap and play again
     },
 
+    finishSongCheck: (position) => {
+        const maxPosition = Math.floor(APP.media.getDuration())
+        const currentPosition = Math.floor(position)
+        console.log(currentPosition, maxPosition)
+        if (currentPosition === maxPosition) { //doesn't reach maxPosition sometimes
+            APP.release()
+        } 
+    }
+
     // TO DO: put into separate functions: find index # of track in array, song id = data-key - keep em short, Math.floor, get songInformation
-    // TO DO: clean code, delete all console logs, comments, change function/variable names, delete let => const
+    // TO DO: clean code, delete all console logs, comments, change function/variable names, delete let => const, fix get.attribute to get id and index == ids are index
 };
 
 const ready = "cordova" in window ? "deviceready" : "DOMContentLoaded";

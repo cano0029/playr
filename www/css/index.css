@@ -27,12 +27,13 @@ html {
     font-size: 16px;
     line-height: 1.7;
     font-family: Lato, Arial, Helvetica, sans-serif;
-    background-color: rgb(238, 240, 249);
+    background-color: rgb(0, 0, 0);
     /* background: url(https://images.unsplash.com/photo-1581610186406-5f6e9f9edbc1?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80) center no-repeat; */
     /* padding-right: 0; */
     background: url(https://images.unsplash.com/photo-1604076913837-52ab5629fba9?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=934&q=80) top no-repeat;
     /* image from https://unsplash.com/photos/tZCrFpSNiIQ */
     background-size: 100vh;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     
 }
 body {
@@ -41,7 +42,7 @@ body {
 }
 
 .page {
-    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    /* padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); */
     min-height: 100vh;
     position: absolute;
     top: 0;
@@ -89,15 +90,15 @@ body {
 
 #playlist-container h3 {
     font-size: 1rem;
-    padding-left: 1.5rem;
     /* padding-bottom: 1rem; */
     border-radius: 20px;
     color: rgb(60, 60, 60);
     background-color:rgba(247, 232, 232, 0.387);
     /* box-shadow: 2px 2px 6px rgba(103, 103, 103, 0.312); */
-    width: 20%;
+    width: 30%;
     margin-left: 1.6rem;
     margin-bottom: 0.4rem;
+    text-align: center;
 }
 ul{
     padding-top: 0.5rem;
@@ -137,13 +138,12 @@ img {
 /* TRACK PAGE */
 
 #track {
-    /* background-color:rgb(13, 173, 191); */
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
 }
 
 #track header {
     display: grid;
-    padding-top: 1rem;
+    padding-top: 2rem;
     padding-bottom: 2.5rem;
     padding-left: 0.2rem;
     padding-right: 0.2rem;
@@ -167,9 +167,9 @@ img {
     color: white;
 }
 #track-container {
-    padding-top: 1.5rem;
+    padding-top: 1rem;
     border-radius: 40px;
-    transform: translateY(-4rem);
+    transform: translateY(-3.2rem);
     background-color: rgb(255, 255, 255);
     box-shadow: -1px -8px 6px rgba(188, 188, 188, 0.25);
     border: none;
@@ -211,8 +211,12 @@ h4 {
 }
 
 #trackControls #replay, #mute, #unmute {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+}
+
+i.mute, i.unmute, i.replay {
+    font-size: 2rem;
 }
 
 i.rw, i.ff {
@@ -220,7 +224,7 @@ i.rw, i.ff {
 }
 
 i.play, i.pause {
-    font-size: 5rem;
+    font-size: 4rem;
     color: rgb(255, 1, 73);
 }
 
@@ -234,14 +238,14 @@ i.play, i.pause {
 }
 
 #bar {
-    padding:0;
+    margin-top:1rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 #bar progress, p {
-    margin: 0rem;
+    margin: 0.5rem;
 }
 
 progress {
@@ -289,6 +293,19 @@ progress[value]::-webkit-progress-value {
 @keyframes animate-stripes {
     100% { background-position: -50px 0px; }
 } */
+
+
+/* NEXT SONG */
+#nextSong-container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    /* transform: translateY(-1rem); */
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-size: 12px;
+}
+
 
 
 
