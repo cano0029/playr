@@ -155,6 +155,7 @@ const APP = {
             APP.media.stop()
             console.log('CAN YOU WORK PLLZ',  APP.media)
         } 
+
     APP.songCard(ev)  
     
     },
@@ -237,7 +238,7 @@ const APP = {
             APP.handleMediaError, 
             APP.handleMediaStatusChange 
         )
-        APP.play()
+        
     },
 
     handleMediaSuccess: () => {
