@@ -79,7 +79,7 @@ body {
 #playlist-container {
     padding-top: 0.8rem;
     border-radius: 40px;
-    background-color: rgba(238, 240, 249, 0.579);
+    background-color: rgba(249, 250, 255, 0.727);
     /* background-color: rgba(0, 0, 0, 0.415); */
     padding-bottom: 4rem;
 }
@@ -89,7 +89,7 @@ body {
     /* padding-bottom: 1rem; */
     border-radius: 20px;
     color: rgb(60, 60, 60);
-    background-color:rgba(247, 232, 232, 0.387);
+    background-color:rgba(221, 221, 221, 0.796);
     /* box-shadow: 2px 2px 6px rgba(103, 103, 103, 0.312); */
     width: 30%;
     margin-left: 1.6rem;
@@ -108,10 +108,10 @@ ul{
     margin-left: 1.2rem;
     margin-right: 1.2rem;
     margin-bottom: 1rem;
-    background-color: rgb(245, 247, 255);
+    background-color: rgba(245, 247, 255, 0.967);
     /* background-color: rgba(32, 32, 32, 0.867); */
     border-radius: 45px;
-    box-shadow: -2px 6px 12px rgba(0, 0, 0, 0.312);
+    box-shadow: -2px 6px 12px rgba(0, 0, 0, 0.22);
     align-items: center;
     /* color: white; */
     /* border: 0.5px solid rgb(11, 11, 11); */
@@ -222,12 +222,26 @@ h4 {
     max-width: 90vw;
     max-height: 40vh;
     border-radius: 50%;
-    box-shadow: 2px 2px 20px rgba(255, 4, 96, 0.161);
+    /* box-shadow: 2.5px 2.5px 28px rgba(255, 4, 96, 0.22); */
+    box-shadow: 2.5px 2.5px 28px rgba(255, 1, 73, 0.248);
     margin-bottom: 0.5rem;
     margin-left: 2rem;
     margin-right: 2rem;
+    
 }
 
+.rotate {
+    animation: rotation 15s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
 
 #trackControls, #mainControls {
     display: flex;

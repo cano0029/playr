@@ -272,6 +272,10 @@ const APP = {
         document.getElementById('play').classList.add('hide')
         document.getElementById('pause').classList.remove('hide')
         document.getElementById('pause').classList.add('show')
+
+        // TO DO: move to sepfunction - ImageRotate
+        document.getElementById('track-image').classList.add('rotate')
+
     },
 
     release: () => {
@@ -321,11 +325,15 @@ const APP = {
 
     pause: () => { 
         APP.media.pause()
+
         // TO: move to separate function toggle Pause
         document.getElementById('pause').classList.remove('show')
         document.getElementById('pause').classList.add('hide')
         document.getElementById('play').classList.remove('hide')
         document.getElementById('play').classList.add('show')
+
+        // TO DO : move to separate function - stopImageRotate
+        document.getElementById('track-image').classList.remove('rotate')
 
     },
     
