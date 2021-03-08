@@ -145,25 +145,31 @@ const APP = {
 
     displaySongPage: (ev) => {
         console.log('hi Im a song page')
+
         document.querySelector('.page.active').classList.remove('active')
         document.getElementById('track').classList.add('active')
-
+    
         let clickedThing = ev.target;
         let track = clickedThing.closest('[data-key]');
         let index = parseInt(track.getAttribute('data-key'))
         console.log('ME TARZAN', index)
         
+        // TO DO: find id of current song playing ?? IDK
+
         let songId = APP.tracks[index].id
         console.log('AHOY THERE', songId )
 
-        // if it is not the same song, stop music else keep playing
-        // i am doing the opposite here, but it works??
+        // TO DO: if it is not the same song, stop music else keep playing
+        // i am doing the opposite here, but it works?? It doesnt, it just pauses everything
         if (APP.media != null && songId === index) {
-            console.log('CAN YOU WORK PLLZ',  songId, index)
-            APP.media.stop()
+            console.log('NOOO IM BEING STOPPED GOODBYE',  songId, index)
+            APP.pause()
         } 
+        if (songId !== index) {
+            APP.media.play()
+        }
         
-        APP.songCard(ev)  
+        APP.songCard(ev) 
     
     },
 
@@ -203,7 +209,7 @@ const APP = {
             document.getElementById('nowPlaying-container').classList.add('show')
 
             document.getElementById('nowPlaying-image').src = APP.tracks[id].image
-            document.getElementById('nowPlaying').textContent = `Now Playing: ${APP.tracks[id].track} by ${APP.tracks[id].artist}`
+            document.getElementById('nowPlaying').textContent = `Listening to: ${APP.tracks[id].track} by ${APP.tracks[id].artist}`
         
         }
     },
@@ -223,7 +229,6 @@ const APP = {
         }
         else if (index = APP.tracks.length - 1) {
             document.getElementById('nextSong').textContent ='You are at the end of the playlist'
-            
             document.getElementById('sadFace').classList.remove('hide') 
             document.getElementById('sadFace').classList.add('show') 
             document.getElementById('nextBtn').classList.remove('show')
@@ -275,6 +280,12 @@ const APP = {
 
         // TO DO: move to sepfunction - ImageRotate
         document.getElementById('track-image').classList.add('rotate')
+
+        // TO DO : move to separate function - musicOn element
+        document.getElementById('musicPaused').classList.remove('show')
+        document.getElementById('musicPaused').classList.add('hide')
+        document.getElementById('musicOn').classList.remove('hide')
+        document.getElementById('musicOn').classList.add('show')
 
     },
 
@@ -334,6 +345,12 @@ const APP = {
 
         // TO DO : move to separate function - stopImageRotate
         document.getElementById('track-image').classList.remove('rotate')
+
+        // TO DO : move to separate function - musicOn element
+        document.getElementById('musicOn').classList.remove('show')
+        document.getElementById('musicOn').classList.add('hide')
+        document.getElementById('musicPaused').classList.remove('hide')
+        document.getElementById('musicPaused').classList.add('show')
 
     },
     
