@@ -129,10 +129,41 @@ li div h6 {
     font-weight: 400;
     /* color: rgb(122, 122, 122); */
 }
-img {
+
+li img {
     max-width: 70px;
     max-height: 70px;
     border-radius: 50%;
+}
+
+#nowPlaying-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#nowPlaying-content p, span {
+    margin-left: 1rem;
+}
+
+#nowPlaying-content img {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 50%;
+}
+
+.footer {
+    position: sticky;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: black;
+    color: white;
+    font-size: 12px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
 }
 
 /* TRACK PAGE */
@@ -238,7 +269,7 @@ i.play, i.pause {
 }
 
 #bar {
-    margin-top:1rem;
+    margin-top:0;
     display: flex;
     justify-content: center;
     align-items: center;

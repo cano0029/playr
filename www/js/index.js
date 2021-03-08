@@ -102,6 +102,7 @@ const APP = {
         document.getElementById('mute').addEventListener('click', APP.toggleMute)
         document.getElementById('unmute').addEventListener('click', APP.toggleMute)
         document.getElementById('nextSong-container').addEventListener('click', APP.displaySongPage)
+        document.getElementById('nowPlaying-container').addEventListener('click', APP.displaySongPage)
     },
 
     showPlaylist: () => {
@@ -139,6 +140,7 @@ const APP = {
     displayHome: () => {
         document.querySelector('.page.active').classList.remove('active')
         document.getElementById('home').classList.add('active')
+        APP.nowPlaying()
     },
 
     displaySongPage: (ev) => {
@@ -146,12 +148,15 @@ const APP = {
         document.querySelector('.page.active').classList.remove('active')
         document.getElementById('track').classList.add('active')
         
-        if (APP.media != null) {
+        const dataKey = document.getElementById('playr-item').getAttribute('data-key')
+        const id = parseInt(dataKey)
+
+        if (APP.media != null && APP.tracks.id != id) {
             APP.media.stop()
             console.log('CAN YOU WORK PLLZ',  APP.media)
-        }
-
-    APP.songCard(ev)    
+        } 
+    APP.songCard(ev)  
+    
     },
 
     songCard: (ev) => {
@@ -167,6 +172,8 @@ const APP = {
                 document.getElementById('track-title').textContent = song.track;
                 document.getElementById('track-artist').textContent = song.artist;
                 document.getElementById('playr-item').setAttribute('data-key', song.id);
+                
+
                 }
             })
         }
@@ -177,6 +184,19 @@ const APP = {
         APP.trackLength()
         APP.saveLength(track)
         APP.previewNextSong()
+    },
+
+    nowPlaying: () => {
+        const dataKey = document.getElementById('playr-item').getAttribute('data-key')
+        const id = parseInt(dataKey);
+        if (APP.media != null) {
+            document.getElementById('nowPlaying-container').classList.remove('hide')
+            document.getElementById('nowPlaying-container').classList.add('show')
+
+            document.getElementById('nowPlaying-image').src = APP.tracks[id].image
+            document.getElementById('nowPlaying').textContent = `Now Playing: ${APP.tracks[id].track} by ${APP.tracks[id].artist}`
+        
+        }
     },
 
     previewNextSong: () => {
@@ -193,7 +213,7 @@ const APP = {
             document.getElementById('sadFace').classList.add('hide') 
         }
         else if (index = APP.tracks.length - 1) {
-            document.getElementById('nextSong').textContent ='You have reached the end of the playlist'
+            document.getElementById('nextSong').textContent ='You are at the end of the playlist'
             
             document.getElementById('sadFace').classList.remove('hide') 
             document.getElementById('sadFace').classList.add('show') 
@@ -203,7 +223,8 @@ const APP = {
     },
 
     mountMedia: (track) => {
-        let id = parseInt(track.getAttribute('data-key'))
+        let dataKey = document.getElementById('playr-item').getAttribute('data-key')
+        let id = parseInt(dataKey)
         console.log('My song id is:' + id)
         let index = APP.tracks.findIndex(song => {
             return song.id === id 
@@ -216,7 +237,7 @@ const APP = {
             APP.handleMediaError, 
             APP.handleMediaStatusChange 
         )
-        
+        APP.play()
     },
 
     handleMediaSuccess: () => {
@@ -233,9 +254,9 @@ const APP = {
     }, 
 
     play: () => { 
-        // TO DO: check if song is currently playing, if it is resume playing at that position, else play
+        // TO DO: check if the same clicked song is currently playing, if it is resume playing at that position, else play
         
-        APP.media.play()
+            APP.media.play()
         
         // TO DO: move to separate function - togglePlay
         document.getElementById('play').classList.remove('show')
@@ -399,7 +420,8 @@ const APP = {
 
     saveLength: (track) => {
         const counter = 0;
-        let id = parseInt(track.getAttribute('data-key'))
+        let dataKey = document.getElementById('playr-item').getAttribute('data-key')
+        let id = parseInt(dataKey)
         let index = APP.tracks.findIndex(song => {
             return song.id === id 
             }
@@ -432,7 +454,7 @@ const APP = {
         const maxPosition = Math.floor(APP.media.getDuration())
         const currentPosition = Math.floor(position)
         console.log(currentPosition, maxPosition)
-        if (currentPosition === maxPosition) { //doesn't reach maxPosition sometimes
+        if (currentPosition === maxPosition || currentPosition ==- (maxPosition - 1)) { //doesn't reach maxPosition sometimes
             APP.release()
         } 
     }
