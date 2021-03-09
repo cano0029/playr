@@ -38,7 +38,7 @@ const CODES = {// TO DO: move to a separate file?
 
 const APP = {
     media: null, 
-    // TO DO: move to a separate resource folder?
+    // TO DO: move to a separate resource folder? Does cordova support require/es6 modules? no...
     tracks: [ 
         {
             id: 0,
@@ -452,8 +452,7 @@ const APP = {
     },
     
     buildSavedPage: () => {
-        // TO DO: build saved page - works but replaces list item each time a new song is saved
-        // how to add each time to the list? 
+        //TO DO: build saved page - works but replaces list item each time a new song is saved
         // might have to use local storage?
         let id = APP.findSongId()
 
