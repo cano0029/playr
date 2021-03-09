@@ -561,24 +561,38 @@ const APP = {
     },
 
     buildSavedPage: (ev) => {
-        //TO DO: build saved page
+        //TO DO: build saved page - works but replaces list item each time a new song is saved
         console.log('Will come back later to build this list')
         const dataKey = document.getElementById('playr-item').getAttribute('data-key')
         const id = parseInt(dataKey);
+
+        let list = document.getElementById('savedSongsList')
+        list.innerHTML = '';
+        let df = document.createDocumentFragment()
+
         if (APP.media != null) {
             // document.getElementById('savedImage').src = APP.tracks[id].image
             // document.getElementById('savedTitle').textContent = APP.tracks[id].track
             // document.getElementById('savedArtist').textContent = APP.tracks[id].artist
-
-            let list = document.getElementById('savedSongsList')
-            list.innerHTML = '';
-            let df = document.createDocumentFragment()
             let li = document.createElement('li')
             let img = document.createElement('img')
             let artist = document.createElement('p')
             let title = document.createElement('p')
+
+            img.alt = 'song image'
+            img.src = APP.tracks[id].image
+            artist.textContent = APP.tracks[id].artist
+            title.textContent = APP.tracks[id].track
+
+            li.setAttribute('data-key', APP.tracks[id].id)
+
+            li.append(img, artist, title)
+            df.append(li)
+
+            li.addEventListener('click', APP.displaySongPage)
         
         }
+        list.append(df)
     },
 
     showSavePage: () => {
