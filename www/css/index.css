@@ -30,7 +30,7 @@ html {
     background-color: rgb(249, 250, 255);
     /* background: url(https://images.unsplash.com/photo-1581610186406-5f6e9f9edbc1?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80) center no-repeat; */
     /* padding-right: 0; */
-    /* background: url(https://images.unsplash.com/photo-1604076913837-52ab5629fba9?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=934&q=80) top no-repeat; */
+    background: url(https://images.unsplash.com/photo-1604076913837-52ab5629fba9?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=934&q=80) top no-repeat;
     /* image from https://unsplash.com/photos/tZCrFpSNiIQ */
     background-size: 100vh;
     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
@@ -82,14 +82,18 @@ body {
     border-radius: 40px;
     background-color: rgb(249, 250, 255);
     /* background-color: rgba(0, 0, 0, 0.415); */
-    /* padding-bottom: 4rem; */
+    padding-bottom: 4rem;
     transform: translateY(-4rem);
 }
 
 #playListPage, #savedPage {
     background-color: rgb(249, 250, 255);
-    transform: translateY(-4rem);
+    /* transform: translateY(1rem); */
     padding-bottom: 2.5rem;
+}
+
+#savedPage {
+    height: 25rem;
 }
 .toggleTitles {
     /* text-align: center; */
@@ -179,7 +183,7 @@ li div h6 {
     bottom: 0;
     width: 100%;
     padding: 0.5rem;
-    height: 5rem;
+    /* height: 5rem; */
     background-color: black;
     color: white;
     font-size: 12px;

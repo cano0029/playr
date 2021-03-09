@@ -85,6 +85,8 @@ const APP = {
             src: './media/gorgeous.mp3',
             volume: 0.5
         },
+
+        // TO DO:add more songs
     ],
 
     init: () => {
@@ -576,9 +578,10 @@ const APP = {
             // document.getElementById('savedTitle').textContent = APP.tracks[id].track
             // document.getElementById('savedArtist').textContent = APP.tracks[id].artist
             let li = document.createElement('li')
+            let div = document.createElement('div')
             let img = document.createElement('img')
-            let artist = document.createElement('p')
-            let title = document.createElement('p')
+            let artist = document.createElement('h6')
+            let title = document.createElement('h4')
 
             img.alt = 'song image'
             img.src = APP.tracks[id].image
@@ -587,7 +590,9 @@ const APP = {
 
             li.setAttribute('data-key', APP.tracks[id].id)
 
-            li.append(img, artist, title)
+            li.append(img)
+            div.append(title, artist)
+            li.append(div)
             df.append(li)
 
             li.addEventListener('click', APP.displaySongPage)
