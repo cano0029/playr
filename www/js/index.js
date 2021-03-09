@@ -562,6 +562,7 @@ const APP = {
 
     buildSavedPage: (ev) => {
         //TO DO: build saved page - works but replaces list item each time a new song is saved
+        // might have to use local storage?
         console.log('Will come back later to build this list')
         const dataKey = document.getElementById('playr-item').getAttribute('data-key')
         const id = parseInt(dataKey);
