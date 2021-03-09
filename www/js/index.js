@@ -90,7 +90,7 @@ const APP = {
             artist: 'Don McLean',
             track: 'American Pie',
             length: 0,
-            image: './img/donMcLean.jpg',
+            image: './img/donMclean.jpg',
             src: './media/american-pie.mp3',
             volume: 0.5
         },
