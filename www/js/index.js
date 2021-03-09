@@ -228,7 +228,7 @@ const APP = {
             console.log('NOOO IM BEING STOPPED GOODBYE',  songId, index)
             APP.pause()
         } 
-        
+
         APP.buildSongPage(track) 
     },
 
@@ -452,7 +452,8 @@ const APP = {
     },
     
     buildSavedPage: () => {
-        //TO DO: build saved page - works but replaces list item each time a new song is saved
+        // TO DO: build saved page - works but replaces list item each time a new song is saved
+        // how to add each time to the list? 
         // might have to use local storage?
         let id = APP.findSongId()
 
@@ -656,8 +657,10 @@ const APP = {
         }
     },
 
-    // TO DO: put into separate functions: find index # of track in array, song id = data-key - keep em short, Math.floor, get songInformation
-    // TO DO: clean code, delete all console logs, comments, change function/variable names, delete let => const/lets?, fix get.attribute to get id and index == ids are index
+    // TO DO: 
+    // put into separate functions: find index # of track in array, song id = data-key - keep em short, Math.floor, get songInformation
+    // clean code, delete all console logs, comments, change function/variable names, delete let => const/lets?, fix get.attribute to get id and index == ids are index
+    // clean up HTML, CSS
 };
 
 const ready = "cordova" in window ? "deviceready" : "DOMContentLoaded";
