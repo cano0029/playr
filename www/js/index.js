@@ -152,11 +152,15 @@ const APP = {
 
     init: () => {
         APP.addListeners()
-        APP.showPlaylist()
+        APP.buildPlaylist()
     },
 
     addListeners: () => {
-        document.getElementById('btnClose').addEventListener('click', APP.displayHome)
+        // home page buttons
+        document.getElementById('savedButton').addEventListener('click', APP.showSavePage)
+        document.getElementById('allSongsButton').addEventListener('click', APP.displayAllSongs)
+
+        // music controls
         document.getElementById('replay').addEventListener('click', APP.replay)
         document.getElementById('play').addEventListener('click', APP.play)
         document.getElementById('pause').addEventListener('click', APP.pause)
@@ -164,18 +168,25 @@ const APP = {
         document.getElementById('rw').addEventListener('click', APP.rewind)
         document.getElementById('mute').addEventListener('click', APP.toggleMute)
         document.getElementById('unmute').addEventListener('click', APP.toggleMute)
+        
+        // favourites/save button
+        document.getElementById('like').addEventListener('click', APP.fillSaveIcon)
+        
+        // go to song card page
         document.getElementById('nextSong-container').addEventListener('click', APP.displaySongPage)
         document.getElementById('nowPlaying-container').addEventListener('click', APP.displaySongPage)
-        document.getElementById('like').addEventListener('click', APP.fillSaveIcon)
-        document.getElementById('savedButton').addEventListener('click', APP.showSavePage)
-        document.getElementById('allSongsButton').addEventListener('click', APP.displayAllSongs)
+
+        // go to home page
+        document.getElementById('btnClose').addEventListener('click', APP.displayHome)
+
+        
     },
 
-    showPlaylist: () => {
-        console.log("suhhh dude");
-        let list = document.getElementById('playlist')
-        list.innerHTML = '';
-        let df = document.createDocumentFragment()
+    buildPlaylist: () => {
+        let playlist = document.getElementById('playlist')
+        playlist.innerHTML = '';
+        let docfragment = document.createDocumentFragment()
+        
         APP.tracks.forEach((song => {
             let li = document.createElement('li')
             let div = document.createElement('div')
@@ -195,14 +206,14 @@ const APP = {
             div.append(artist)
             li.append(div)
 
-            df.append(li);
+            docfragment.append(li);
 
             li.addEventListener("click", APP.displaySongPage)
         })
         )
-        list.append(df)
+        playlist.append(docfragment)
     },
-
+    
     displayHome: () => {
         document.querySelector('.page.active').classList.remove('active')
         document.getElementById('home').classList.add('active')
@@ -211,23 +222,29 @@ const APP = {
     },
 
     displaySongPage: (ev) => {
-        console.log('hi Im a song page')
-
         document.querySelector('.page.active').classList.remove('active')
         document.getElementById('track').classList.add('active')
+
+        APP.checkSongPlaying(ev)
+    },
     
+    findSongId: () => {
+        let dataKeyAttr = document.getElementById('playr-item').getAttribute('data-key')
+        let id = parseInt(dataKeyAttr)
+        return id
+    },
+
+    checkSongPlaying: (ev) => {
         let clickedThing = ev.target;
         let track = clickedThing.closest('[data-key]');
         let index = parseInt(track.getAttribute('data-key'))
-        console.log('ME TARZAN', index)
         
         // TO DO: find id of current song playing ?? IDK
+        // if it is not the same song, stop music else keep playing
+        // i am doing the opposite here, but it works?? It doesnt, it just pauses everything
 
         let songId = APP.tracks[index].id
-        console.log('AHOY THERE', songId )
 
-        // TO DO: if it is not the same song, stop music else keep playing
-        // i am doing the opposite here, but it works?? It doesnt, it just pauses everything
         if (APP.media != null && songId === index) {
             console.log('NOOO IM BEING STOPPED GOODBYE',  songId, index)
             APP.pause()
@@ -235,18 +252,13 @@ const APP = {
         if (songId !== index) {
             APP.media.play()
         }
-        
-        APP.songCard(ev) 
-    
+
+        APP.buildSongPage(track) 
     },
 
-    songCard: (ev) => {
-        let clickedThing = ev.target;
-        let track = clickedThing.closest('[data-key]');
-
-        
+    buildSongPage: (track) => {
         if(track) {
-            const id = parseInt(track.getAttribute('data-key'));
+            let id = parseInt(track.getAttribute('data-key'));
             console.log('I am track #', id)
             APP.tracks.find(song => {
                 if (song.id === id) {
@@ -255,77 +267,39 @@ const APP = {
                 document.getElementById('track-artist').textContent = song.artist;
                 document.getElementById('playr-item').setAttribute('data-key', song.id);
                 document.getElementById('track-header').setAttribute('data-key', song.id)
-                
-
                 }
             })
         }
+        APP.callSongPageFeatures(track)
+    },
 
-        APP.mountMedia(track)
+    callSongPageFeatures: (track) => {
+        APP.mountMedia()
         APP.play()
         APP.progressBar()
         APP.trackLength()
         APP.saveLength(track)
         APP.previewNextSong()
-        APP.unfillSaveIcon(ev)
-    },
-
-    nowPlaying: () => {
-        const dataKey = document.getElementById('playr-item').getAttribute('data-key')
-        const id = parseInt(dataKey);
-        if (APP.media != null) {
-            document.getElementById('nowPlaying-container').classList.remove('hide')
-            document.getElementById('nowPlaying-container').classList.add('show')
-
-            document.getElementById('nowPlaying-image').src = APP.tracks[id].image
-            document.getElementById('nowPlaying').textContent = `Listening to: ${APP.tracks[id].track} by ${APP.tracks[id].artist}`
-        
-        }
-    },
-
-    previewNextSong: () => {
-        let dataKey = document.getElementById('playr-item').getAttribute('data-key')
-        let index = parseInt(dataKey)
-        let nextSong = index + 1
-        if (index < APP.tracks.length - 1) {
-            document.getElementById('nextSong').textContent =`Up Next: ${APP.tracks[nextSong].track} by ${APP.tracks[nextSong].artist}`
-            document.getElementById('nextSong-container').setAttribute('data-key', APP.tracks[nextSong].id);
-
-            document.getElementById('nextBtn').classList.remove('hide')
-            document.getElementById('nextBtn').classList.add('show')
-            document.getElementById('sadFace').classList.remove('show') 
-            document.getElementById('sadFace').classList.add('hide') 
-        }
-        else if (index = APP.tracks.length - 1) {
-            document.getElementById('nextSong').textContent ='You are at the end of the playlist'
-            document.getElementById('sadFace').classList.remove('hide') 
-            document.getElementById('sadFace').classList.add('show') 
-            document.getElementById('nextBtn').classList.remove('show')
-            document.getElementById('nextBtn').classList.add('hide')
-        }
+        APP.unfillSaveIcon(track) //fix, not passing ev - must pass track
     },
 
     mountMedia: () => {
-        let dataKey = document.getElementById('playr-item').getAttribute('data-key')
-        let id = parseInt(dataKey)
-        console.log('My song id is:' + id)
+        let id = APP.findSongId()
         let index = APP.tracks.findIndex(song => {
             return song.id === id 
-            }
-        )
-        console.log('My index position is:' + index)
+        })
+
         APP.media = new Media (
             APP.tracks[index].src, 
             APP.handleMediaSuccess, 
             APP.handleMediaError, 
             APP.handleMediaStatusChange 
         )
-        
     },
-
+    
     handleMediaSuccess: () => {
+        // optional - may remove if not using it
         console.log('WOOHOO! Successfully completed the media task')
-        // APP.release()
     },
 
     handleMediaError: (error) => {
@@ -338,96 +312,25 @@ const APP = {
 
     play: () => { 
         // TO DO: check if the same clicked song is currently playing, if it is resume playing at that position, else play
-
         APP.media.play()
-        
-        // TO DO: move to separate function - togglePlay
-        document.getElementById('play').classList.remove('show')
-        document.getElementById('play').classList.add('hide')
-        document.getElementById('pause').classList.remove('hide')
-        document.getElementById('pause').classList.add('show')
-
-        // TO DO: move to sepfunction - ImageRotate
-        document.getElementById('track-image').classList.add('rotate')
-
-        // TO DO : move to separate function - musicOn element
-        document.getElementById('musicPaused').classList.remove('show')
-        document.getElementById('musicPaused').classList.add('hide')
-        document.getElementById('musicOn').classList.remove('hide')
-        document.getElementById('musicOn').classList.add('show')
-
-    },
-
-    release: () => {
-        APP.media.release()
-        console.log('I MADE IT HERE')
-        APP.playNextSong()
-    },
-
-    playNextSong: () => {
-        // TO DO: clean up, move some in different functions
-        // logic: keep track of position in array
-        // listen for status fo event at the end of the song
-        // release old media object before creating a new one
-
-        console.log('HEELLOOO I NEED TO PLAY NEXT SONG')
-
-        let dataKey = document.getElementById('playr-item').getAttribute('data-key')
-        let id = parseInt(dataKey)
-        console.log(id)
-        let index = APP.tracks.findIndex(song => {
-            return song.id === id
-        })
-        
-        const next = index + 1
-
-
-        if (index < APP.tracks.length -1) {
-            APP.media = new Media (
-                APP.tracks[next].src, 
-                APP.handleMediaSuccess, 
-                APP.handleMediaError, 
-                APP.handleMediaStatusChange 
-            )
-            document.getElementById('track-image').src = APP.tracks[next].image; 
-            document.getElementById('track-title').textContent = APP.tracks[next].track;
-            document.getElementById('track-artist').textContent = APP.tracks[next].artist;
-            document.getElementById('playr-item').setAttribute('data-key', APP.tracks[next].id);
-        }
-
-        console.log(index)
-
-        APP.play()
-        APP.progressBar()
-        APP.trackLength()
-        APP.saveLength()
-    },
-
+        APP.showPauseButton()
+        APP.toggleMusicOnButton()
+        APP.songImageRotate()
+    
+    }, 
+    
     pause: () => { 
         APP.media.pause()
-
-        // TO: move to separate function toggle Pause
-        document.getElementById('pause').classList.remove('show')
-        document.getElementById('pause').classList.add('hide')
-        document.getElementById('play').classList.remove('hide')
-        document.getElementById('play').classList.add('show')
-
-        // TO DO : move to separate function - stopImageRotate
-        document.getElementById('track-image').classList.remove('rotate')
-
-        // TO DO : move to separate function - musicOn element
-        document.getElementById('musicOn').classList.remove('show')
-        document.getElementById('musicOn').classList.add('hide')
-        document.getElementById('musicPaused').classList.remove('hide')
-        document.getElementById('musicPaused').classList.add('show')
-
+        APP.showPlayButton()
+        APP.toggleMusicOffButton()
+        APP.hideMusicOnButton()
+        APP.stopImageRotate()
     },
     
     fastForward: () => {
         APP.media.getCurrentPosition((currentPosition) => {
-            const maxPosition = APP.media.getDuration(); // duration is built-in - values in seconds
+            const maxPosition = APP.media.getDuration(); 
             const newPosition = Math.min(maxPosition, currentPosition + 10); // adding 10 seconds
-
             APP.media.seekTo((newPosition) * 1000) //milliseconds -- advance it by 10 seconds
             console.log('Music is now fast forwarding:', {newPosition, maxPosition})
         });
@@ -443,40 +346,25 @@ const APP = {
     },
 
     replay: () => {
-        console.log('IAM REPLAYING')
         APP.media.play({ numberOfLoops: 1 })
+        console.log('IAM REPLAYING')
     },
 
     toggleMute: () => {
-        const muteBtn = document.getElementById('mute') //event.target;
-        const unmuteBtn = document.getElementById('unmute')
         if(APP.tracks.isMuted) {
             APP.media.setVolume(1)
             APP.tracks.isMuted = false;
-
-            // TO DO: move to separate function
-            // if the volume is unmuted, tell the user a button they can click to mute
-            unmuteBtn.classList.remove('show')
-            unmuteBtn.classList.add('hide')
-            muteBtn.classList.remove('hide')
-            muteBtn.classList.add('show')
-
+            APP.showMuteButton() 
             console.log(`Volume now set at ${APP.tracks.volume}`)
         }else {
             APP.media.setVolume(0) //if not muted, we want to mute it so set the volume to 0
             APP.tracks.isMuted = true
-
-            // TO DO: move to separate function
-            // if the volume is muted, tell the user a button they can click to unmute
-            muteBtn.classList.remove('show')
-            muteBtn.classList.add('hide')
-            unmuteBtn.classList.remove('hide')
-            unmuteBtn.classList.add('show')
-
+            APP.showUnmuteButton()
             console.log(`Volume now set at 0`)
         }
     },
 
+    // PROGRESS BAR THINGS
     progressBar: () => {
         setInterval(function () {
             // get media position
@@ -550,9 +438,142 @@ const APP = {
         }, 1000)
     },
 
-    resumeSong: () => {
 
+    // BUTTONS, FEATURES
+    showPauseButton: () => {
+        document.getElementById('play').classList.remove('show')
+        document.getElementById('play').classList.add('hide')
+        document.getElementById('pause').classList.remove('hide')
+        document.getElementById('pause').classList.add('show')
     },
+
+    showPlayButton: () => {
+        document.getElementById('pause').classList.remove('show')
+        document.getElementById('pause').classList.add('hide')
+        document.getElementById('play').classList.remove('hide')
+        document.getElementById('play').classList.add('show')
+    },
+
+    showMuteButton: () => {
+        document.getElementById('unmute').classList.remove('show')
+        document.getElementById('unmute').classList.add('hide')
+        document.getElementById('mute').classList.remove('hide')
+        document.getElementById('mute').classList.add('show')
+    },
+
+    showUnmuteButton: () => {
+        document.getElementById('mute').classList.remove('show')
+        document.getElementById('mute').classList.add('hide')
+        document.getElementById('unmute').classList.remove('hide')
+        document.getElementById('unmute').classList.add('show')
+    },
+
+    toggleMusicOnButton: () => {
+        document.getElementById('musicPaused').classList.remove('show')
+        document.getElementById('musicPaused').classList.add('hide')
+        document.getElementById('musicOn').classList.remove('hide')
+        document.getElementById('musicOn').classList.add('show')
+    },
+
+    toggleMusicOffButton: () => {
+        document.getElementById('track-image').classList.remove('rotate')
+    },
+
+    hideMusicOnButton: () => {
+        document.getElementById('musicOn').classList.remove('show')
+        document.getElementById('musicOn').classList.add('hide')
+        document.getElementById('musicPaused').classList.remove('hide')
+        document.getElementById('musicPaused').classList.add('show')
+    },
+
+    songImageRotate: () => {
+        document.getElementById('track-image').classList.add('rotate')
+    },
+
+    stopImageRotate: () => {
+        document.getElementById('track-image').classList.remove('rotate')
+    },
+
+    nowPlaying: () => {
+        let id = APP.findSongId()
+        if (APP.media != null) {
+            document.getElementById('nowPlaying-container').classList.remove('hide')
+            document.getElementById('nowPlaying-container').classList.add('show')
+            document.getElementById('nowPlaying-image').src = APP.tracks[id].image
+            document.getElementById('nowPlaying').textContent = `Listening to: ${APP.tracks[id].track} by ${APP.tracks[id].artist}`
+        
+        }
+    },
+
+    previewNextSong: () => {
+        let dataKey = document.getElementById('playr-item').getAttribute('data-key')
+        let index = parseInt(dataKey)
+        let nextSong = index + 1
+        if (index < APP.tracks.length - 1) {
+            document.getElementById('nextSong').textContent =`Up Next: ${APP.tracks[nextSong].track} by ${APP.tracks[nextSong].artist}`
+            document.getElementById('nextSong-container').setAttribute('data-key', APP.tracks[nextSong].id);
+
+            document.getElementById('nextBtn').classList.remove('hide')
+            document.getElementById('nextBtn').classList.add('show')
+            document.getElementById('sadFace').classList.remove('show') 
+            document.getElementById('sadFace').classList.add('hide') 
+        }
+        else if (index = APP.tracks.length - 1) {
+            document.getElementById('nextSong').textContent ='You are at the end of the playlist'
+            document.getElementById('sadFace').classList.remove('hide') 
+            document.getElementById('sadFace').classList.add('show') 
+            document.getElementById('nextBtn').classList.remove('show')
+            document.getElementById('nextBtn').classList.add('hide')
+        }
+    },
+
+    release: () => {
+        APP.media.release()
+        console.log('I MADE IT HERE')
+        APP.playNextSong()
+    },
+
+    playNextSong: () => {
+        // TO DO: clean up, move some in different functions
+        // logic: keep track of position in array
+        // listen for status fo event at the end of the song
+        // release old media object before creating a new one
+
+        console.log('HEELLOOO I NEED TO PLAY NEXT SONG')
+
+        let dataKey = document.getElementById('playr-item').getAttribute('data-key')
+        let id = parseInt(dataKey)
+        console.log(id)
+        let index = APP.tracks.findIndex(song => {
+            return song.id === id
+        })
+        
+        const next = index + 1
+
+
+        if (index < APP.tracks.length -1) {
+            APP.media = new Media (
+                APP.tracks[next].src, 
+                APP.handleMediaSuccess, 
+                APP.handleMediaError, 
+                APP.handleMediaStatusChange 
+            )
+            document.getElementById('track-image').src = APP.tracks[next].image; 
+            document.getElementById('track-title').textContent = APP.tracks[next].track;
+            document.getElementById('track-artist').textContent = APP.tracks[next].artist;
+            document.getElementById('playr-item').setAttribute('data-key', APP.tracks[next].id);
+        }
+
+        console.log(index)
+
+        APP.play()
+        APP.progressBar()
+        APP.trackLength()
+        APP.saveLength()
+    },
+
+    
+
 
     finishSongCheck: (position) => {
         const maxPosition = Math.floor(APP.media.getDuration())
@@ -601,10 +622,10 @@ const APP = {
     navigator.notification.alert(message,alertCallback,title, buttonName);
     },
 
-    unfillSaveIcon: (ev) => {
+    unfillSaveIcon: (track) => {
         
-        let clickedThing = ev.target;
-        let track = clickedThing.closest('[data-key]');
+        // let clickedThing = ev.target;
+        // let track = clickedThing.closest('[data-key]');
 
         
         if(track) {
