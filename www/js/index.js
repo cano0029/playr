@@ -148,8 +148,6 @@ const APP = {
             src: './media/you-can-call-me-al.mp3',
             volume: 0.5
         },
-
-        // TO DO:add more songs
     ],
 
     init: () => {
