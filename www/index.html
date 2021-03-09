@@ -44,12 +44,30 @@
             <header>
                 <h1>josPlayr</h1>
             </header>
-            <main id = "playlist-container">
-                <h3>Playlist</h3>
-                <ul id="playlist">
-                    <!-- songs will go here -->
-                </ul>
-            </main>
+            <div id = "playListPage" class = "show">
+                <main id = "playlist-container">
+                    <div class = "toggleTitles">
+                        <button><h3>Playlist</h3></button>
+                        <button><h3>Saved</h3></button>
+                    </div>
+                    <ul id="playlist">
+                        <!-- songs will go here -->
+                    </ul>
+                </main>
+            </div>
+            <div id = "savedPage" class = "hide">
+                <main id = "playlist-container">
+                    <div class = "toggleTitles">
+                        <button><h3>Playlist</h3></button>
+                        <button><h3>Saved</h3></button>
+                    </div>
+                    
+                    <ul id="savedSongs">
+                        <!-- songs will go here -->
+                    </ul>
+                </main>
+            </div>
+            
             <div class = "footer hide" id ="nowPlaying-container">
                 <div id = "nowPlaying-content">
                     <img id = "nowPlaying-image">
