@@ -103,6 +103,9 @@ const APP = {
         document.getElementById('unmute').addEventListener('click', APP.toggleMute)
         document.getElementById('nextSong-container').addEventListener('click', APP.displaySongPage)
         document.getElementById('nowPlaying-container').addEventListener('click', APP.displaySongPage)
+        document.getElementById('like').addEventListener('click', APP.fillSaveIcon)
+        document.getElementById('savedButton').addEventListener('click', APP.showSavePage)
+        document.getElementById('allSongsButton').addEventListener('click', APP.displayAllSongs)
     },
 
     showPlaylist: () => {
@@ -140,6 +143,7 @@ const APP = {
     displayHome: () => {
         document.querySelector('.page.active').classList.remove('active')
         document.getElementById('home').classList.add('active')
+
         APP.nowPlaying()
     },
 
@@ -187,6 +191,7 @@ const APP = {
                 document.getElementById('track-title').textContent = song.track;
                 document.getElementById('track-artist').textContent = song.artist;
                 document.getElementById('playr-item').setAttribute('data-key', song.id);
+                document.getElementById('track-header').setAttribute('data-key', song.id)
                 
 
                 }
@@ -199,6 +204,7 @@ const APP = {
         APP.trackLength()
         APP.saveLength(track)
         APP.previewNextSong()
+        APP.unfillSaveIcon(ev)
     },
 
     nowPlaying: () => {
@@ -492,6 +498,102 @@ const APP = {
         if (currentPosition === maxPosition || currentPosition ==- (maxPosition - 1)) { //doesn't reach maxPosition sometimes
             return APP.release()
         } 
+    },
+
+    fillSaveIcon: (ev) => {
+
+        let clickedThing = ev.target;
+        let track = clickedThing.closest('[data-key]');
+
+        
+        if(track) {
+            const id = parseInt(track.getAttribute('data-key'));
+            console.log('I am track #', id)
+            APP.tracks.find(song => {
+                if (song.id === id) {
+                    console.log('I AM GOING TO THE SAVED PAGE', song.id, id)
+                    document.getElementById('like').classList.remove('show')
+                    document.getElementById('like').classList.add('hide')
+                    document.getElementById('songLiked').classList.remove('hide')
+                    document.getElementById('songLiked').classList.add('show')
+
+                    APP.showConfirmSaved()
+                }
+            })
+        }
+
+        APP.buildSavedPage(ev)
+    },
+
+    showConfirmSaved: () => {
+        const message = 'This song will be added to your saved list';
+        const title = 'Saved';
+        const buttonName = 'OK';
+        const alertCallback = () => {
+        // do stuff when dialog closes - 
+        // when user click OK, alert closes then this callback function runs
+        APP.buildSavedPage()
+        }
+
+    navigator.notification.alert(message,alertCallback,title, buttonName);
+    },
+
+    unfillSaveIcon: (ev) => {
+        
+        let clickedThing = ev.target;
+        let track = clickedThing.closest('[data-key]');
+
+        
+        if(track) {
+            const id = parseInt(track.getAttribute('data-key'));
+            console.log('I am track #', id)
+            APP.tracks.find(song => {
+                if (song.id !== id) {
+                    console.log('I AM NOT GOING TO THE SAVED PAGE', song.id, id)
+                    document.getElementById('songLiked').classList.remove('show')
+                    document.getElementById('songLiked').classList.add('hide')
+                    document.getElementById('like').classList.remove('hide')
+                    document.getElementById('like').classList.add('show')
+        
+                } 
+            })
+        }
+    },
+
+    buildSavedPage: (ev) => {
+        //TO DO: build saved page
+        console.log('Will come back later to build this list')
+        const dataKey = document.getElementById('playr-item').getAttribute('data-key')
+        const id = parseInt(dataKey);
+        if (APP.media != null) {
+            // document.getElementById('savedImage').src = APP.tracks[id].image
+            // document.getElementById('savedTitle').textContent = APP.tracks[id].track
+            // document.getElementById('savedArtist').textContent = APP.tracks[id].artist
+
+            let list = document.getElementById('savedSongsList')
+            list.innerHTML = '';
+            let df = document.createDocumentFragment()
+            let li = document.createElement('li')
+            let img = document.createElement('img')
+            let artist = document.createElement('p')
+            let title = document.createElement('p')
+        
+        }
+    },
+
+    showSavePage: () => {
+        APP.displayHome()
+        document.getElementById('playListPage').classList.remove('show')
+        document.getElementById('playListPage').classList.add('hide')
+        document.getElementById('savedPage').classList.remove('hide')
+        document.getElementById('savedPage').classList.add('show')
+    },
+
+    displayAllSongs: () => {
+        document.getElementById('savedPage').classList.remove('show')
+        document.getElementById('savedPage').classList.add('hide')
+        document.getElementById('playListPage').classList.remove('hide')
+        document.getElementById('playListPage').classList.add('show')
     }
 
     // TO DO: put into separate functions: find index # of track in array, song id = data-key - keep em short, Math.floor, get songInformation

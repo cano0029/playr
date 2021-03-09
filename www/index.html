@@ -44,28 +44,30 @@
             <header>
                 <h1>josPlayr</h1>
             </header>
+            <main id = "playlist-container">
+                <div class = "toggleTitles">
+                    <button id = "allSongsButton"><h3>All Songs</h3></button>
+                    <button id = "savedButton"><h3>Saved</h3></button>
+                </div>
+            </main>
+            
+            <!-- PLAYLIST -->
             <div id = "playListPage" class = "show">
-                <main id = "playlist-container">
-                    <div class = "toggleTitles">
-                        <button><h3>Playlist</h3></button>
-                        <button><h3>Saved</h3></button>
-                    </div>
-                    <ul id="playlist">
-                        <!-- songs will go here -->
-                    </ul>
-                </main>
+                <ul id="playlist">
+                <!-- songs will go here -->
+                </ul>
             </div>
-            <div id = "savedPage" class = "hide">
-                <main id = "playlist-container">
-                    <div class = "toggleTitles">
-                        <button><h3>Playlist</h3></button>
-                        <button><h3>Saved</h3></button>
-                    </div>
-                    
-                    <ul id="savedSongs">
-                        <!-- songs will go here -->
-                    </ul>
-                </main>
+            
+            <!-- SAVED -->
+            <div id = "savedPage" class = "show">
+                <ul id="savedSongsList">
+                <!-- songs will go here -->
+                    <li>
+                        <img id = 'savedImage'>
+                        <p id = 'savedTitle'></p>
+                        <p id = 'savedArtist'></p>
+                    </li>
+                </ul>
             </div>
             
             <div class = "footer hide" id ="nowPlaying-container">
@@ -81,10 +83,11 @@
         <!-- TRACK PAGE -->
         <section class="page" id="track">
             <main>
-                <header id = "track-header">
+                <header id = "track-header" data-key= "">
                     <btn id="btnClose"><img src= "./img/outline_arrow_back_ios_white_24pt_1x.png" alt="back arrow"></btn>
                     <h4 id="playing-title">Now Playing</h4>
-                    <btn id="like"><i class="material-icons">favorite_filled</i></btn>
+                    <btn id="songLiked" class= "hide"><i class="material-icons">favorite_filled</i></btn>
+                    <btn id="like" class= "show"><i class="material-icons">favorite_outline</i></btn>
                 </header>
                 <div id = "track-container">
                     <div id = "playr-item">
