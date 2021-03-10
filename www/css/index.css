@@ -86,6 +86,10 @@ body {
     transform: translateY(-4.5rem);
 }
 
+#playlist h6 {
+
+}
+
 #playListPage, #savedPage {
     background-color: rgb(249, 250, 255);
     /* transform: translateY(1rem); */
@@ -102,9 +106,9 @@ body {
     left: 0;
     top: 0;
     width: 100%;
-    padding: 0.8rem;
+    padding: 1.6rem;
     padding-left: 1.2rem;
-    background-color: rgba(249, 250, 255, 0.871);
+    background-color: rgba(249, 250, 255, 0.891);
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
 }
@@ -157,6 +161,8 @@ li div {
 }
 li div h6 {
     font-weight: 400;
+    font-size: 14px;
+    color: rgb(135, 135, 135);
     /* color: rgb(122, 122, 122); */
 }
 
@@ -168,7 +174,7 @@ li div h6 {
 
 /* FAVOURITES PAGE */
 
-#savedSongsList h5 {
+#savedSongsList h4 {
     margin-top: 2rem;
     text-align: center;
     font-weight: 300;;
@@ -177,7 +183,8 @@ li div h6 {
 /* NOW PLAYING */
 
 #nowPlaying-content{
-    padding: 0.5;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -186,6 +193,7 @@ li div h6 {
 
 #nowPlaying-content p, span {
     margin-left: 0.5rem;
+    font-size: 13px;
 }
 
 #nowPlaying-content img {
@@ -394,6 +402,7 @@ progress[value]::-webkit-progress-value {
     align-items: center;
     transform: translateY(0.2rem);
     color: white;
-    font-size: 12px;
+    font-size: 13px;
     background-color: rgb(0, 0, 0);
 }
+

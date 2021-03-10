@@ -187,7 +187,15 @@ const APP = {
             let div = document.createElement('div')
             let img = document.createElement('img')
             let title = document.createElement('h4')
-            let artist = document.createElement('h6') 
+            let artist = document.createElement('h6')
+
+            // material icon that indicates which song is playing
+            let musicOnDiv = document.createElement('div')
+            let musicOnIndicator = document.createElement('span')
+            musicOnIndicator.classList.add('material-icons')
+            musicOnIndicator.innerHTML = 'music_video'
+            musicOnDiv.classList.add('musicOn', 'hide')
+            musicOnDiv.setAttribute('data-id', song.id)
 
             img.alt = 'track photo'
             img.src = song.image
@@ -198,7 +206,9 @@ const APP = {
             li.append(img)
             div.append(title)
             div.append(artist)
+            musicOnDiv.append(musicOnIndicator)
             li.append(div)
+            li.append(musicOnDiv)
             docfragment.append(li);
             li.addEventListener("click", APP.displaySongPage)
         })
@@ -296,7 +306,6 @@ const APP = {
     }, 
 
     play: () => { 
-        // TO DO: check if the same clicked song is currently playing, if it is resume playing at that position, else play
         APP.media.play()
         APP.showPauseButton()
         APP.toggleMusicOnButton()
@@ -502,6 +511,8 @@ const APP = {
         document.querySelector('.page.active').classList.remove('active')
         document.getElementById('home').classList.add('active')
         APP.nowPlaying()
+        APP.hideMusicIndicators()
+        APP.musicOnIndicator()
     },
 
     displaySongPage: (ev) => {
@@ -538,6 +549,45 @@ const APP = {
             document.getElementById('nowPlaying-image').src = APP.tracks[id].image
             document.getElementById('nowPlaying').textContent = `Now Playing: ${APP.tracks[id].track} by ${APP.tracks[id].artist}`
         }
+    },
+    hideMusicIndicators: () => {
+
+    },
+
+    musicOnIndicator: () => {
+        // TO DO: musicOn icon indicates which song is currently playing on homepage playlist
+        let songPlayingId = APP.findSongId()
+
+        // TO DO: move to separate function
+        let cardDataKey = document.getElementById('playr-item').getAttribute('data-key')
+        let playlistCardId = parseInt(cardDataKey)
+        console.log('CINDERELLA', songPlayingId, playlistCardId)
+        
+        let playlist = document.getElementById('playlist')
+        let songItem = playlist.querySelectorAll('li')
+        console.log(songItem) //returns playlist list items as a nodelist
+        
+        if (songPlayingId === playlistCardId) {
+            // if current song playing matches the id of card in the playlist, 
+            // find musicOnIndicator that matches them and classlist remove, hide and add class show
+            
+            // TO DO: move to separate function
+            let musicIcon = songItem[playlistCardId]
+            console.log(musicIcon) // returns li item with index matching
+
+            let musicIconDiv = musicIcon.childNodes[2]
+            console.log(musicIconDiv) // finds div of musicIcon
+            let musicIconDataId = musicIconDiv.getAttribute('data-id')
+            let musicIconId = parseInt(musicIconDataId)
+            console.log(musicIconId) // finds data-id of that specific musicIcon
+            
+            if (songPlayingId === musicIconId) {
+                musicIconDiv.classList.remove('hide')
+                musicIconDiv.classList.add('show')
+            } 
+            
+        }
+
     },
 
     previewNextSong: () => {
