@@ -153,6 +153,7 @@ const APP = {
     init: () => {
         APP.addListeners()
         APP.buildPlaylist()
+        APP.colourAllSongsBtn()
     },
 
     addListeners: () => {
@@ -204,6 +205,8 @@ const APP = {
         )
         playlist.append(docfragment)
     },
+
+    
     
     findSongId: () => {
         let dataKeyAttr = document.getElementById('playr-item').getAttribute('data-key')
@@ -507,13 +510,18 @@ const APP = {
         document.getElementById('playListPage').classList.add('hide')
         document.getElementById('savedPage').classList.remove('hide')
         document.getElementById('savedPage').classList.add('show')
+        APP.colourSaveBtn()
+        APP.uncolourAllSongsBtn()
     },
 
     displayAllSongs: () => {
+        
         document.getElementById('savedPage').classList.remove('show')
         document.getElementById('savedPage').classList.add('hide')
         document.getElementById('playListPage').classList.remove('hide')
         document.getElementById('playListPage').classList.add('show')
+        APP.colourAllSongsBtn()
+        APP.uncolourSaveBtn()
     },
     
     // FEATURES
@@ -552,6 +560,33 @@ const APP = {
     },
 
     // BUTTONS
+    
+    colourAllSongsBtn: () => {
+        APP.uncolourSaveBtn()
+        let allSongsBtn = document.getElementById('allSongsButton')
+        allSongsBtn.style.backgroundColor = '#ff0149'
+        allSongsBtn.style.color = '#ffffff'
+    },
+
+    colourSaveBtn: () => {
+        APP.uncolourAllSongsBtn()
+        let saveBtn = document.getElementById('savedButton')
+        saveBtn.style.backgroundColor = '#ff0149'
+        saveBtn.style.color = '#ffffff'
+    },
+
+    uncolourAllSongsBtn: () => {
+        let allSongsBtn = document.getElementById('allSongsButton')
+        allSongsBtn.style.backgroundColor = '#d1d1d1'
+        allSongsBtn.style.color = '#7b7b7b'
+    },
+
+    uncolourSaveBtn: () => {
+        let saveBtn = document.getElementById('savedButton')
+        saveBtn.style.backgroundColor = '#d1d1d1'
+        saveBtn.style.color = '#7b7b7b'
+    },
+
     showPauseButton: () => {
         document.getElementById('play').classList.remove('show')
         document.getElementById('play').classList.add('hide')
