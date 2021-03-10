@@ -78,12 +78,12 @@ body {
     transform: translateY(6rem);
 }
 #playlist-container {
-    padding-top: 1.5rem;
+    padding-top: 1rem;
     border-radius: 40px;
     background-color: rgb(249, 250, 255);
     /* background-color: rgba(0, 0, 0, 0.415); */
     padding-bottom: 4rem;
-    transform: translateY(-4rem);
+    transform: translateY(-4.5rem);
 }
 
 #playListPage, #savedPage {
@@ -95,10 +95,18 @@ body {
 #savedPage {
     height: 25rem;
 }
+
 .toggleTitles {
     /* text-align: center; */
-    margin-left: 1.2rem;
-    padding-bottom: 1rem;
+    position: sticky;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 0.8rem;
+    padding-left: 1.2rem;
+    background-color: rgba(249, 250, 255, 0.871);
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
 }
 
 .toggleTitles button {
@@ -257,8 +265,13 @@ h4 {
     max-width: 90vw;
     max-height: 40vh;
     border-radius: 50%;
-    /* box-shadow: 2.5px 2.5px 28px rgba(255, 4, 96, 0.22); */
-    box-shadow: 2.5px 2.5px 28px rgba(255, 1, 73, 0.248);
+    /* box-shadow: 0 2.5px 12px rgba(255, 1, 73, 0.248); */
+    box-shadow: 0 2.8px 2.2px rgba(199, 199, 199, 0.034),
+    0 6.7px 5.3px rgba(230, 230, 230, 0.048),
+    0 12.5px 15px rgba(255, 1, 73, 0.131),
+    0 22.3px 17.9px rgba(208, 208, 208, 0.072),
+    0 31.8px 23.4px rgba(186, 186, 186, 0.086),
+    0 100px 80px rgba(233, 233, 233, 0.12);
     margin-bottom: 0.5rem;
     margin-left: 2rem;
     margin-right: 2rem;
@@ -368,7 +381,6 @@ progress[value]::-webkit-progress-value {
 /* @-webkit-keyframes animate-stripes {
     100% { background-position: -50px 0px; }
 }
-
 @keyframes animate-stripes {
     100% { background-position: -50px 0px; }
 } */
@@ -385,7 +397,3 @@ progress[value]::-webkit-progress-value {
     font-size: 12px;
     background-color: rgb(0, 0, 0);
 }
-
-
-
-

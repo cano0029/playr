@@ -220,10 +220,18 @@ const APP = {
 
     checkSongPlaying: (ev) => {
         // TO DO: if it is not the same song, stop music else keep playing
+
+        // currentSongId
+        // let clickedSong = ev.target
+        // let track = clickedThing.closest('[data-key]');
+        // let currentSongId = parseInt(track.getAttribute('data-key'))
+
+        //newSongId
+        // getAttribute data-key from (playlist)
+
         let track = APP.findSongDataKey(ev)
         let index = parseInt(track.getAttribute('data-key'))
         let songId = APP.tracks[index].id
-        
         // Doing the opposite here, but it works?? It doesnt, it just pauses everything
         if (APP.media != null && songId === index) {
             console.log('NOOO IM BEING STOPPED GOODBYE',  songId, index)
@@ -528,7 +536,7 @@ const APP = {
             document.getElementById('nowPlaying-container').classList.remove('hide')
             document.getElementById('nowPlaying-container').classList.add('show')
             document.getElementById('nowPlaying-image').src = APP.tracks[id].image
-            document.getElementById('nowPlaying').textContent = `Listening to: ${APP.tracks[id].track} by ${APP.tracks[id].artist}`
+            document.getElementById('nowPlaying').textContent = `Now Playing: ${APP.tracks[id].track} by ${APP.tracks[id].artist}`
         }
     },
 
@@ -547,8 +555,8 @@ const APP = {
     },
     
     showConfirmSaved: () => {
-        const message = 'This song will be added to your saved list';
-        const title = 'Saved';
+        const message = 'This song has been added to your favourites list';
+        const title = 'Success';
         const buttonName = 'OK';
         const alertCallback = () => {
         APP.buildSavedPage()

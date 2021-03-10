@@ -41,15 +41,16 @@
     <body>
         <!-- HOMEPAGE -->
         <section class="page active" id="home">
-            <header>
+            
+            <header class = "header">
                 <h1>josPlayr</h1>
             </header>
+
             <main id = "playlist-container">
-                <div class = "toggleTitles">
+                <div class = "toggleTitles sticky">
                     <button id = "allSongsButton"><h3>All Songs</h3></button>
                     <button id = "savedButton"><h3>Favourites</h3></button>
                 </div>
-            
                 <!-- PLAYLIST -->
                 <div id = "playListPage" class = "show">
                     <ul id="playlist">
@@ -65,6 +66,7 @@
                     </ul>
                 </div>
             </main>
+            
             <div class = "footer hide" id ="nowPlaying-container">
                 <div id = "nowPlaying-content">
                     <img id = "nowPlaying-image">
@@ -86,7 +88,9 @@
                 </header>
                 <div id = "track-container">
                     <div id = "playr-item">
-                        <img id = "track-image" class="">
+                        <div classs = "img-container">
+                            <img id = "track-image" class="">
+                        </div>
                         <h1 id = "track-title"></h1>
                         <p id = "track-artist"></p>
                     </div>
