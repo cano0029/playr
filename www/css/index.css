@@ -78,24 +78,25 @@ body {
     transform: translateY(6rem);
 }
 #playlist-container {
-    padding-top: 1rem;
+    padding-top: 0.4rem;
     border-radius: 40px;
-    background-color: rgb(249, 250, 255);
+    background-color: rgba(245, 247, 255, 0.967);
     /* background-color: rgba(0, 0, 0, 0.415); */
     padding-bottom: 4rem;
     transform: translateY(-4.5rem);
 }
 
-#playlist h6 {
-
-}
 
 #playListPage, #savedPage {
-    background-color: rgb(249, 250, 255);
+    background-color: rgba(245, 247, 255, 0.967);
     /* transform: translateY(1rem); */
     padding-bottom: 2.5rem;
 }
 
+.musicOn {
+    justify-content: right;
+    translate: 8rem;
+}
 #savedPage {
     height: 25rem;
 }
@@ -106,24 +107,23 @@ body {
     left: 0;
     top: 0;
     width: 100%;
-    padding: 1.6rem;
-    padding-left: 1.2rem;
-    background-color: rgba(249, 250, 255, 0.891);
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
+    padding: 1rem;
+    padding-left: 0.8rem;
+    background-color: rgba(245, 247, 255, 0.967);
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
 }
 
 .toggleTitles button {
     font-size: 12px;
-    padding: 0.2rem;
-    margin: 0.2rem;
-    /* padding-bottom: 1rem; */
+    padding: 0.5rem;
+    margin: 0.6rem;
     border-radius: 20px;
     color: rgb(123, 123, 123);
     background-color: rgb(209, 209, 209);
     /* box-shadow: 2px 2px 6px rgba(103, 103, 103, 0.312); */
-    width: 30%;
     text-align: center;
+    width: 30%;
     border: 0.5px solid rgb(235, 235, 235);
 }
 
@@ -159,6 +159,13 @@ li div {
     margin-left: 1.5rem;
     text-align: left;
 }
+
+
+/* width of playlist title and artist - not very responsive */
+li div h4, h6 {
+    width: 10.5rem;
+}
+
 li div h6 {
     font-weight: 400;
     font-size: 14px;
@@ -175,16 +182,20 @@ li div h6 {
 /* FAVOURITES PAGE */
 
 #savedSongsList h4 {
-    margin-top: 2rem;
     text-align: center;
-    font-weight: 300;;
+}
+
+#savedSongsList p {
+    margin-top: 2rem;
+    font-size: 16px;
+    text-align: center;
 }
 
 /* NOW PLAYING */
 
+
 #nowPlaying-content{
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding: 0.25rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -202,12 +213,17 @@ li div h6 {
     border-radius: 50%;
 }
 
+.musicOn span {
+    color: rgba(255, 1, 73, 0.391);
+}
+
 .footer {
     position: sticky;
     left: 0;
     bottom: 0;
     width: 100%;
-    padding: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     /* height: 5rem; */
     background-color: black;
     color: white;
@@ -368,33 +384,11 @@ progress[value]::-webkit-progress-bar {
 
 progress[value]::-webkit-progress-value {
     /* styles the bar */
-    /* background-image:
-        -webkit-linear-gradient(-45deg, 
-            transparent 33%, rgba(0, 0, 0, .1) 33%, 
-            rgba(86, 4, 50, 0.1) 66%, transparent 66%),
-        -webkit-linear-gradient(top, 
-            rgba(255, 9, 87, 0.25), 
-            rgba(89, 7, 11, 0.25)),
-        -webkit-linear-gradient(bottom, rgb(255, 1, 73), rgb(187, 1, 255)); */
     background: rgb(255, 1, 73);
     border-radius: 20px; 
     background-size: 60px 20px, 100% 100%, 100% 100%;
-
-    /* animates it */
-    /* -webkit-animation: animate-stripes 5s linear infinite;
-        animation: animate-stripes 5s linear infinite; */
-
 }
 
-/* @-webkit-keyframes animate-stripes {
-    100% { background-position: -50px 0px; }
-}
-@keyframes animate-stripes {
-    100% { background-position: -50px 0px; }
-} */
-
-
-/* NEXT SONG */
 
 #nextSong-container{
     display:flex;

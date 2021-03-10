@@ -485,8 +485,8 @@ const APP = {
             let li = document.createElement('li')
             let div = document.createElement('div')
             let img = document.createElement('img')
-            let artist = document.createElement('h6')
             let title = document.createElement('h4')
+            let artist = document.createElement('h6')
 
             img.alt = 'song image'
             img.src = APP.tracks[id].image
