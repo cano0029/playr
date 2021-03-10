@@ -195,7 +195,7 @@ const APP = {
             musicOnIndicator.classList.add('material-icons')
             musicOnIndicator.innerHTML = 'audiotrack'
             musicOnDiv.classList.add('musicOn', 'hide')
-            musicOnDiv.setAttribute('data-id', song.id)
+            musicOnDiv.setAttribute('id', `musicIcon${song.id}`)
 
             img.alt = 'track photo'
             img.src = song.image
@@ -229,20 +229,11 @@ const APP = {
     },
 
     checkSongPlaying: (ev) => {
-        // TO DO: if it is not the same song, stop music else keep playing
-
-        // currentSongId
-        // let clickedSong = ev.target
-        // let track = clickedThing.closest('[data-key]');
-        // let currentSongId = parseInt(track.getAttribute('data-key'))
-
-        //newSongId
-        // getAttribute data-key from (playlist)
 
         let track = APP.findSongDataKey(ev)
         let index = parseInt(track.getAttribute('data-key'))
         let songId = APP.tracks[index].id
-        // Doing the opposite here, but it works?? It doesnt, it just pauses everything
+
         if (APP.media != null && songId === index) {
             console.log('NOOO IM BEING STOPPED GOODBYE',  songId, index)
             APP.pause()
@@ -438,10 +429,6 @@ const APP = {
     },
 
     playNextSong: () => {
-        // logic: keep track of position in array
-        // listen for status fo event at the end of the song
-        // release old media object before creating a new one
-
         let id = APP.findSongId()
         let index = APP.tracks.findIndex(song => {
             return song.id === id
@@ -510,8 +497,7 @@ const APP = {
     displayHome: () => {
         document.querySelector('.page.active').classList.remove('active')
         document.getElementById('home').classList.add('active')
-        APP.nowPlaying()
-        APP.hideMusicIndicators()
+        APP.nowPlaying()        
         APP.musicOnIndicator()
     },
 
@@ -550,44 +536,23 @@ const APP = {
             document.getElementById('nowPlaying').textContent = `Now Playing: ${APP.tracks[id].track} by ${APP.tracks[id].artist}`
         }
     },
-    hideMusicIndicators: () => {
-
-    },
 
     musicOnIndicator: () => {
-        // TO DO: musicOn icon indicates which song is currently playing on homepage playlist
         let songPlayingId = APP.findSongId()
 
         // TO DO: move to separate function
         let cardDataKey = document.getElementById('playr-item').getAttribute('data-key')
         let playlistCardId = parseInt(cardDataKey)
-        console.log('CINDERELLA', songPlayingId, playlistCardId)
-        
-        let playlist = document.getElementById('playlist')
-        let songItem = playlist.querySelectorAll('li')
-        console.log(songItem) //returns playlist list items as a nodelist
-        
-        if (songPlayingId === playlistCardId) {
-            // if current song playing matches the id of card in the playlist, 
-            // find musicOnIndicator that matches them and classlist remove, hide and add class show
-            
-            // TO DO: move to separate function
-            let musicIcon = songItem[playlistCardId]
-            console.log(musicIcon) // returns li item with index matching
 
-            let musicIconDiv = musicIcon.childNodes[2]
-            console.log(musicIconDiv) // finds div of musicIcon
-            let musicIconDataId = musicIconDiv.getAttribute('data-id')
-            let musicIconId = parseInt(musicIconDataId)
-            console.log(musicIconId) // finds data-id of that specific musicIcon
-            
-            if (songPlayingId === musicIconId) {
-                musicIconDiv.classList.remove('hide')
-                musicIconDiv.classList.add('show')
-            } 
-            
-        }
-
+        musicOnIcons = document.querySelectorAll('.musicOn')
+        musicOnIcons.forEach(icon => {
+            icon.classList.remove('show')
+            icon.classList.add('hide')
+            if (songPlayingId === playlistCardId) {
+                document.getElementById(`musicIcon${songPlayingId}`).classList.remove('hide')
+                document.getElementById(`musicIcon${songPlayingId}`).classList.add('show')
+            }
+        })
     },
 
     previewNextSong: () => {
