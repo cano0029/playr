@@ -37,7 +37,8 @@ const CODES = {// TO DO: move to a separate file?
 }
 
 const APP = {
-    media: null, 
+    media: null,
+    favourites: [], 
     // TO DO: move to a separate resource folder? Does cordova support require/es6 modules? no...
     tracks: [ 
         {
@@ -204,11 +205,9 @@ const APP = {
             li.setAttribute('data-key', song.id)
             
             li.append(img)
-            div.append(title)
-            div.append(artist)
+            div.append(title, artist)
             musicOnDiv.append(musicOnIndicator)
-            li.append(div)
-            li.append(musicOnDiv)
+            li.append(div, musicOnDiv)
             docfragment.append(li);
             li.addEventListener("click", APP.displaySongPage)
         })
@@ -229,7 +228,6 @@ const APP = {
     },
 
     checkSongPlaying: (ev) => {
-
         let track = APP.findSongDataKey(ev)
         let index = parseInt(track.getAttribute('data-key'))
         let songId = APP.tracks[index].id
@@ -264,7 +262,6 @@ const APP = {
         APP.play()
         APP.getSongCurrentPosition()
         APP.getSongLength()
-        APP.saveSongLength()
         APP.previewNextSong()
         APP.unfillSaveIcon(track)
     },
@@ -284,7 +281,6 @@ const APP = {
     },
     
     handleMediaSuccess: () => {
-        // optional - may remove if not using it
         console.log('WOOHOO! Successfully completed the media task')
     },
 
@@ -331,12 +327,11 @@ const APP = {
 
     replay: () => {
         APP.media.play({ numberOfLoops: 1 })
-        console.log('IAM REPLAYING')
+        console.log('I am replaying')
     },
     
     release: () => {
         APP.media.release()
-        console.log('I MADE IT HERE')
         APP.playNextSong()
     },
 
@@ -347,7 +342,7 @@ const APP = {
             APP.showMuteButton() 
             console.log(`Volume now set at ${APP.tracks.volume}`)
         } else {
-            APP.media.setVolume(0) //if not muted, we want to mute it so set the volume to 0
+            APP.media.setVolume(0)
             APP.tracks.isMuted = true
             APP.showUnmuteButton()
             console.log(`Volume now set at 0`)
@@ -358,12 +353,11 @@ const APP = {
     getSongCurrentPosition: () => {
         setInterval(function () {
             APP.media.getCurrentPosition( 
-                // success callback
                 function (position) {
                     if (position > -1) { // if it is actually playing
                         const minutes = Math.floor(position / 60)
                         const seconds = Math.floor(position - minutes * 60)
-                        document.getElementById('progressBar').value = position // updates progress bar
+                        document.getElementById('progressBar').value = position
                         document.getElementById('duration').innerHTML= minutes + ':' + (seconds < 10 ? '0' : '') + seconds
                         APP.finishedSong(position)
                     } 
@@ -377,26 +371,6 @@ const APP = {
     },
 
     getSongLength: () => {
-        const counter = 0;
-        const timerDur = setInterval(function() {
-            if (counter > 2000) {
-                counter = counter + 100
-                clearInterval(timerDur)
-            }
-            const duration = APP.media.getDuration()
-            const minutes = Math.floor(duration / 60)
-            const seconds = Math.floor(duration - minutes * 60)
-
-            if (duration > 0) {
-                clearInterval(timerDur);
-                document.getElementById('trackLength').innerHTML = minutes + ':' + (seconds < 10 ? '0' : '') + seconds
-                document.getElementById('progressBar').max = duration 
-            }
-        }, 1000);
-
-    },
-
-    saveSongLength: () => {
         let id = APP.findSongId()
         let index = APP.tracks.findIndex(song => {
             return song.id === id 
@@ -409,15 +383,17 @@ const APP = {
                 counter = counter + 100
                 clearInterval(timerDur)
             }
-
             const duration = APP.media.getDuration()
-            const formatDur = Math.floor(duration)
+            const minutes = Math.floor(duration / 60)
+            const seconds = Math.floor(duration - minutes * 60)
 
             if (duration > 0) {
-                APP.tracks[index].length = formatDur + ' ' + 'seconds';
-                clearInterval(timerDur)
+                APP.tracks[index].length =  minutes + ':' + (seconds < 10 ? '0' : '') + seconds
+                document.getElementById('trackLength').innerHTML = minutes + ':' + (seconds < 10 ? '0' : '') + seconds 
+                document.getElementById('progressBar').max = duration 
+                clearInterval(timerDur);
             }
-        }, 1000)
+        }, 1000);
     },
     
     finishedSong: (position) => {
@@ -446,7 +422,6 @@ const APP = {
         APP.play()
         APP.getSongCurrentPosition()
         APP.getSongLength()
-        APP.saveSongLength()
     },
 
     showNextSong: (nextSong) => {
@@ -457,40 +432,41 @@ const APP = {
     },
     
     buildSavedPage: () => {
-        //TO DO: build saved page - works but replaces list item each time a new song is saved
-        // might have to use local storage?
         let id = APP.findSongId()
 
         let savedList = document.getElementById('savedSongsList')
-        savedList.innerHTML = '';
+        let message = document.querySelector( '#savedSongsList p')
+        message.innerHTML = ''
         let docfrag = document.createDocumentFragment()
-
-        if (APP.media != null) {
-            // document.getElementById('savedImage').src = APP.tracks[id].image
-            // document.getElementById('savedTitle').textContent = APP.tracks[id].track
-            // document.getElementById('savedArtist').textContent = APP.tracks[id].artist
-            let li = document.createElement('li')
-            let div = document.createElement('div')
-            let img = document.createElement('img')
-            let title = document.createElement('h4')
-            let artist = document.createElement('h6')
-
-            img.alt = 'song image'
-            img.src = APP.tracks[id].image
-            artist.textContent = APP.tracks[id].artist
-            title.textContent = APP.tracks[id].track
-
-            li.setAttribute('data-key', APP.tracks[id].id)
-
-            li.append(img)
-            div.append(title, artist)
-            li.append(div)
-            docfrag.append(li)
-
-            li.addEventListener('click', APP.displaySongPage)
         
-        }
-        savedList.append(docfrag)
+
+            if (APP.media != null) {
+                // document.getElementById('savedImage').src = APP.tracks[id].image
+                // document.getElementById('savedTitle').textContent = APP.tracks[id].track
+                // document.getElementById('savedArtist').textContent = APP.tracks[id].artist
+                let li = document.createElement('li')
+                let div = document.createElement('div')
+                let img = document.createElement('img')
+                let title = document.createElement('h4')
+                let artist = document.createElement('h6')
+    
+                img.alt = 'song image'
+                img.src = APP.tracks[id].image
+                artist.textContent = APP.tracks[id].artist
+                title.textContent = APP.tracks[id].track
+    
+                li.setAttribute('data-key', APP.tracks[id].id)
+    
+                li.append(img)
+                div.append(title, artist)
+                li.append(div)
+                docfrag.append(li)
+    
+                li.addEventListener('click', APP.displaySongPage)
+            }
+            savedList.append(docfrag)
+            // return APP.favourites = [savedList]
+            
     },
     
     // DISPLAY PAGES/SECTIONS
@@ -693,7 +669,6 @@ const APP = {
                 }
             })
         }
-        APP.buildSavedPage(ev)
     },
     
     unfillSaveIcon: (track) => {        
