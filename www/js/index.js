@@ -205,8 +205,6 @@ const APP = {
         )
         playlist.append(docfragment)
     },
-
-    
     
     findSongId: () => {
         let dataKeyAttr = document.getElementById('playr-item').getAttribute('data-key')
@@ -515,7 +513,6 @@ const APP = {
     },
 
     displayAllSongs: () => {
-        
         document.getElementById('savedPage').classList.remove('show')
         document.getElementById('savedPage').classList.add('hide')
         document.getElementById('playListPage').classList.remove('hide')
@@ -560,7 +557,7 @@ const APP = {
     },
 
     // BUTTONS
-    
+
     colourAllSongsBtn: () => {
         APP.uncolourSaveBtn()
         let allSongsBtn = document.getElementById('allSongsButton')
@@ -699,4 +696,3 @@ const APP = {
 
 const ready = "cordova" in window ? "deviceready" : "DOMContentLoaded";
 document.addEventListener(ready, APP.init);
-
