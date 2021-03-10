@@ -193,7 +193,7 @@ const APP = {
             let musicOnDiv = document.createElement('div')
             let musicOnIndicator = document.createElement('span')
             musicOnIndicator.classList.add('material-icons')
-            musicOnIndicator.innerHTML = 'music_video'
+            musicOnIndicator.innerHTML = 'audiotrack'
             musicOnDiv.classList.add('musicOn', 'hide')
             musicOnDiv.setAttribute('data-id', song.id)
 

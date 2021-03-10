@@ -109,7 +109,7 @@ body {
     width: 100%;
     padding: 1rem;
     padding-left: 0.8rem;
-    background-color: rgba(245, 247, 255, 0.967);
+    background-color: rgba(249, 250, 255, 0.891);
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
 }
@@ -193,6 +193,10 @@ li div h6 {
 
 /* NOW PLAYING */
 
+#nowPlaying-container {
+    border: 1px;
+    padding: 0.2;
+}
 
 #nowPlaying-content{
     padding: 0.25rem;
@@ -214,7 +218,7 @@ li div h6 {
 }
 
 .musicOn span {
-    color: rgba(255, 1, 73, 0.391);
+    color: rgb(135, 135, 135);
 }
 
 .footer {
@@ -303,17 +307,17 @@ h4 {
 }
 
 .rotate {
-    animation: rotation 15s infinite linear;
+    animation: rotation 30s infinite linear;
 }
 
 @keyframes rotation {
     from {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
     to {
-      transform: rotate(359deg);
+        transform: rotate(359deg);
     }
-  }
+}
 
 #trackControls, #mainControls {
     display: flex;
