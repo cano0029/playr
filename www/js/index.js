@@ -246,10 +246,10 @@ const APP = {
             let id = parseInt(track.getAttribute('data-key'));
             APP.tracks.find(song => {
                 if (song.id === id) {
-                document.getElementById('track-image').src = song.image; 
-                document.getElementById('track-title').textContent = song.track;
-                document.getElementById('track-artist').textContent = song.artist;
-                document.getElementById('playr-item').setAttribute('data-key', song.id);
+                document.getElementById('track-image').src = song.image
+                document.getElementById('track-title').textContent = song.track
+                document.getElementById('track-artist').textContent = song.artist
+                document.getElementById('playr-item').setAttribute('data-key', song.id)
                 document.getElementById('track-header').setAttribute('data-key', song.id)
                 }
             })
@@ -457,12 +457,7 @@ const APP = {
         let message = document.querySelector( '#savedSongsList p')
         message.innerHTML = ''
         let docfrag = document.createDocumentFragment()
-        
-
             if (APP.media != null) {
-                // document.getElementById('savedImage').src = APP.tracks[id].image
-                // document.getElementById('savedTitle').textContent = APP.tracks[id].track
-                // document.getElementById('savedArtist').textContent = APP.tracks[id].artist
                 let li = document.createElement('li')
                 let div = document.createElement('div')
                 let img = document.createElement('img')
@@ -494,7 +489,7 @@ const APP = {
         faveSongs = document.querySelectorAll('#savedSongsList li')
         faveSongs.forEach(song => {
             if (songPlayingId === playlistCardId) {
-                song.innerHTML = ''
+                song.textContent = ''
             }
         })
     },
@@ -724,24 +719,48 @@ const APP = {
         
         let songCardId = APP.findSongId()
         let faveSongs = document.querySelectorAll('#savedSongsList li')
+
         
+        // can't use forEach
+         // what's happening here is that it is looping through the favelist
+        // if it does not match faveId to songCard id it will unfill 
+        // BUT each card does not have these buttons so it turns it off once it goes down the list
         faveSongs.forEach(fave => {
             let faveDataKey = fave.getAttribute('data-key')
             let faveId = parseInt(faveDataKey)
             
             if (faveId === songCardId) {
+                console.log('same same', faveId, songCardId)
                 document.getElementById('songLiked').classList.remove('hide')
                 document.getElementById('songLiked').classList.add('show')
-                console.log('Same same', faveId, songCardId)
                 document.getElementById('like').classList.remove('show')
                 document.getElementById('like').classList.add('hide')
-                
             } else {
+                console.log('different', faveId, songCardId)
                 document.getElementById('songLiked').classList.remove('show')
                 document.getElementById('songLiked').classList.add('hide')
                 document.getElementById('like').classList.remove('hide')
                 document.getElementById('like').classList.add('show')}
         })
+
+        // for (let fave = 0; fave < faveSongs.length; fave++) {
+        //     console.log(fave)
+        //     if (fave === songCardId) {
+        //         console.log('same same', fave, songCardId)
+        //         document.getElementById('songLiked').classList.remove('hide')
+        //         document.getElementById('songLiked').classList.add('show')
+        //         document.getElementById('like').classList.remove('show')
+        //         document.getElementById('like').classList.add('hide')
+        //     } else {
+        //         console.log('different', fave, songCardId)
+        //         document.getElementById('songLiked').classList.remove('show')
+        //         document.getElementById('songLiked').classList.add('hide')
+        //         document.getElementById('like').classList.remove('hide')
+        //         document.getElementById('like').classList.add('show')
+        //     }
+        // }
+
+
     }
 
     // TO DO: 

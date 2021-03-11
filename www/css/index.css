@@ -254,7 +254,7 @@ li div h6 {
 
 
 /* like button size */
-#songLiked i.material-icons {
+#songLiked {
     max-width: 24px;
     max-height: 24px;
     color:rgb(255, 1, 73);
