@@ -171,6 +171,7 @@ const APP = {
         document.getElementById('unmute').addEventListener('click', APP.toggleMute)
         // favourites/save button
         document.getElementById('like').addEventListener('click', APP.fillSaveIcon)
+        document.getElementById('songLiked').addEventListener('click', APP.unfillSaveIcon)
         // go to song card page
         document.getElementById('nextSong-container').addEventListener('click', APP.displaySongPage)
         document.getElementById('nowPlaying-container').addEventListener('click', APP.displaySongPage)
@@ -250,21 +251,20 @@ const APP = {
                 document.getElementById('track-artist').textContent = song.artist;
                 document.getElementById('playr-item').setAttribute('data-key', song.id);
                 document.getElementById('track-header').setAttribute('data-key', song.id)
-                // document.getElementById('like').setAttribute('data-key'.song.id)
-                // document.getElementById('songLiked').setAttribute('data-key'.song.id)
                 }
             })
         }
-        APP.callSongPageFeatures(track)
+        APP.callSongPageFeatures()
+        APP.unfillAllIcons()
     },
 
-    callSongPageFeatures: (track) => {
+    callSongPageFeatures: () => {
         APP.mountMedia()
         APP.play()
         APP.getSongCurrentPosition()
         APP.getSongLength()
         APP.previewNextSong()
-        APP.unfillSaveIcon(track)
+        // APP.unfillAllIcons()
     },
 
     mountMedia: () => {
@@ -484,8 +484,6 @@ const APP = {
                 li.addEventListener('click', APP.displaySongPage)
             }
             savedList.append(docfrag)
-            // return APP.favourites = [savedList]
-            
     },
 
     removeFromSaveList: () => {
@@ -703,7 +701,9 @@ const APP = {
         }
     },
     
-    unfillSaveIcon: (track) => {    
+    unfillSaveIcon: (ev) => { 
+        let clickedThing = ev.target;
+        let track = clickedThing.closest('[data-key]');  
         if(track) {
             const id = parseInt(track.getAttribute('data-key'));
             APP.tracks.find(song => {
@@ -712,10 +712,37 @@ const APP = {
                     document.getElementById('songLiked').classList.add('hide')
                     document.getElementById('like').classList.remove('hide')
                     document.getElementById('like').classList.add('show')
+
+                    APP.removeFromSaveList()
                 } 
             })
         }
     },
+
+    unfillAllIcons: () => {
+        // if it's in the favourites list, do not unfill it (keep heart filled), if it's not unfill it    
+        
+        let songCardId = APP.findSongId()
+        let faveSongs = document.querySelectorAll('#savedSongsList li')
+        
+        faveSongs.forEach(fave => {
+            let faveDataKey = fave.getAttribute('data-key')
+            let faveId = parseInt(faveDataKey)
+            
+            if (faveId === songCardId) {
+                document.getElementById('songLiked').classList.remove('hide')
+                document.getElementById('songLiked').classList.add('show')
+                console.log('Same same', faveId, songCardId)
+                document.getElementById('like').classList.remove('show')
+                document.getElementById('like').classList.add('hide')
+                
+            } else {
+                document.getElementById('songLiked').classList.remove('show')
+                document.getElementById('songLiked').classList.add('hide')
+                document.getElementById('like').classList.remove('hide')
+                document.getElementById('like').classList.add('show')}
+        })
+    }
 
     // TO DO: 
     // put into separate functions: find index # of track in array, song id = data-key - keep em short, Math.floor, get songInformation
