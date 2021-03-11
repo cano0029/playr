@@ -243,7 +243,6 @@ const APP = {
     buildSongPage: (track) => {
         if(track) {
             let id = parseInt(track.getAttribute('data-key'));
-            console.log('I am track #', id)
             APP.tracks.find(song => {
                 if (song.id === id) {
                 document.getElementById('track-image').src = song.image; 
@@ -251,6 +250,8 @@ const APP = {
                 document.getElementById('track-artist').textContent = song.artist;
                 document.getElementById('playr-item').setAttribute('data-key', song.id);
                 document.getElementById('track-header').setAttribute('data-key', song.id)
+                // document.getElementById('like').setAttribute('data-key'.song.id)
+                // document.getElementById('songLiked').setAttribute('data-key'.song.id)
                 }
             })
         }
@@ -409,8 +410,10 @@ const APP = {
         let index = APP.tracks.findIndex(song => {
             return song.id === id
         })
+
+        let nextSong = index + 1
+
         if (index < APP.tracks.length -1) {
-            let nextSong = index + 1
             APP.media = new Media (
                 APP.tracks[nextSong].src, 
                 APP.handleMediaSuccess, 
@@ -418,10 +421,26 @@ const APP = {
                 APP.handleMediaStatusChange 
             )
             APP.showNextSong(nextSong) 
+        // } else { // replays playlist from the start
+        //     APP.media = new Media (
+        //         APP.tracks[0].src, 
+        //         APP.handleMediaSuccess, 
+        //         APP.handleMediaError, 
+        //         APP.handleMediaStatusChange 
+        //     )
+        //     APP.showFirstSong()
         }
+        
         APP.play()
         APP.getSongCurrentPosition()
         APP.getSongLength()
+    },
+
+    showFirstSong: () => {
+        document.getElementById('track-image').src = APP.tracks[0].image; 
+        document.getElementById('track-title').textContent = APP.tracks[0].track;
+        document.getElementById('track-artist').textContent = APP.tracks[0].artist;
+        document.getElementById('playr-item').setAttribute('data-key', APP.tracks[0 + 1].id);
     },
 
     showNextSong: (nextSong) => {
@@ -467,6 +486,19 @@ const APP = {
             savedList.append(docfrag)
             // return APP.favourites = [savedList]
             
+    },
+
+    removeFromSaveList: () => {
+        let songPlayingId = APP.findSongId()
+        let cardDataKey = document.getElementById('playr-item').getAttribute('data-key')
+        let playlistCardId = parseInt(cardDataKey)
+
+        faveSongs = document.querySelectorAll('#savedSongsList li')
+        faveSongs.forEach(song => {
+            if (songPlayingId === playlistCardId) {
+                song.innerHTML = ''
+            }
+        })
     },
     
     // DISPLAY PAGES/SECTIONS
@@ -534,12 +566,13 @@ const APP = {
     previewNextSong: () => {
         let index = APP.findSongId()
         let nextSong = index + 1
+
         if (index < APP.tracks.length - 1) {
             document.getElementById('nextSong').textContent =`Up Next: ${APP.tracks[nextSong].track} by ${APP.tracks[nextSong].artist}`
             document.getElementById('nextSong-container').setAttribute('data-key', APP.tracks[nextSong].id);
             APP.showNextSongButton()
         }
-        else if (index = APP.tracks.length - 1) {
+        else {
             document.getElementById('nextSong').textContent ='You are at the end of the playlist'
             APP.showSadFace()
         }
@@ -657,7 +690,6 @@ const APP = {
         let track = clickedThing.closest('[data-key]');
         if (track) {
             let id = parseInt(track.getAttribute('data-key'));
-            console.log('I am track #', id)
             APP.tracks.find(song => {
                 if (song.id === id) {
                     document.getElementById('like').classList.remove('show')
@@ -671,10 +703,9 @@ const APP = {
         }
     },
     
-    unfillSaveIcon: (track) => {        
+    unfillSaveIcon: (track) => {    
         if(track) {
             const id = parseInt(track.getAttribute('data-key'));
-            console.log('I am track #', id)
             APP.tracks.find(song => {
                 if (song.id !== id) {
                     document.getElementById('songLiked').classList.remove('show')
