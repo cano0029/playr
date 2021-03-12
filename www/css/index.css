@@ -55,7 +55,7 @@ body {
 .page.active {
     opacity: 1;
     transform: translateX(0);
-    transition: transform 400ms ease-in-out;
+    animation: slideInRight 0.4s ease-in-out forwards;
 }
 
 #home header {
@@ -93,12 +93,18 @@ body {
     padding-bottom: 2.5rem;
 }
 
+#playListPage {
+    animation: slideInRight 0.2s ease-in-out forwards;
+}
+
+#savedPage{
+    height: 25rem;
+    animation: slideInLeft 0.2s ease-in-out forwards;
+}
+
 .musicOn {
     justify-content: right;
     translate: 8rem;
-}
-#savedPage {
-    height: 25rem;
 }
 
 .segmentedBtn {
@@ -231,7 +237,7 @@ li div h6 {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     /* height: 5rem; */
-    background-color: black;
+    background-color: #241613;
     color: white;
     font-size: 12px;
     border-top-left-radius: 40px;
@@ -254,7 +260,7 @@ li div h6 {
     /* grid-template-areas: "btn-left title btn-right"; */
     justify-items: center;
     height: 120px;
-    background-color: #3a231e;
+    background-color: #241613;
     color: white;
     /* background: url(https://images.unsplash.com/photo-1590808100071-3654286139a4?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1650&q=80) bottom no-repeat; */
 }
@@ -415,6 +421,33 @@ progress[value]::-webkit-progress-value {
     transform: translateY(0.2rem);
     color: white;
     font-size: 13px;
-    background-color: rgb(0, 0, 0);
+    background-color: #241613;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(500px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        transform: translateX(-500px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+@keyframes slideInLeft {
+    0% {
+        transform: translateX(500px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
 }
 
