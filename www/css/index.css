@@ -117,7 +117,7 @@ ul{
 }
 .page.active li {
     display: flex;
-    padding: 1rem;
+    padding: 0.5rem;
     padding-right: 1rem;
     justify-content: left;
     text-align: center;
