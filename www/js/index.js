@@ -493,6 +493,7 @@ const APP = {
         document.getElementById('track-title').textContent = APP.tracks[nextSong].track
         document.getElementById('track-artist').textContent = APP.tracks[nextSong].artist
         document.getElementById('playr-item').setAttribute('data-key', APP.tracks[nextSong].id)
+        APP.previewNextSong()
     },
 
     displayAllSongs: () => {
