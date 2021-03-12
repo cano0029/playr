@@ -195,7 +195,7 @@ const APP = {
             let musicOnIndicator = document.createElement('span')
             musicOnIndicator.classList.add('material-icons')
             musicOnIndicator.innerHTML = 'audiotrack'
-            musicOnDiv.classList.add('musicOn', 'hide')
+            musicOnDiv.classList.add('musicOnIcon', 'hide')
             musicOnDiv.setAttribute('id', `musicIcon${song.id}`)
 
             img.alt = 'track photo'
@@ -524,7 +524,7 @@ const APP = {
         let cardDataKey = document.getElementById('playr-item').getAttribute('data-key')
         let playlistCardId = parseInt(cardDataKey)
 
-        musicOnIcons = document.querySelectorAll('.musicOn')
+        musicOnIcons = document.querySelectorAll('.musicOnIcon')
         musicOnIcons.forEach(icon => {
             icon.classList.remove('show')
             icon.classList.add('hide')
@@ -561,7 +561,6 @@ const APP = {
     },
 
     // BUTTONS
-
     colourAllSongsBtn: () => {
         APP.uncolourSaveBtn()
         let allSongsBtn = document.getElementById('allSongsButton')
@@ -700,16 +699,11 @@ const APP = {
     },
 
     unfillAllIcons: () => {
-        // if it's in the favourites list, do not unfill it (keep heart filled), if it's not unfill it    
+        // TO DO: does not work properly
         
         let songCardId = APP.findSongId()
         let faveSongs = document.querySelectorAll('#faveSongsList li')
 
-        
-        // can't use forEach
-         // what's happening here is that it is looping through the favelist
-        // if it does not match faveId to songCard id it will unfill 
-        // BUT each card does not have these buttons so it turns it off once it goes down the list
         faveSongs.forEach(fave => {
             let faveDataKey = fave.getAttribute('data-key')
             let faveId = parseInt(faveDataKey)
@@ -722,25 +716,6 @@ const APP = {
                 APP.showFaveIconOutline()
             }
         })
-
-        // for (let fave = 0; fave < faveSongs.length; fave++) {
-        //     console.log(fave)
-        //     if (fave === songCardId) {
-        //         console.log('same same', fave, songCardId)
-        //         document.getElementById('songLiked').classList.remove('hide')
-        //         document.getElementById('songLiked').classList.add('show')
-        //         document.getElementById('like').classList.remove('show')
-        //         document.getElementById('like').classList.add('hide')
-        //     } else {
-        //         console.log('different', fave, songCardId)
-        //         document.getElementById('songLiked').classList.remove('show')
-        //         document.getElementById('songLiked').classList.add('hide')
-        //         document.getElementById('like').classList.remove('hide')
-        //         document.getElementById('like').classList.add('show')
-        //     }
-        // }
-
-
     }
 
     // TO DO: 
