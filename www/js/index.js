@@ -340,7 +340,6 @@ const APP = {
         }
     },
 
-    // PROGRESS BAR THINGS
     getSongCurrentPosition: () => {
         setInterval(function () {
             APP.media.getCurrentPosition(
@@ -465,7 +464,7 @@ const APP = {
         })
     },
 
-    // DISPLAY PAGES/SECTIONS
+
     displayHome: () => {
         document.querySelector('.page.active').classList.remove('active')
         document.getElementById('home').classList.add('active')
@@ -505,7 +504,6 @@ const APP = {
         APP.uncolourFaveBtn()
     },
 
-    // FEATURES
     nowPlaying: () => {
         let id = APP.findSongId()
         if (APP.media != null) {
@@ -518,11 +516,7 @@ const APP = {
 
     musicOnIndicator: () => {
         let songPlayingId = APP.findSongId()
-
-        // TO DO: move to separate function
-        let cardDataKey = document
-            .getElementById('playr-item')
-            .getAttribute('data-key')
+        let cardDataKey = document.getElementById('playr-item').getAttribute('data-key')
         let playlistCardId = parseInt(cardDataKey)
 
         musicOnIcons = document.querySelectorAll('.musicOnIcon')
@@ -542,13 +536,10 @@ const APP = {
 
         if (index < APP.tracks.length - 1) {
             document.getElementById('nextSong').textContent = `Up Next: ${APP.tracks[nextSong].track} by ${APP.tracks[nextSong].artist}`
-            document
-                .getElementById('nextSong-container')
-                .setAttribute('data-key', APP.tracks[nextSong].id)
+            document.getElementById('nextSong-container').setAttribute('data-key', APP.tracks[nextSong].id)
             APP.showNextSongButton()
         } else {
-            document.getElementById('nextSong').textContent =
-                'You are at the end of the playlist'
+            document.getElementById('nextSong').textContent = 'You are at the end of the playlist'
             APP.showSadFace()
         }
     },
@@ -563,7 +554,6 @@ const APP = {
         navigator.notification.alert(message, alertCallback, title, buttonName)
     },
 
-    // BUTTONS
     colourAllSongsBtn: () => {
         APP.uncolourFaveBtn()
         let allSongsBtn = document.getElementById('allSongsButton')
@@ -702,7 +692,6 @@ const APP = {
 
     unfillAllIcons: () => {
         // TO DO: does not work properly
-
         let songCardId = APP.findSongId()
         let faveSongs = document.querySelectorAll('#faveSongsList li')
 

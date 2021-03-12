@@ -269,9 +269,12 @@ section#track.page.active{
     margin-bottom: 0.5rem;
     margin-left: 2rem;
     margin-right: 2rem;
-    animation: rotation 30s infinite linear;
-    
 }
+
+.rotate {
+    animation: rotation 30s infinite linear;
+}
+
 h4#playing-title {
     font-size: 17px;
 }
