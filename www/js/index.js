@@ -169,7 +169,7 @@ const APP = {
         document.getElementById('mute').addEventListener('click', APP.toggleMute)
         document.getElementById('unmute').addEventListener('click', APP.toggleMute)
         // favourites/save button
-        document.getElementById('like').addEventListener('click', APP.fillSaveIcon)
+        document.getElementById('faveOutline').addEventListener('click', APP.fillSaveIcon)
         document.getElementById('songLiked').addEventListener('click', APP.unfillSaveIcon)
         // go to song card page
         document.getElementById('nextSong-container').addEventListener('click', APP.displaySongPage)
@@ -657,8 +657,8 @@ const APP = {
     },
 
     showFaveIconFill: () => {
-        document.getElementById('like').classList.remove('show')
-        document.getElementById('like').classList.add('hide')
+        document.getElementById('faveOutline').classList.remove('show')
+        document.getElementById('faveOutline').classList.add('hide')
         document.getElementById('songLiked').classList.remove('hide')
         document.getElementById('songLiked').classList.add('show')
     },
@@ -666,8 +666,8 @@ const APP = {
     showFaveIconOutline: () => {
         document.getElementById('songLiked').classList.remove('show')
         document.getElementById('songLiked').classList.add('hide')
-        document.getElementById('like').classList.remove('hide')
-        document.getElementById('like').classList.add('show')
+        document.getElementById('faveOutline').classList.remove('hide')
+        document.getElementById('faveOutline').classList.add('show')
     },
     
     fillSaveIcon: (ev) => {
