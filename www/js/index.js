@@ -453,8 +453,8 @@ const APP = {
     buildSavedPage: () => {
         let id = APP.findSongId()
 
-        let savedList = document.getElementById('savedSongsList')
-        let message = document.querySelector( '#savedSongsList p')
+        let savedList = document.getElementById('faveSongsList')
+        let message = document.querySelector( '#faveSongsList p')
         message.innerHTML = ''
         let docfrag = document.createDocumentFragment()
             if (APP.media != null) {
@@ -481,15 +481,15 @@ const APP = {
             savedList.append(docfrag)
     },
 
-    removeFromSaveList: () => {
-        let songPlayingId = APP.findSongId()
-        let cardDataKey = document.getElementById('playr-item').getAttribute('data-key')
-        let playlistCardId = parseInt(cardDataKey)
+    removeFromSaveList: (track) => {
+        // TO DO: fix - removes everything from the list
+        let songPlayingId = APP.findSongId() 
+        let id = parseInt(track.getAttribute('data-key'));
 
-        faveSongs = document.querySelectorAll('#savedSongsList li')
+        faveSongs = document.querySelectorAll('#faveSongsList li')
         faveSongs.forEach(song => {
-            if (songPlayingId === playlistCardId) {
-                song.textContent = ''
+            if (songPlayingId === id) {
+                song.innerHTML = ''
             }
         })
     },
@@ -512,15 +512,15 @@ const APP = {
         APP.displayHome()
         document.getElementById('playListPage').classList.remove('show')
         document.getElementById('playListPage').classList.add('hide')
-        document.getElementById('savedPage').classList.remove('hide')
-        document.getElementById('savedPage').classList.add('show')
+        document.getElementById('favePage').classList.remove('hide')
+        document.getElementById('favePage').classList.add('show')
         APP.colourSaveBtn()
         APP.uncolourAllSongsBtn()
     },
 
     displayAllSongs: () => {
-        document.getElementById('savedPage').classList.remove('show')
-        document.getElementById('savedPage').classList.add('hide')
+        document.getElementById('favePage').classList.remove('show')
+        document.getElementById('favePage').classList.add('hide')
         document.getElementById('playListPage').classList.remove('hide')
         document.getElementById('playListPage').classList.add('show')
         APP.colourAllSongsBtn()
@@ -708,7 +708,7 @@ const APP = {
                     document.getElementById('like').classList.remove('hide')
                     document.getElementById('like').classList.add('show')
 
-                    APP.removeFromSaveList()
+                    APP.removeFromSaveList(track)
                 } 
             })
         }
@@ -718,7 +718,7 @@ const APP = {
         // if it's in the favourites list, do not unfill it (keep heart filled), if it's not unfill it    
         
         let songCardId = APP.findSongId()
-        let faveSongs = document.querySelectorAll('#savedSongsList li')
+        let faveSongs = document.querySelectorAll('#faveSongsList li')
 
         
         // can't use forEach

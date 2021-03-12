@@ -176,13 +176,13 @@ li div h6 {
 }
 
 /* * * * * FAVOURITES * * * * */
-#savedPage{
+#favePage{
     background-color: rgba(245, 247, 255, 0.967);
     padding-bottom: 2.5rem;
     height: 25rem;
     animation: slideInLeft 0.2s ease-in-out forwards;
 }
-#savedSongsList p {
+#faveSongsList p {
     margin-top: 2rem;
     font-size: 16px;
     text-align: center;
