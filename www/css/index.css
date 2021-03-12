@@ -16,8 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
- /* //////////////////// GENERAL ////////////////////// */
  *,
  *:before,
  *:after {
@@ -38,6 +36,7 @@ html {
 body {
     margin: 0;
 }
+
 .page {
     min-height: 100vh;
     position: absolute;
@@ -47,25 +46,28 @@ body {
     opacity: 0;
     transform: translateX(-200%); 
 }
+
 .page.active {
     opacity: 1;
     transform: translateX(0);
 }
 
- /* //////////////////// END OF GENERAL ////////////////////// */
-
-
- /* //////////////////// HOMEPAGE ////////////////////// */
 section#home.page.active {
     transform: translateX(0);
     animation: fadeIn 0.6s ease-out forwards; 
 }
+
+section#track.page.active{
+    animation: slideUp 0.6s ease-out forwards;
+}
+
 #home header {
     background: url(https://images.unsplash.com/photo-1590808100071-3654286139a4?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1650&q=80) bottom no-repeat;
     background-size: 100vh;
     margin-bottom: 2rem;
     min-height: 190px;
-}#home header h1 {
+}
+.page header h1 {
     display: flex;
     align-items: flex-start;
     font-size: 2rem;
@@ -75,14 +77,44 @@ section#home.page.active {
     font-size: 2rem;
     transform: translateY(6rem);
 }
+#playlist-container {
+    padding-top: 0.4rem;
+    border-radius: 40px;
+    background-color: rgba(245, 247, 255, 0.967);
+    padding-bottom: 4rem;
+    transform: translateY(-4.5rem);
+}
+
+
+#playListPage, #savedPage {
+    background-color: rgba(245, 247, 255, 0.967);
+    padding-bottom: 2.5rem;
+}
+
+#playListPage {
+    animation: slideInRight 0.2s ease-in-out forwards;
+}
+
+#savedPage{
+    height: 25rem;
+    animation: slideInLeft 0.2s ease-in-out forwards;
+}
+
+.musicOn {
+    justify-content: right;
+    translate: 8rem;
+}
+
 .segmentedBtn {
     background-color: rgb(209, 209, 209);
+    /* text-align: center; */
     border-radius: 40px;
     margin: 0.5rem;
-    /* text-align: center; */
     /* padding: 0.1rem; */
 }
+
 .toggleTitles {
+    /* text-align: center; */
     position: sticky;
     left: 0;
     top: 0;
@@ -93,6 +125,7 @@ section#home.page.active {
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
 }
+
 .toggleTitles button {
     font-size: 12px;
     padding: 0.4rem;
@@ -103,31 +136,14 @@ section#home.page.active {
     width: 49%;
     border: 0.5px solid rgb(209, 209, 209);
 }
+
 .toggleTitles button:active {
+    /* border: 3px solid rgba(255, 1, 77, 0.549); */
     color: white;
     background-color: #ff0044;
 }
 
- /* //////////////////// PLAYLIST ////////////////////// */
-#playlist-container {
-    padding-top: 0.4rem;
-    border-radius: 40px;
-    background-color: rgba(245, 247, 255, 0.967);
-    padding-bottom: 4rem;
-    transform: translateY(-4.5rem);
-}
-#playListPage {
-    background-color: rgba(245, 247, 255, 0.967);
-    padding-bottom: 2.5rem;
-}
-#playListPage {
-    animation: slideInRight 0.2s ease-in-out forwards;
-}
-.musicOnIcon {
-    justify-content: right;
-    translate: 8rem;
-}
-#playlist{
+ul{
     padding-top: 0.5rem;
 }
 .page.active li {
@@ -141,44 +157,45 @@ section#home.page.active {
     margin-right: 1.2rem;
     margin-bottom: 0.5rem;
     background-color: rgba(245, 247, 255, 0.967);
+    /* background-color: rgba(32, 32, 32, 0.867); */
     border-radius: 45px;
     box-shadow: -10px -5px 10px rgba(0, 0, 0, 0.118);
     align-items: center;
+    /* color: white; */
+    /* border: 0.5px solid rgb(11, 11, 11); */
 }
+
 li div {
     margin-left: 1.5rem;
     text-align: left;
 }
+
+
+/* width of playlist title and artist - not very responsive */
 li div h4, h6 {
     width: 10.5rem;
 }
+
 li div h6 {
     font-weight: 400;
     font-size: 14px;
     color: rgb(135, 135, 135);
+    /* color: rgb(122, 122, 122); */
 }
+
 #home li img {
     max-width: 60px;
     max-height: 60px;
     border-radius: 50%;
 }
-/* //////////////////// END OF PLAYLIST ////////////////////// */
 
+/* FAVOURITES PAGE */
 
-/* //////////////////// FAVOURITES ////////////////////// */
-
-#savedPage{
-    background-color: rgba(245, 247, 255, 0.967);
-    padding-bottom: 2.5rem;
-    height: 25rem;
-    animation: slideInLeft 0.2s ease-in-out forwards;
-}
 #savedSongsList p {
     margin-top: 2rem;
     font-size: 16px;
     text-align: center;
 }
-/* //////////////////// END OF FAVOURITES ////////////////////// */
 
 /* NOW PLAYING */
 
@@ -205,7 +222,8 @@ li div h6 {
     max-height: 50px;
     border-radius: 50%;
 }
-.musicOnIcon span {
+
+.musicOn span {
     color: rgb(135, 135, 135);
 }
 
@@ -226,9 +244,7 @@ li div h6 {
 
 /* TRACK PAGE */
 
-
-section#track.page.active{
-    animation: slideUp 0.6s ease-out forwards;
+#track {
     background-color: #000000;
 }
 

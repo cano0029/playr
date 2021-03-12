@@ -196,7 +196,7 @@ const APP = {
             let musicOnIndicator = document.createElement('span')
             musicOnIndicator.classList.add('material-icons')
             musicOnIndicator.innerHTML = 'audiotrack'
-            musicOnDiv.classList.add('musicOnIcon', 'hide')
+            musicOnDiv.classList.add('musicOn', 'hide')
             musicOnDiv.setAttribute('id', `musicIcon${song.id}`)
 
             img.alt = 'track photo'
@@ -545,7 +545,7 @@ const APP = {
         let cardDataKey = document.getElementById('playr-item').getAttribute('data-key')
         let playlistCardId = parseInt(cardDataKey)
 
-        musicOnIcons = document.querySelectorAll('.musicOnIcon')
+        musicOnIcons = document.querySelectorAll('.musicOn')
         musicOnIcons.forEach(icon => {
             icon.classList.remove('show')
             icon.classList.add('hide')
@@ -586,14 +586,14 @@ const APP = {
     colourAllSongsBtn: () => {
         APP.uncolourSaveBtn()
         let allSongsBtn = document.getElementById('allSongsButton')
-        allSongsBtn.style.backgroundColor = '#ff0044'
+        allSongsBtn.style.backgroundColor = '#ff0149'
         allSongsBtn.style.color = '#ffffff'
     },
 
     colourSaveBtn: () => {
         APP.uncolourAllSongsBtn()
         let saveBtn = document.getElementById('savedButton')
-        saveBtn.style.backgroundColor = '#ff0044'
+        saveBtn.style.backgroundColor = '#ff0149'
         saveBtn.style.color = '#ffffff'
     },
 
