@@ -29,7 +29,7 @@ html {
     font-size: 16px;
     line-height: 1.7;
     font-family: Lato, Arial, Helvetica, sans-serif;
-    background-color: rgb(249, 250, 255);
+    background-color: rgb(209, 209, 209);
     background: url(https://images.unsplash.com/photo-1604076913837-52ab5629fba9?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=934&q=80) top no-repeat;
     background-size: 100vh;
     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
@@ -92,7 +92,7 @@ section#home.page.active {
     left: 0;
     top: 0;
     width: 100%;
-    padding: 1rem;
+    padding: 1.5rem;
     padding-left: 0.8rem;
     background-color: rgba(245, 247, 255, 0.967);
     border-top-left-radius: 40px;
@@ -109,8 +109,8 @@ section#home.page.active {
     border: 0.5px solid rgb(209, 209, 209);
 }
 .toggleTitles button:active {
-    color: white;
-    background-color: #ff0044;
+    color: #ffffff;
+    background-color:  #ff0044;
 }
 ul{
     padding-top: 0.5rem;
@@ -125,25 +125,25 @@ ul{
     margin-left: 1.2rem;
     margin-right: 1.2rem;
     margin-bottom: 0.5rem;
-    background-color: rgba(245, 247, 255, 0.967);
+    background-color: rgb(245, 247, 255);
     border-radius: 45px;
     box-shadow: -10px -5px 10px rgba(0, 0, 0, 0.118);
     align-items: center;
 }
 li div {
-    margin-left: 1.5rem;
+    margin-left: 1rem;
     text-align: left;
 }
-li div h4, h6 {
+li div h4, h5 {
     width: 10.5rem;
 }
 h4 {
     line-height: 1;
 }
-li div h6 {
+li div h5 {
     font-weight: 400;
     font-size: 14px;
-    color: rgb(135, 135, 135);
+    color: #484848;
     /* color: rgb(122, 122, 122); */
 }
 #home li img {
@@ -157,33 +157,33 @@ li div h6 {
 #playlist-container {
     padding-top: 1rem;
     border-radius: 40px;
-    background-color: rgba(245, 247, 255, 0.967);
-    padding-bottom: 4rem;
+    background-color: rgb(245, 247, 255);
+    padding-bottom: 2rem;
     transform: translateY(-4.5rem);
 }
 /* removes my sticky title if I keep this, but I dont have a transition for playlist :( */
 #playlist {
-    background-color: rgba(245, 247, 255, 0.967);
-    padding-bottom: 2.5rem;
+    background-color: rgb(245, 247, 255);
+    padding-bottom: 2rem;
     /* animation: slideInRight 0.2s ease-in-out forwards; */
 }
-.musicOn {
+.musicOnIcon {
     justify-content: right;
     translate: 8rem;
 }
-.musicOn span {
-    color: rgb(135, 135, 135);
+.musicOnIcon span {
+    color: #484848;
 }
 
 /* * * * * FAVOURITES * * * * */
 #favePage{
-    background-color: rgba(245, 247, 255, 0.967);
+    background-color: rgb(245, 247, 255);
     padding-bottom: 2.5rem;
     height: 25rem;
     animation: slideInLeft 0.2s ease-in-out forwards;
 }
 #faveSongsList p {
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
     font-size: 16px;
     text-align: center;
 }
@@ -249,7 +249,7 @@ section#track.page.active{
     padding-top: 1rem;
     border-radius: 40px;
     transform: translateY(-2.4rem);
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(245, 247, 255);
     box-shadow: -1px -8px 6px rgba(188, 188, 188, 0.25);
     border: none;
 }
@@ -269,11 +269,9 @@ section#track.page.active{
     margin-left: 2rem;
     margin-right: 2rem;
 }
-
 .rotate {
     animation: rotation 30s infinite linear;
 }
-
 h4#playing-title {
     font-size: 17px;
 }
@@ -311,7 +309,6 @@ i.play, i.pause {
     font-size: 5rem;
     color: #ff0044;
 }
-
 
 
 /* * * * * PROGRESS BAR * * * * */

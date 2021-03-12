@@ -188,7 +188,7 @@ const APP = {
             let div = document.createElement('div')
             let img = document.createElement('img')
             let title = document.createElement('h4')
-            let artist = document.createElement('h6')
+            let artist = document.createElement('h5')
 
             let musicOnDiv = document.createElement('div')
             let musicOnIndicator = document.createElement('span')
@@ -556,27 +556,27 @@ const APP = {
     colourAllSongsBtn: () => {
         APP.uncolourFaveBtn()
         let allSongsBtn = document.getElementById('allSongsButton')
-        allSongsBtn.style.backgroundColor = '#ff0149'
+        allSongsBtn.style.backgroundColor = '#e80b46'
         allSongsBtn.style.color = '#ffffff'
     },
 
     colourFaveBtn: () => {
         APP.uncolourAllSongsBtn()
         let faveBtn = document.getElementById('savedButton')
-        faveBtn.style.backgroundColor = '#ff0149'
+        faveBtn.style.backgroundColor = '#e80b46'
         faveBtn.style.color = '#ffffff'
     },
 
     uncolourAllSongsBtn: () => {
         let allSongsBtn = document.getElementById('allSongsButton')
         allSongsBtn.style.backgroundColor = '#d1d1d1'
-        allSongsBtn.style.color = '#7b7b7b'
+        allSongsBtn.style.color = '#484848'
     },
 
     uncolourFaveBtn: () => {
         let faveBtn = document.getElementById('savedButton')
         faveBtn.style.backgroundColor = '#d1d1d1'
-        faveBtn.style.color = '#7b7b7b'
+        faveBtn.style.color = '#484848'
     },
 
     showPauseButton: () => {
