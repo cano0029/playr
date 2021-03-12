@@ -425,7 +425,7 @@ const APP = {
     buildFavesSongCard: () => {
         let id = APP.findSongId()
 
-        let savedList = document.getElementById('faveSongsList')
+        let favesList = document.getElementById('faveSongsList')
         let message = document.querySelector( '#faveSongsList p')
         message.innerHTML = ''
         let docfrag = document.createDocumentFragment()
@@ -450,7 +450,7 @@ const APP = {
     
                 li.addEventListener('click', APP.displaySongPage)
             }
-            savedList.append(docfrag)
+            favesList.append(docfrag)
     },
 
     removeFromFaves: (track) => {
@@ -486,7 +486,7 @@ const APP = {
         document.getElementById('playListPage').classList.add('hide')
         document.getElementById('favePage').classList.remove('hide')
         document.getElementById('favePage').classList.add('show')
-        APP.colourSaveBtn()
+        APP.colourFaveBtn()
         APP.uncolourAllSongsBtn()
     },    
     
@@ -503,7 +503,7 @@ const APP = {
         document.getElementById('playListPage').classList.remove('hide')
         document.getElementById('playListPage').classList.add('show')
         APP.colourAllSongsBtn()
-        APP.uncolourSaveBtn()
+        APP.uncolourFaveBtn()
     },
     
     // FEATURES
@@ -550,9 +550,9 @@ const APP = {
         }
     },
     
-    showConfirmSaved: () => {
-        const message = 'This song has been added to your favourites list';
-        const title = 'Success';
+    confirmFaveDialog: () => {
+        const message = 'The song has been added. See it in your favourites list';
+        const title = 'Added to Favourites';
         const buttonName = 'OK';
         const alertCallback = () => {
         APP.buildFavesSongCard()
@@ -562,13 +562,13 @@ const APP = {
 
     // BUTTONS
     colourAllSongsBtn: () => {
-        APP.uncolourSaveBtn()
+        APP.uncolourFaveBtn()
         let allSongsBtn = document.getElementById('allSongsButton')
         allSongsBtn.style.backgroundColor = '#ff0149'
         allSongsBtn.style.color = '#ffffff'
     },
 
-    colourSaveBtn: () => {
+    colourFaveBtn: () => {
         APP.uncolourAllSongsBtn()
         let saveBtn = document.getElementById('savedButton')
         saveBtn.style.backgroundColor = '#ff0149'
@@ -581,7 +581,7 @@ const APP = {
         allSongsBtn.style.color = '#7b7b7b'
     },
 
-    uncolourSaveBtn: () => {
+    uncolourFaveBtn: () => {
         let saveBtn = document.getElementById('savedButton')
         saveBtn.style.backgroundColor = '#d1d1d1'
         saveBtn.style.color = '#7b7b7b'
@@ -678,7 +678,7 @@ const APP = {
             APP.tracks.find(song => {
                 if (song.id === id) {
                     APP.showFaveIconFill()
-                    APP.showConfirmSaved()
+                    APP.confirmFaveDialog()
                 }
             })
         }
