@@ -117,7 +117,7 @@ ul{
 }
 .page.active li {
     display: flex;
-    padding: 0.5rem;
+    padding: 1rem;
     padding-right: 1rem;
     justify-content: left;
     text-align: center;
@@ -155,18 +155,17 @@ li div h6 {
 
 /* * * * * PLAYLIST * * * * */
 #playlist-container {
-    padding-top: 0.4rem;
+    padding-top: 1rem;
     border-radius: 40px;
     background-color: rgba(245, 247, 255, 0.967);
     padding-bottom: 4rem;
     transform: translateY(-4.5rem);
 }
-#playListPage {
+/* removes my sticky title if I keep this, but I dont have a transition for playlist :( */
+#playlist {
     background-color: rgba(245, 247, 255, 0.967);
     padding-bottom: 2.5rem;
-}
-#playListPage {
-    animation: slideInRight 0.2s ease-in-out forwards;
+    /* animation: slideInRight 0.2s ease-in-out forwards; */
 }
 .musicOn {
     justify-content: right;
