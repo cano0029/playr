@@ -169,8 +169,8 @@ const APP = {
         document.getElementById('mute').addEventListener('click', APP.toggleMute)
         document.getElementById('unmute').addEventListener('click', APP.toggleMute)
         // favourites/save button
-        document.getElementById('faveOutline').addEventListener('click', APP.fillSaveIcon)
-        document.getElementById('songLiked').addEventListener('click', APP.unfillSaveIcon)
+        document.getElementById('faveOutline').addEventListener('click', APP.fillFaveIcon)
+        document.getElementById('songLiked').addEventListener('click', APP.unfillFaveIcon)
         // go to song card page
         document.getElementById('nextSong-container').addEventListener('click', APP.displaySongPage)
         document.getElementById('nowPlaying-container').addEventListener('click', APP.displaySongPage)
@@ -670,7 +670,7 @@ const APP = {
         document.getElementById('faveOutline').classList.add('show')
     },
     
-    fillSaveIcon: (ev) => {
+    fillFaveIcon: (ev) => {
         let clickedThing = ev.target;
         let track = clickedThing.closest('[data-key]');
         if (track) {
@@ -684,7 +684,7 @@ const APP = {
         }
     },
     
-    unfillSaveIcon: (ev) => { 
+    unfillFaveIcon: (ev) => { 
         let clickedThing = ev.target;
         let track = clickedThing.closest('[data-key]');  
         if(track) {
