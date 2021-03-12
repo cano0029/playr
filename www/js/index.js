@@ -390,8 +390,7 @@ const APP = {
         let maxPosition = Math.floor(APP.media.getDuration())
         let currentPosition = Math.floor(position)
         if (
-            currentPosition === maxPosition ||
-            currentPosition == -(maxPosition - 1)
+            currentPosition === maxPosition || currentPosition === (maxPosition - 1)
         ) {
             return APP.release()
         }
