@@ -304,8 +304,8 @@ const APP = {
     fastForward: () => {
         APP.media.getCurrentPosition((currentPosition) => {
             const maxPosition = APP.media.getDuration(); 
-            const newPosition = Math.min(maxPosition, currentPosition + 10); // adding 10 seconds
-            APP.media.seekTo((newPosition) * 1000) //milliseconds -- advance it by 10 seconds
+            const newPosition = Math.min(maxPosition, currentPosition + 10);
+            APP.media.seekTo((newPosition) * 1000)
             console.log('Music is now fast forwarding:', {newPosition, maxPosition})
         });
     },
@@ -313,8 +313,8 @@ const APP = {
     rewind: () => {
         APP.media.getCurrentPosition((currentPosition) => { 
             const minPosition = 0; 
-            const newPosition = Math.max(minPosition, currentPosition - 10); // subtracting 10 seconds
-            APP.media.seekTo((newPosition) * 1000) //milliseconds -- rewind it by 10 seconds
+            const newPosition = Math.max(minPosition, currentPosition - 10);
+            APP.media.seekTo((newPosition) * 1000) 
             console.log('Music is now rewinding:', {newPosition, minPosition})
         });
     },
@@ -348,15 +348,16 @@ const APP = {
         setInterval(function () {
             APP.media.getCurrentPosition( 
                 function (position) {
-                    if (position > -1) { // if it is actually playing
+                    if (position > -1) {
                         const minutes = Math.floor(position / 60)
                         const seconds = Math.floor(position - minutes * 60)
+                        
                         document.getElementById('progressBar').value = position
                         document.getElementById('duration').innerHTML= minutes + ':' + (seconds < 10 ? '0' : '') + seconds
-                        APP.finishedSong(position)
+                        
+                        APP.releaseFinishedSong(position)
                     } 
                 },
-                // error callback
                 function (error) {
                     console.log('Error getting position:' + error)
                 }
@@ -390,7 +391,7 @@ const APP = {
         }, 1000);
     },
     
-    finishedSong: (position) => {
+    releaseFinishedSong: (position) => {
         const maxPosition = Math.floor(APP.media.getDuration())
         const currentPosition = Math.floor(position)
         if (currentPosition === maxPosition || currentPosition ==- (maxPosition - 1)) { 
@@ -414,35 +415,13 @@ const APP = {
                 APP.handleMediaStatusChange 
             )
             APP.showNextSong(nextSong) 
-        // } else { // replays playlist from the start
-        //     APP.media = new Media (
-        //         APP.tracks[0].src, 
-        //         APP.handleMediaSuccess, 
-        //         APP.handleMediaError, 
-        //         APP.handleMediaStatusChange 
-        //     )
-        //     APP.showFirstSong()
-        }
+        } 
         
         APP.play()
         APP.getSongCurrentPosition()
         APP.getSongLength()
     },
 
-    showFirstSong: () => {
-        document.getElementById('track-image').src = APP.tracks[0].image; 
-        document.getElementById('track-title').textContent = APP.tracks[0].track;
-        document.getElementById('track-artist').textContent = APP.tracks[0].artist;
-        document.getElementById('playr-item').setAttribute('data-key', APP.tracks[0 + 1].id);
-    },
-
-    showNextSong: (nextSong) => {
-        document.getElementById('track-image').src = APP.tracks[nextSong].image; 
-        document.getElementById('track-title').textContent = APP.tracks[nextSong].track;
-        document.getElementById('track-artist').textContent = APP.tracks[nextSong].artist;
-        document.getElementById('playr-item').setAttribute('data-key', APP.tracks[nextSong].id);
-    },
-    
     buildSavedPage: () => {
         let id = APP.findSongId()
 
@@ -509,6 +488,13 @@ const APP = {
         document.getElementById('favePage').classList.add('show')
         APP.colourSaveBtn()
         APP.uncolourAllSongsBtn()
+    },    
+    
+    showNextSong: (nextSong) => {
+        document.getElementById('track-image').src = APP.tracks[nextSong].image; 
+        document.getElementById('track-title').textContent = APP.tracks[nextSong].track;
+        document.getElementById('track-artist').textContent = APP.tracks[nextSong].artist;
+        document.getElementById('playr-item').setAttribute('data-key', APP.tracks[nextSong].id);
     },
 
     displayAllSongs: () => {
@@ -670,6 +656,20 @@ const APP = {
         document.getElementById('nextBtn').classList.add('hide')
 
     },
+
+    showFaveIconFill: () => {
+        document.getElementById('like').classList.remove('show')
+        document.getElementById('like').classList.add('hide')
+        document.getElementById('songLiked').classList.remove('hide')
+        document.getElementById('songLiked').classList.add('show')
+    },
+    
+    showFaveIconOutline: () => {
+        document.getElementById('songLiked').classList.remove('show')
+        document.getElementById('songLiked').classList.add('hide')
+        document.getElementById('like').classList.remove('hide')
+        document.getElementById('like').classList.add('show')
+    },
     
     fillSaveIcon: (ev) => {
         let clickedThing = ev.target;
@@ -678,11 +678,7 @@ const APP = {
             let id = parseInt(track.getAttribute('data-key'));
             APP.tracks.find(song => {
                 if (song.id === id) {
-                    document.getElementById('like').classList.remove('show')
-                    document.getElementById('like').classList.add('hide')
-                    document.getElementById('songLiked').classList.remove('hide')
-                    document.getElementById('songLiked').classList.add('show')
-
+                    APP.showFaveIconFill()
                     APP.showConfirmSaved()
                 }
             })
@@ -696,11 +692,7 @@ const APP = {
             const id = parseInt(track.getAttribute('data-key'));
             APP.tracks.find(song => {
                 if (song.id !== id) {
-                    document.getElementById('songLiked').classList.remove('show')
-                    document.getElementById('songLiked').classList.add('hide')
-                    document.getElementById('like').classList.remove('hide')
-                    document.getElementById('like').classList.add('show')
-
+                    APP.showFaveIconOutline()
                     APP.removeFromSaveList(track)
                 } 
             })
@@ -724,16 +716,11 @@ const APP = {
             
             if (faveId === songCardId) {
                 console.log('same same', faveId, songCardId)
-                document.getElementById('songLiked').classList.remove('hide')
-                document.getElementById('songLiked').classList.add('show')
-                document.getElementById('like').classList.remove('show')
-                document.getElementById('like').classList.add('hide')
+                APP.showFaveIconFill()
             } else {
                 console.log('different', faveId, songCardId)
-                document.getElementById('songLiked').classList.remove('show')
-                document.getElementById('songLiked').classList.add('hide')
-                document.getElementById('like').classList.remove('hide')
-                document.getElementById('like').classList.add('show')}
+                APP.showFaveIconOutline()
+            }
         })
 
         // for (let fave = 0; fave < faveSongs.length; fave++) {
