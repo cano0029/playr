@@ -158,7 +158,7 @@ const APP = {
 
     addListeners: () => {
         // home page buttons
-        document.getElementById('savedButton').addEventListener('click', APP.showSavePage)
+        document.getElementById('savedButton').addEventListener('click', APP.showFavePage)
         document.getElementById('allSongsButton').addEventListener('click', APP.displayAllSongs)
         // music controls
         document.getElementById('replay').addEventListener('click', APP.replay)
@@ -422,7 +422,7 @@ const APP = {
         APP.getSongLength()
     },
 
-    buildSavedPage: () => {
+    buildFavesSongCard: () => {
         let id = APP.findSongId()
 
         let savedList = document.getElementById('faveSongsList')
@@ -480,7 +480,7 @@ const APP = {
         APP.pauseBeforeNext(ev)
     },
 
-    showSavePage: () => {
+    showFavePage: () => {
         APP.displayHome()
         document.getElementById('playListPage').classList.remove('show')
         document.getElementById('playListPage').classList.add('hide')
@@ -555,7 +555,7 @@ const APP = {
         const title = 'Success';
         const buttonName = 'OK';
         const alertCallback = () => {
-        APP.buildSavedPage()
+        APP.buildFavesSongCard()
         }
     navigator.notification.alert(message,alertCallback,title, buttonName);
     },
