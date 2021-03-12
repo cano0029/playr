@@ -84,7 +84,8 @@ section#home.page.active {
 .segmentedBtn {
     background-color: rgb(209, 209, 209);
     border-radius: 40px;
-    margin: 0.5rem;
+    margin-left: 0.5rem;
+    padding: 0.1rem;
 }
 .toggleTitles {
     position: sticky;
@@ -231,7 +232,7 @@ section#track.page.active{
     animation: slideUp 0.6s ease-out forwards;
 }
 #track {
-    background-color: #000000;
+    background-color: #241613;
 }
 #track header {
     display: grid;
@@ -265,12 +266,6 @@ section#track.page.active{
     max-height: 40vh;
     border-radius: 50%;
     box-shadow: 0 2.5px 22px rgba(255, 1, 73, 0.248);
-    /* box-shadow: 0 2.8px 2.2px rgba(199, 199, 199, 0.034),
-    0 6.7px 5.3px rgba(230, 230, 230, 0.048),
-    0 12.5px 15px rgba(255, 1, 73, 0.227),
-    0 22.3px 17.9px rgba(208, 208, 208, 0.072),
-    0 35px 23.4px rgba(186, 186, 186, 0.086),
-    0 100px 80px rgba(233, 233, 233, 0.12); */
     margin-bottom: 0.5rem;
     margin-left: 2rem;
     margin-right: 2rem;

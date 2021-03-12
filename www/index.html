@@ -19,63 +19,55 @@
 -->
 <html>
     <head>
-        <meta charset="utf-8">
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-        <!-- <meta name="color-scheme" content="light dark"> -->
-        <link rel="stylesheet" href="css/index.css">
-        <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover"/>
+        <link rel="stylesheet" href="css/index.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet"/>
         <title>cano0029-Playr</title>
     </head>
     <body>
         <!-- HOMEPAGE -->
         <section class="page active" id="home">
-            
-            <header class = "header">
+            <header class="header">
                 <h1>josPlayr</h1>
             </header>
 
-            <main id = "playlist-container">
-                <div class = "toggleTitles sticky">
-                    <div class = "segmentedBtn">
-                        <button id = "allSongsButton"><h3>All Songs</h3></button>
-                        <button id = "savedButton"><h3>Favourites</h3></button>
-                    </div> 
+            <main id="playlist-container">
+                <div class="toggleTitles sticky">
+                    <div class="segmentedBtn">
+                        <button id="allSongsButton"><h3>All Songs</h3></button>
+                        <button id="savedButton"><h3>Favourites</h3></button>
+                    </div>
                 </div>
                 <!-- PLAYLIST -->
-                <div id = "playListPage" class = "show">
+                <div id="playListPage" class="show">
                     <ul id="playlist">
-                    <!-- songs will go here -->
+                        <!-- songs will go here -->
                     </ul>
                 </div>
-                
+
                 <!-- FAVOURITES -->
-                <div id = "favePage" class = "hide">
+                <div id="favePage" class="hide">
                     <ul id="faveSongsList">
-                    <!-- songs will go here -->
-                        <p>You have no songs in this list<p>
+                        <!-- songs will go here -->
+                        <p>You have no songs in this list</p>
                     </ul>
                 </div>
             </main>
-            
+
             <!-- NOW PLAYING -->
-            <div class = "footer hide" id ="nowPlaying-container">
-                <div id = "nowPlaying-content">
-                    <img id = "nowPlaying-image">
-                    <p id = "nowPlaying">HELLO</p>
-                    <p id = "musicOnIcon" class = ""><span class="material-icons">audiotrack</span></p>
-                    <p id = "musicPaused" class = ""><span class="material-icons">music_off</span></p>
+            <div class="footer hide" id="nowPlaying-container">
+                <div id="nowPlaying-content">
+                    <img id="nowPlaying-image" />
+                    <p id="nowPlaying">HELLO</p>
+                    <p id="musicOnIcon" class="">
+                        <span class="material-icons">audiotrack</span>
+                    </p>
+                    <p id="musicPaused" class="">
+                        <span class="material-icons">music_off</span>
+                    </p>
                 </div>
             </div>
         </section>
@@ -83,50 +75,50 @@
         <!-- TRACK PAGE -->
         <section class="page" id="track">
             <main>
-                <header id = "track-header" data-key= "">
-                    <btn id="btnClose"><img src= "./img/round_arrow_back_ios_white_24pt_1x.png" alt="back arrow"></btn>
-                    <!-- <btn id = btnClose><i class = "material-icons back">arrow_back_ios</i></btn> -->
+                <header id="track-header" data-key="">
+                    <btn id="btnClose"><img src="./img/round_arrow_back_ios_white_24pt_1x.png" alt="back arrow"/></btn>
                     <h4 id="playing-title">Now Playing</h4>
-                    <btn id="songLiked" class= "hide"><i class="material-icons songLiked">star</i></btn>
-                    <btn id="faveOutline" class= "show"><i class="material-icons faveOutline">star_outline</i></btn>
+                    <btn id="songLiked" class="hide"><i class="material-icons songLiked">star</i></btn>
+                    <btn id="faveOutline" class="show"><i class="material-icons faveOutline">star_outline</i></btn>
                 </header>
-                <div id = "track-container">
-                    <div id = "playr-item">
-                        <div classs = "img-container">
-                            <img id = "track-image" class="">
+                <div id="track-container">
+                    <div id="playr-item">
+                        <div classs="img-container">
+                            <img id="track-image" class=""/>
                         </div>
-                        <h1 id = "track-title"></h1>
-                        <p id = "track-artist"></p>
+                        <h1 id="track-title"></h1>
+                        <p id="track-artist"></p>
                     </div>
-                    <div id = "bar">
-                        <p id ="duration">0:00</p>
+                    <div id="bar">
+                        <p id="duration">0:00</p>
                         <progress id="progressBar" max="100" value="">Listening at:</progress>
-                        <p id ="trackLength">0:00</p>
+                        <p id="trackLength">0:00</p>
                     </div>
-                    <div id= "trackControls">
-                        <btn id = replay><i class="material-icons replay">replay</i></btn>
-                        <div id ="mainControls">
-                            <btn id= "rw"><i class="material-icons rw">fast_rewind</i></btn>
-                            <btn id= "pause" class="hide"><i class="material-icons pause">pause_circle_filled</i></btn>
-                            <btn id= "play" class="show"><i class="material-icons play">play_circle_filled</i></btn>
-                            <btn id= "ff"><i class="material-icons ff">fast_forward</i></btn>
+                    <div id="trackControls">
+                        <btn id="replay"><i class="material-icons replay">replay</i></btn>
+                        <div id="mainControls">
+                            <btn id="rw"><i class="material-icons rw">fast_rewind</i></btn>
+                            <btn id="pause" class="hide"><i class="material-icons pause">pause_circle_filled</i></btn>
+                            <btn id="play" class="show"><i class="material-icons play">play_circle_filled</i></btn>
+                            <btn id="ff"><i class="material-icons ff">fast_forward</i></btn>
                         </div>
                         <btn id="mute" class="show"><i class="material-icons mute">volume_off</i></btn>
                         <btn id="unmute" class="hide"><i class="material-icons unmute">volume_up</i></btn>
                     </div>
 
                     <!-- PREVIEW NEXT SONG -->
-                    <div id ="nextSong-container">
+                    <div id="nextSong-container">
                         <span class="material-icons">library_music</span>
-                        <p id = "nextSong">Up Next:<p>
-                        <btn id = "nextBtn" class="show"><span class="material-icons arrowNext hide">arrow_forward_ios</span></btn>
-                        <btn id = "sadFace" class="hide"><span class="material-icons">sentiment_very_dissatisfied</span></btn>
+                        <p id="nextSong">Up Next:</p>
+                        <p>
+                            <btn id="nextBtn" class="show"><span class="material-icons arrowNext hide">arrow_forward_ios</span></btn>
+                            <btn id="sadFace" class="hide"><span class="material-icons">sentiment_very_dissatisfied</span></btn>
+                        </p>
                     </div>
                 </div>
-                
             </main>
         </section>
-        
+
         <script src="cordova.js"></script>
         <script src="js/index.js"></script>
     </body>
