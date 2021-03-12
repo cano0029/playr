@@ -20,7 +20,7 @@
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 
-const CODES = {// TO DO: move to a separate file?
+const CODES = {
     error: {
         1: 'MEDIA_ERR_ABORTED',
         2: 'MEDIA_ERR_NETWORK',
@@ -39,7 +39,6 @@ const CODES = {// TO DO: move to a separate file?
 const APP = {
     media: null,
     favourites: [], 
-    // TO DO: move to a separate resource folder? Does cordova support require/es6 modules? no...
     tracks: [ 
         {
             id: 0,
@@ -222,14 +221,9 @@ const APP = {
         return id
     },
 
-    findSongDataKey: (ev) => {
+    pauseBeforeNext: (ev) => {
         let clickedThing = ev.target;
         let track = clickedThing.closest('[data-key]');
-        return track
-    },
-
-    checkSongPlaying: (ev) => {
-        let track = APP.findSongDataKey(ev)
         let index = parseInt(track.getAttribute('data-key'))
         let songId = APP.tracks[index].id
 
@@ -254,17 +248,16 @@ const APP = {
                 }
             })
         }
-        APP.callSongPageFeatures()
+        APP.songPageFeatures()
         APP.unfillAllIcons()
     },
 
-    callSongPageFeatures: () => {
+    songPageFeatures: () => {
         APP.mountMedia()
         APP.play()
         APP.getSongCurrentPosition()
         APP.getSongLength()
         APP.previewNextSong()
-        // APP.unfillAllIcons()
     },
 
     mountMedia: () => {
@@ -482,7 +475,7 @@ const APP = {
     },
 
     removeFromSaveList: (track) => {
-        // TO DO: fix - removes everything from the list
+        // TO DO: fix removes everything from the list
         let songPlayingId = APP.findSongId() 
         let id = parseInt(track.getAttribute('data-key'));
 
@@ -505,7 +498,7 @@ const APP = {
     displaySongPage: (ev) => {
         document.querySelector('.page.active').classList.remove('active')
         document.getElementById('track').classList.add('active')
-        APP.checkSongPlaying(ev)
+        APP.pauseBeforeNext(ev)
     },
 
     showSavePage: () => {
