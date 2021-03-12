@@ -586,14 +586,14 @@ const APP = {
     colourAllSongsBtn: () => {
         APP.uncolourSaveBtn()
         let allSongsBtn = document.getElementById('allSongsButton')
-        allSongsBtn.style.backgroundColor = '#ff0149'
+        allSongsBtn.style.backgroundColor = '#ff0044'
         allSongsBtn.style.color = '#ffffff'
     },
 
     colourSaveBtn: () => {
         APP.uncolourAllSongsBtn()
         let saveBtn = document.getElementById('savedButton')
-        saveBtn.style.backgroundColor = '#ff0149'
+        saveBtn.style.backgroundColor = '#ff0044'
         saveBtn.style.color = '#ffffff'
     },
 
