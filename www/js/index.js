@@ -453,7 +453,7 @@ const APP = {
             savedList.append(docfrag)
     },
 
-    removeFromSaveList: (track) => {
+    removeFromFaves: (track) => {
         // TO DO: fix removes everything from the list
         let songPlayingId = APP.findSongId() 
         let id = parseInt(track.getAttribute('data-key'));
@@ -692,7 +692,7 @@ const APP = {
             APP.tracks.find(song => {
                 if (song.id !== id) {
                     APP.showFaveIconOutline()
-                    APP.removeFromSaveList(track)
+                    APP.removeFromFaves(track)
                 } 
             })
         }
