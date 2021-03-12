@@ -196,7 +196,7 @@ const APP = {
             let musicOnIndicator = document.createElement('span')
             musicOnIndicator.classList.add('material-icons')
             musicOnIndicator.innerHTML = 'audiotrack'
-            musicOnDiv.classList.add('musicOn', 'hide')
+            musicOnDiv.classList.add('musicOnIcon', 'hide')
             musicOnDiv.setAttribute('id', `musicIcon${song.id}`)
 
             img.alt = 'track photo'
@@ -545,7 +545,7 @@ const APP = {
         let cardDataKey = document.getElementById('playr-item').getAttribute('data-key')
         let playlistCardId = parseInt(cardDataKey)
 
-        musicOnIcons = document.querySelectorAll('.musicOn')
+        musicOnIcons = document.querySelectorAll('.musicOnIcon')
         musicOnIcons.forEach(icon => {
             icon.classList.remove('show')
             icon.classList.add('hide')
@@ -640,8 +640,8 @@ const APP = {
     toggleMusicOnButton: () => {
         document.getElementById('musicPaused').classList.remove('show')
         document.getElementById('musicPaused').classList.add('hide')
-        document.getElementById('musicOn').classList.remove('hide')
-        document.getElementById('musicOn').classList.add('show')
+        document.getElementById('musicOnIcon').classList.remove('hide')
+        document.getElementById('musicOnIcon').classList.add('show')
     },
 
     toggleMusicOffButton: () => {
@@ -649,8 +649,8 @@ const APP = {
     },
 
     hideMusicOnButton: () => {
-        document.getElementById('musicOn').classList.remove('show')
-        document.getElementById('musicOn').classList.add('hide')
+        document.getElementById('musicOnIcon').classList.remove('show')
+        document.getElementById('musicOnIcon').classList.add('hide')
         document.getElementById('musicPaused').classList.remove('hide')
         document.getElementById('musicPaused').classList.add('show')
     },
