@@ -463,7 +463,6 @@ const APP = {
         })
     },
 
-
     displayHome: () => {
         document.querySelector('.page.active').classList.remove('active')
         document.getElementById('home').classList.add('active')
