@@ -157,7 +157,7 @@ li div h5 {
 
 /* * * * * PLAYLIST * * * * */
 #playlist-container {
-    padding-top: 1rem;
+    padding-top: 0.2rem;
     border-radius: 40px;
     background-color: rgb(245, 247, 255);
     padding-bottom: 2rem;
