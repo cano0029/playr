@@ -38,7 +38,7 @@ const CODES = {
 
 const APP = {
     media: null,
-
+    faves: [],
     tracks: [
         {
             id: 0,
@@ -423,8 +423,7 @@ const APP = {
         let id = APP.findSongId()
 
         let favesList = document.getElementById('faveSongsList')
-        let message = document.querySelector('#faveSongsList p')
-        message.innerHTML = ''
+        favesList.innerHTML = ''
         let docfrag = document.createDocumentFragment()
         if (APP.media != null) {
             let li = document.createElement('li')
@@ -447,7 +446,7 @@ const APP = {
 
             li.addEventListener('click', APP.displaySongPage)
         }
-        favesList.append(docfrag)
+        favesList.append(docfrag) 
     },
 
     removeFromFaves: (track) => {
@@ -455,10 +454,15 @@ const APP = {
         let songPlayingId = APP.findSongId()
         let id = parseInt(track.getAttribute('data-key'))
 
-        faveSongs = document.querySelectorAll('#faveSongsList li')
+        faveSongs = document.querySelectorAll('#faveSongsList')
         faveSongs.forEach((song) => {
+            let docfrag = document.createDocumentFragment()
             if (songPlayingId === id) {
                 song.innerHTML = ''
+                let message = document.createElement('p')
+                message.textContent = 'Songs you add to your favourites will go here'
+                docfrag.append(message)
+                song.append(docfrag)
             }
         })
     },
