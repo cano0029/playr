@@ -30,7 +30,8 @@ html {
     line-height: 1.7;
     font-family: Lato, Arial, Helvetica, sans-serif;
     background-color: rgb(209, 209, 209);
-    background: url(https://images.unsplash.com/photo-1604076913837-52ab5629fba9?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=934&q=80) top no-repeat;
+    background: url(./background-by-mymind-unsplash.jpg) top no-repeat;
+    /* Photo by myming from unsplash https://unsplash.com/photos/tZCrFpSNiIQ */
     background-size: 100vh;
     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     
@@ -66,7 +67,8 @@ section#home.page.active {
     animation: fadeIn 0.6s ease-out forwards; 
 }
 #home header {
-    background: url(https://images.unsplash.com/photo-1590808100071-3654286139a4?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1650&q=80) bottom no-repeat;
+    background: url(header-by-ken-cheung-unsplash.jpg) bottom no-repeat;
+    /* Photo by Ken Cheung from Unsplash https://unsplash.com/photos/C7ZEKkaMz3A */
     background-size: 100vh;
     margin-bottom: 2rem;
     min-height: 190px;
