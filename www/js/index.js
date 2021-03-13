@@ -160,6 +160,7 @@ const APP = {
         // home page buttons
         document.getElementById('savedButton').addEventListener('click', APP.showFavePage)
         document.getElementById('allSongsButton').addEventListener('click', APP.displayAllSongs)
+        
         // music controls
         document.getElementById('replay').addEventListener('click', APP.replay)
         document.getElementById('play').addEventListener('click', APP.play)
@@ -168,12 +169,15 @@ const APP = {
         document.getElementById('rw').addEventListener('click', APP.rewind)
         document.getElementById('mute').addEventListener('click', APP.toggleMute)
         document.getElementById('unmute').addEventListener('click', APP.toggleMute)
-        // favourites button
+        
+        // favourites(star) button
         document.getElementById('faveOutline').addEventListener('click', APP.fillFaveIcon)
         document.getElementById('songLiked').addEventListener('click', APP.unfillFaveIcon)
+        
         // go to song card page
         document.getElementById('nextSong-container').addEventListener('click', APP.displaySongPage)
         document.getElementById('nowPlaying-container').addEventListener('click', APP.displaySongPage)
+        
         // go to home page
         document.getElementById('btnClose').addEventListener('click', APP.displayHome)
     },
@@ -419,53 +423,8 @@ const APP = {
         APP.getSongLength()
     },
 
-    buildFavesSongCard: () => {
-        let id = APP.findSongId()
-
-        let favesList = document.getElementById('faveSongsList')
-        favesList.innerHTML = ''
-        let docfrag = document.createDocumentFragment()
-        if (APP.media != null) {
-            let li = document.createElement('li')
-            let div = document.createElement('div')
-            let img = document.createElement('img')
-            let title = document.createElement('h4')
-            let artist = document.createElement('h6')
-
-            img.alt = 'song image'
-            img.src = APP.tracks[id].image
-            artist.textContent = APP.tracks[id].artist
-            title.textContent = APP.tracks[id].track
-
-            li.setAttribute('data-key', APP.tracks[id].id)
-
-            li.append(img)
-            div.append(title, artist)
-            li.append(div)
-            docfrag.append(li)
-
-            li.addEventListener('click', APP.displaySongPage)
-        }
-        favesList.append(docfrag) 
-    },
-
-    removeFromFaves: (track) => {
-        // TO DO: fix removes everything from the list
-        let songPlayingId = APP.findSongId()
-        let id = parseInt(track.getAttribute('data-key'))
-
-        faveSongs = document.querySelectorAll('#faveSongsList')
-        faveSongs.forEach((song) => {
-            let docfrag = document.createDocumentFragment()
-            if (songPlayingId === id) {
-                song.innerHTML = ''
-                let message = document.createElement('p')
-                message.textContent = 'Songs you add to your favourites will go here'
-                docfrag.append(message)
-                song.append(docfrag)
-            }
-        })
-    },
+    
+    // SHOW/HIDE PAGES
 
     displayHome: () => {
         document.querySelector('.page.active').classList.remove('active')
@@ -506,6 +465,8 @@ const APP = {
         APP.colourAllSongsBtn()
         APP.uncolourFaveBtn()
     },
+
+    // EXTRA FEATURES
 
     nowPlaying: () => {
         let id = APP.findSongId()
@@ -556,6 +517,56 @@ const APP = {
         }
         navigator.notification.alert(message, alertCallback, title, buttonName)
     },
+
+    buildFavesSongCard: () => {
+        let id = APP.findSongId()
+
+        let favesList = document.getElementById('faveSongsList')
+        favesList.innerHTML = ''
+        let docfrag = document.createDocumentFragment()
+        if (APP.media != null) {
+            let li = document.createElement('li')
+            let div = document.createElement('div')
+            let img = document.createElement('img')
+            let title = document.createElement('h4')
+            let artist = document.createElement('h6')
+
+            img.alt = 'song image'
+            img.src = APP.tracks[id].image
+            artist.textContent = APP.tracks[id].artist
+            title.textContent = APP.tracks[id].track
+
+            li.setAttribute('data-key', APP.tracks[id].id)
+
+            li.append(img)
+            div.append(title, artist)
+            li.append(div)
+            docfrag.append(li)
+
+            li.addEventListener('click', APP.displaySongPage)
+        }
+        favesList.append(docfrag) 
+    },
+
+    removeFromFaves: (track) => {
+        let songPlayingId = APP.findSongId()
+        let id = parseInt(track.getAttribute('data-key'))
+
+        faveSongs = document.querySelectorAll('#faveSongsList')
+        faveSongs.forEach((song) => {
+            let docfrag = document.createDocumentFragment()
+            if (songPlayingId === id) {
+                song.innerHTML = ''
+                let message = document.createElement('p')
+                message.textContent = 'Songs you add to your favourites will go here'
+                docfrag.append(message)
+                song.append(docfrag)
+            }
+        })
+    },
+
+    
+    // BUTTONS
 
     colourAllSongsBtn: () => {
         APP.uncolourFaveBtn()
@@ -694,7 +705,6 @@ const APP = {
     },
 
     unfillAllIcons: () => {
-        // TO DO: does not work properly
         let songCardId = APP.findSongId()
         let faveSongs = document.querySelectorAll('#faveSongsList li')
 
