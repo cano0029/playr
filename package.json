@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "A sample Apache Cordova application that responds to the deviceready event.",
   "main": "index.js",
+  "theme_color": "#ff0044",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
